@@ -14,14 +14,14 @@ public class IngredientTest {
      */
     @Test
     public void createInstanceWithValidName(){
-        Ingredient ingredient = new Ingredient("Apple");
+        Ingredient ingredient = new Ingredient("Apple", 200, 1, 1);
         assertEquals("Apple",ingredient.getName());
     }
 
     @Test
     public void createInstanceWithInvalidName(){
         try{
-            Ingredient ingredient = new Ingredient("");
+            Ingredient ingredient = new Ingredient("", 2000, 1, 1);
             fail();
         } catch (IllegalArgumentException e){
             assertTrue(true);
