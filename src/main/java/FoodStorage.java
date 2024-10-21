@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
@@ -80,6 +81,21 @@ public class FoodStorage {
 
 
         return foundIngredient;
+    }
+
+
+    /**
+     * Deletes all the ingredients with the given name.
+     * @param name
+     */
+    public void deleteAllIngredient(String name){
+        Iterator<Ingredient> it = this.ingredients.iterator();
+        while(it.hasNext()){
+            Ingredient ingredient = it.next();
+            if (ingredient.getName().equals(name)){
+                it.remove();
+            }
+        }
     }
 
 }

@@ -15,17 +15,34 @@ public class Ingredient {
     private String name;
     private Calendar calendar = Calendar.getInstance();
     private Date expiryDate;
+    private float amount;
+    private String unit;
+    private double price;
 
     /**
-     * Creates a new Ingredient object with fields name and expiration date.
+     * Creates a new Ingredient object with fields name, expiration date, amount, unit and
+     * pricePerUnit.
      */
-    public Ingredient(String name, int expiryYear, int expiryMonth, int expiryDay){
-        if (name.isBlank()){
+    public Ingredient(String name,float amount, String unit, double pricePerUnit, int expiryYear, int expiryMonth, int expiryDay){
+
+        if ((name.isBlank())||(name == null)){
             throw new IllegalArgumentException("Name cannot be empty");
         }
-        if (name == null){
-            throw new IllegalArgumentException("Name cannot be null");
+        if ((amount < 0)||(amount == 0)){
+            throw new IllegalArgumentException("Illegal amount");
         }
+        if ((unit.isBlank())||(unit == null)){
+            throw new IllegalArgumentException("Unit cannot be empty");
+        }
+        if ((pricePerUnit < 0)||(pricePerUnit == 0)) {
+            throw new IllegalArgumentException("Illegal pricePerUnit");
+        }
+
+        this.name = name;
+        this.amount = amount;
+        this.unit = unit;
+        this.price = pricePerUnit;
+
         calendar.set(Calendar.YEAR, expiryYear);
         calendar.set(Calendar.MONTH, expiryMonth);
         calendar.set(Calendar.DAY_OF_MONTH, expiryDay);
@@ -35,16 +52,13 @@ public class Ingredient {
 
         expiryDate = calendar.getTime();
 
-        this.name = name;
-
-
     }
 
     /**
-     * Returnd the name of the ingredient.
+     * Return the name of the ingredient.
      */
     public String getName(){
-        return name;
+        return this.name;
     }
 
     /**
@@ -61,6 +75,8 @@ public class Ingredient {
     public Date getExpiryDate(){
         return expiryDate;
     }
+
+
 
 
 }
