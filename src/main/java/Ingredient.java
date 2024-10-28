@@ -2,7 +2,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * keeps information of the name amount and expiry date of foods
+ * keeps information of the name, amount, price and expiry date of different ingredients.
  * is able to check each of these fields
  * is able to change these fields
  * v.09.10.2024
@@ -65,6 +65,9 @@ public class Ingredient {
      * Changes the name of the object.
      */
     public void setName(String newName){
+        if ((newName.isBlank())||(newName == null)) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
         this.name = newName;
     }
 
@@ -74,6 +77,74 @@ public class Ingredient {
      */
     public Date getExpiryDate(){
         return expiryDate;
+    }
+
+    /**
+     * returns the amount of the object
+     * @return
+     */
+    public float getAmount(){
+        return amount;
+    }
+
+    /**
+     * Changes the amount of the object
+     * @param newAmount
+     */
+    public void setAmount(float newAmount){
+        if ((amount < 0)||(amount == 0)) {
+            throw new IllegalArgumentException("Illegal amount");
+        }
+        this.amount = newAmount;
+    }
+
+    /**
+     * Subtracts a specified amount from the amount.
+     * @param subtractedAmount
+     */
+    public void reduceAmount(int subtractedAmount){
+        if ((subtractedAmount < 0)) {
+            throw new IllegalArgumentException("Subtracted amount cannot be less than zero");
+        }
+        this.amount -= subtractedAmount;
+    }
+
+    /**
+     * Returns the unit of the object
+     * @return
+     */
+    public String getUnit(){
+        return unit;
+    }
+
+    /**
+     * Changes the unit of the object.
+     * @param newUnit
+     */
+    public void setUnit(String newUnit){
+        if ((newUnit.isBlank())||(newUnit == null)) {
+            throw new IllegalArgumentException("NewUnit cannot be empty");
+        }
+        this.unit = newUnit;
+    }
+
+    /**
+     * Returns the price of the objetc.
+     * @return
+     */
+     public double getPrice(){
+        return price;
+     }
+
+    /**
+     * Changes the price of the object.
+     * @param newPrice
+     */
+     public void setPrice(double newPrice){
+        if ((newPrice < 0)||(newPrice == 0)) {
+            throw new IllegalArgumentException("Illegal newPrice");
+        }
+        this.price = newPrice;
     }
 
 
