@@ -1,3 +1,7 @@
+package edu.ntnu.iir.bidata.fridser.logic;
+
+import edu.ntnu.iir.bidata.fridser.data.Ingredient;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -14,7 +18,7 @@ public class FoodStorage {
     private ArrayList<Ingredient> ingredients;
 
     /**
-     * Creates an instance of FoodStorage object
+     * Creates an instance of edu.ntnu.iir.bidata.fridser.logic.FoodStorage object
      */
     public FoodStorage(){
         ingredients = new ArrayList<>();
@@ -39,14 +43,14 @@ public class FoodStorage {
     /**
      * returns the ingredient at a specified index
      * @param index
-     * @return Ingredient
+     * @return edu.ntnu.iir.bidata.fridser.data.Ingredient
      */
     public Ingredient getIngredient(int index){
         return this.ingredients.get(index);
     }
 
     /**
-     * Returns the index of a specified Ingredient
+     * Returns the index of a specified edu.ntnu.iir.bidata.fridser.data.Ingredient
      * @param ingredient
      * @return int
      */
