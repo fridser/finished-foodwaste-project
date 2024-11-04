@@ -1,7 +1,8 @@
 package edu.ntnu.iir.bidata.fridser.data;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+
+
 
 /**
  * Keeps information of the name, amount, price and expiry date of different ingredients.
@@ -15,8 +16,7 @@ import java.util.Date;
 
 public class Ingredient {
     private String name;
-    private Calendar calendar = Calendar.getInstance();
-    private Date expiryDate;
+    private LocalDate expiryDate;
     private double amount;
     private String unit; //grams, liters or stk
     private double price; //price per unit
@@ -35,14 +35,8 @@ public class Ingredient {
        setUnit(unit);
        setPrice(pricePerUnit);
 
-        calendar.set(Calendar.YEAR, expiryYear);
-        calendar.set(Calendar.MONTH, expiryMonth);
-        calendar.set(Calendar.DAY_OF_MONTH, expiryDay);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
+        expiryDate = LocalDate.of(expiryYear,expiryMonth,expiryDay);
 
-        expiryDate = calendar.getTime();
     }
 
     /**
@@ -71,7 +65,7 @@ public class Ingredient {
      *
      * @return The expiration date of the object
      */
-    public Date getExpiryDate(){
+    public LocalDate getExpiryDate(){
         return expiryDate;
     }
 
@@ -88,7 +82,7 @@ public class Ingredient {
      * @param newAmount The new amount of the object
      */
     public void setAmount(double newAmount){
-        if ((amount < 0)||(amount == 0)) {
+        if ((newAmount < 0)||(newAmount == 0)) {
             throw new IllegalArgumentException("Illegal amount");
         }
         this.amount = newAmount;
