@@ -17,7 +17,7 @@ public class IngredientTest {
     public void createInstanceWithValidName(){
         Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
 
-        assertEquals("Apple",ingredient.getName());
+        assertEquals("Apple",ingredient.getIngredientName());
     }
 
     /**
@@ -124,7 +124,7 @@ public class IngredientTest {
     public void changeNameWithInvalidNewName(){
         try{
             Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
-            ingredient.setName("");
+            ingredient.setIngredientName("");
             fail();
         } catch (IllegalArgumentException e) {
             assertTrue(true);

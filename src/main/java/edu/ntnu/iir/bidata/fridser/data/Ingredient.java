@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 
 public class Ingredient {
-    private String name;
+    private String ingredientName;
     private LocalDate expiryDate;
     private double amount;
     private String unit; //grams, liters or stk
@@ -30,7 +30,7 @@ public class Ingredient {
      * @param pricePerUnit Price of the object per unit
      */
     public Ingredient(String name,double amount, String unit, double pricePerUnit, int expiryYear, int expiryMonth, int expiryDay){
-       setName(name);
+       setIngredientName(name);
        setAmount(amount);
        setUnit(unit);
        setPrice(pricePerUnit);
@@ -44,8 +44,8 @@ public class Ingredient {
      *
      * @return name of the ingredient
      */
-    public String getName(){
-        return this.name;
+    public String getIngredientName(){
+        return this.ingredientName;
     }
 
     /**
@@ -53,11 +53,11 @@ public class Ingredient {
      *
      * @param newName New name of ingredient
      */
-    public void setName(String newName){
+    public void setIngredientName(String newName){
         if ((newName.isBlank())||(newName == null)) {
             throw new IllegalArgumentException("Name cannot be empty");
         }
-        this.name = newName;
+        this.ingredientName = newName;
     }
 
     /**
@@ -131,7 +131,7 @@ public class Ingredient {
      * Subtracts a specified amount from the amount.
      * @param subtractedAmount
      */
-    public void reduceAmount(int subtractedAmount){
+    public void reduceAmount(double subtractedAmount){
         if ((subtractedAmount < 0)) {
             throw new IllegalArgumentException("Subtracted amount cannot be less than zero");
         }
