@@ -32,7 +32,7 @@ public class FoodStorage {
     public void addIngredient(Ingredient ingredient){
         boolean foundSame = false;
         int index = 0;
-        while ((index < this.ingredients.size())&&(foundSame == false)){
+        while ((index < this.ingredients.size())&&(!foundSame)){
             Ingredient ingredient2 = this.ingredients.get(index);
             if (isSame(ingredient,ingredient2)){
                 ingredient2.addAmount(ingredient.getAmount());
@@ -40,7 +40,7 @@ public class FoodStorage {
             }
             index++;
         }
-        if (foundSame == false){
+        if (!foundSame){
             ingredients.add(ingredient);
         }
     }
@@ -133,19 +133,44 @@ public class FoodStorage {
         }
     }
 
-    public void useIngredient(double amount){
+    /**
+     * Uses a specified amount of ingredient of a specified name. If the
+     * amount is more than the amount of the first ingredient, the amount of the
+     * first ingredient is deleted and
+     *
+     * @param amount
+     * @param ingredientName
+     */
+    public void useIngredient(double amount, String ingredientName){
+        if (getAmountOfIngredients(ingredientName)<amount){
+            throw new IllegalArgumentException("You do not have enough of the ingredient");
+        }
         Iterator<Ingredient> it = this.ingredients.iterator();
         while((it.hasNext()) && (amount > 0)){
             Ingredient ingredient = it.next();
-            if (ingredient.getAmount() < amount){
-                amount -= ingredient.getAmount();
-                it.remove();
+            if (ingredient.getIngredientName() == ingredientName){
+                if (ingredient.getAmount() < amount){
+                    amount -= ingredient.getAmount();
+                    it.remove();
+                }
+                else{
+                    ingredient.reduceAmount(amount);
+                    amount = 0;
+                }
             }
-            else{
-                ingredient.reduceAmount(amount);
-                amount = 0;
+
+        }
+
+    }
+
+    public double getAmountOfIngredients(String ingredientName){
+        double amount = 0;
+        for (Ingredient ingredient:ingredients){
+            if (ingredient.getIngredientName().equals(ingredientName)){
+                amount += ingredient.getAmount();
             }
         }
+        return amount;
 
     }
 
