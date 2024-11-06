@@ -185,5 +185,62 @@ public class IngredientTest {
         }
     }
 
+    /**
+     * Reduces the amount of the object with a valid reduced amount.
+     * Checks that the amount is equal to the initial amount minus the reduced
+     * amount.
+     */
+    @Test
+    public void reduceValidAmount(){
+        Ingredient ingredient = new Ingredient("Apple", 8, "Kg", 12.9,2000,1,1);
+        ingredient.reduceAmount(5);
+
+        assertEquals(3,ingredient.getAmount());
+    }
+
+    /**
+     * Tries to reduce the amount of the object with a bigger reduced amount
+     * than the initial amount.
+     * Checks if an exception is caught.
+     */
+    @Test
+    public void reduceWithMoreAmountThanIsInTheIngredientAmount(){
+        try{
+            Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
+            ingredient.reduceAmount(5);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Adds a valid amount to the object. Checks that the amount of the object is
+     * equal to the sum of the initial amount and the added amount.
+     */
+    @Test
+    public void addValidAmount(){
+        Ingredient ingredient = new Ingredient("Apple", 3, "Kg", 12.9,2000,1,1);
+        ingredient.addAmount(5);
+
+        assertEquals(8,ingredient.getAmount());
+    }
+
+    /**
+     * Tries to add a negative amount to the objects initial amount.
+     * Checks if an exception is caught.
+     */
+    @Test
+    public void addInvalidAmount(){
+        try{
+            Ingredient ingredient = new Ingredient("Apple", 3, "Kg", 12.9,2000,1,1);
+            ingredient.addAmount(-5);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue(true);
+        }
+    }
+
+
 }
 
