@@ -3,11 +3,17 @@ package edu.ntnu.iir.bidata.fridser.logic;
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.time.LocalDate;
+
+
+//TODO: create sorting methods
 
 
 /**
- * can add and remove food in a list
+ * can add and remove ingredients in a list
  * keeps track of how many different and the amount of food
  * v.14.10.2024
  * Eriksen F. E.
@@ -16,6 +22,7 @@ import java.util.Iterator;
 
 public class FoodStorage {
     private ArrayList<Ingredient> ingredients;
+
 
     /**
      * Creates an instance of edu.ntnu.iir.bidata.fridser.logic.FoodStorage object
@@ -47,7 +54,7 @@ public class FoodStorage {
 
     /**
      * returns the size of the ingredients list
-     * @return int
+     * @return numberOfIngredients
      */
     public int getNumberOfIngredients(){
         return this.ingredients.size();
@@ -163,16 +170,96 @@ public class FoodStorage {
 
     }
 
+    /**
+     * Returns the amount of ingredients there are of one ingredient in FoodStorage,
+     * using the name of the ingredient
+     * @param ingredientName
+     * @return amount
+     */
     public double getAmountOfIngredients(String ingredientName){
         double amount = 0;
-        for (Ingredient ingredient:ingredients){
-            if (ingredient.getIngredientName().equals(ingredientName)){
-                amount += ingredient.getAmount();
+        Iterator<Ingredient> it = ingredients.iterator();
+        while (it.hasNext()){
+            if (it.next().getIngredientName().equals(ingredientName)){
+                amount += it.next().getAmount();
             }
         }
         return amount;
 
     }
+
+    /**
+     * Returns the list of ingredients as an Iterator
+     * @return it, list of ingredient in FoodStorage
+     */
+    public Iterator getIngredientList(){
+        Iterator<Ingredient> it = ingredients.iterator();
+        return it;
+    }
+
+    /**
+     * Returns the length of the ingredients list.
+     * @return int, size of ingredients
+     */
+    public int getLength(){
+        return ingredients.size();
+    }
+
+    /**
+     * Returns an arraylist sorted by date.
+     *
+     * I found a better way to do this five minutes after I wrote this,
+     * but look! My brainchild! Isn't she beautiful?
+     *
+     * @return ArrayList<Ingredient>
+     */
+    public ArrayList<Ingredient> sortByDate(){
+        ArrayList<Ingredient> sortedList = new ArrayList<>();
+        int index = 0;
+        for (Ingredient ingredient:ingredients){
+            int indexOfSortedIngredient = 0;
+            boolean sorted = false;
+            while ((indexOfSortedIngredient < sortedList.size())&&(!sorted)){
+                Ingredient sortedIngredient = sortedList.get(indexOfSortedIngredient);
+                if (sortedIngredient.getExpiryDate().isAfter(ingredient.getExpiryDate())) {
+                    index = sortedList.indexOf(sortedIngredient);
+                    sorted = true;
+                }
+                indexOfSortedIngredient++;
+
+            }
+            sortedList.add(index,ingredient);
+
+        }
+        return sortedList;
+
+    }
+
+    /**
+     * Sorts the ingredients arraylist by date.
+     */
+    public void sortByDate2(){
+        Collections.sort(ingredients, Comparator.comparing(Ingredient::getExpiryDate));
+    }
+
+    /**
+     * Sorts the ingredients arrayList alphabetically.
+     */
+    public void sortAlphabetically(){
+        Collections.sort(ingredients, new Comparator<Ingredient>() {
+            public int compare(Ingredient i1, Ingredient i2) {
+                return i1.getIngredientName().compareTo(i2.getIngredientName());
+            }
+        });
+
+    }
+
+    public void sortAlphabetically2(){
+        Collections.sort(ingredients, Comparator.comparing(Ingredient::getIngredientName));
+    }
+
+
+
 
 }
 

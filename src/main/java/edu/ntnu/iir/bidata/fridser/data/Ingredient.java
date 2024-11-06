@@ -18,7 +18,7 @@ public class Ingredient {
     private String ingredientName;
     private LocalDate expiryDate;
     private double amount;
-    private String unit; //grams, liters or stk
+    private String unit; //grams, litres or stk
     private double price; //price per unit
 
     /**
@@ -35,8 +35,23 @@ public class Ingredient {
        setUnit(unit);
        setPrice(pricePerUnit);
 
-        expiryDate = LocalDate.of(expiryYear,expiryMonth,expiryDay);
+       expiryDate = LocalDate.of(expiryYear,expiryMonth,expiryDay);
 
+    }
+
+    /**
+     * The constructor used in recipes.
+     *
+     * @param name
+     * @param amount
+     * @param unit
+     */
+    public Ingredient(String name,double amount,String unit){
+        setIngredientName(name);
+        setAmount(amount);
+        setUnit(unit);
+        setPrice(1);
+        expiryDate = LocalDate.of(1,1,1);
     }
 
     /**
@@ -99,13 +114,15 @@ public class Ingredient {
 
     /**
      * Changes the unit of the object.
-     * @param newUnit Grams, liters of stk
+     * @param newUnit Grams, Litres or Stk
      */
     public void setUnit(String newUnit){
-        if ((newUnit.isBlank())||(newUnit == null)) {
-            throw new IllegalArgumentException("NewUnit cannot be empty");
+        if ((newUnit == "Grams")||(newUnit == "Stk")||(newUnit == "Litres")){
+            this.unit = newUnit;
         }
-        this.unit = newUnit;
+        else{
+            throw new IllegalArgumentException("Unit must be either Grams, Stk or Litres");
+        }
     }
 
     /**
@@ -155,6 +172,8 @@ public class Ingredient {
         }
         this.amount += addedAmount;
     }
+
+
 
 
 

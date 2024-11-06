@@ -17,7 +17,7 @@ public class UserInterface {
     }
 
     public void printDetails(Ingredient ingredient){
-        System.out.println("Name: " + ingredient.getName());
+        System.out.println("Name: " + ingredient.getIngredientName());
         System.out.println("Amount: " + ingredient.getAmount() +" " + ingredient.getUnit());
         System.out.println("Price: " + ingredient.getPrice() + " per " + ingredient.getUnit());
         System.out.println("Expiration date: " + ingredient.getExpiryDate().toString());
