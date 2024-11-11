@@ -29,8 +29,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * <b>Negative tests:</b>
  *
  * <ul>
- *   <li></li>
- *   <li></li>
+ *   <li>Use invalid amount of ingredients</li>
+ *   <li>Search for an ingredient with a blank search name</li>
  * </ul>
  */
 

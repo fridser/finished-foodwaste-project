@@ -20,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
  *   <li>that setting the name with valid string results in the name being set.</li>
  *   <li>that setting the unit results in the correct unit being set</li>
  *   <li>that setting the price results in the correct price being set</li>
+ *   <li>That the reduce amount method reduces the correct amount</li>
+ *   <li>that the add amount method adds the corrrect amount</li>
  * </ul>
  *
  * <b>Negative tests:</b>
@@ -29,6 +31,9 @@ import static org.junit.jupiter.api.Assertions.*;
  *   <li>that it is not possible to create a person with an empty name, or value of name is "null"</li>
  *   <li>that it is not possible to create a person with an empty unit, or value of unit is "null"</li>
  *   <li>that it is not possible to set negative price - constructor, nor setPrice()</li>
+ *   <li>That it is not possible to reduce with a negative amount</li>
+ *   <li>that it is not possible to reduce with an amount that is bigger than the amount of the object</li>
+ *   <li>thst it is not possible to add a negative amount</li>
  * </ul>
  */
 
