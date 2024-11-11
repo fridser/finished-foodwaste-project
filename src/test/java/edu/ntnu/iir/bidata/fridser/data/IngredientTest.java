@@ -1,4 +1,5 @@
-import edu.ntnu.iir.bidata.fridser.data.Ingredient;
+package edu.ntnu.iir.bidata.fridser.data;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
