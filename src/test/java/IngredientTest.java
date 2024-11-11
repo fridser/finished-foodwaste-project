@@ -3,7 +3,32 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
+ * Tests the class edu.ntnu.iir.bidata.fridser.data.Ingredient
  *
+ * <p>The following is tested:</p>
+ *
+ * <b>Positive tests:</b>
+ *
+ * <ul>
+ *   <li>creation of edu.ntnu.iir.bidata.fridser.data.Ingredient object with valid name , amount, unit, price and expiryDate</li>
+ *   <li>that the accessor-method returning full name returns correct name</li>
+ *   <li>that the accessor-method returning amount returns correct amount</li>
+ *   <li>that the accessor-method returning unit returns correct unit </li>
+ *   <li>that the accessor-method returning price returns correct price </li>
+ *   <li>that setting the amount results in the correct amount being set</li>
+ *   <li>that setting the name with valid string results in the name being set.</li>
+ *   <li>that setting the unit results in the correct unit being set</li>
+ *   <li>that setting the price results in the correct price being set</li>
+ * </ul>
+ *
+ * <b>Negative tests:</b>
+ *
+ * <ul>
+ *   <li>that it is not possible to set negative amount - constructor, nor setAmount()</li>
+ *   <li>that it is not possible to create a person with an empty name, or value of name is "null"</li>
+ *   <li>that it is not possible to create a person with an empty unit, or value of unit is "null"</li>
+ *   <li>that it is not possible to set negative price - constructor, nor setPrice()</li>
+ * </ul>
  */
 
 public class IngredientTest {

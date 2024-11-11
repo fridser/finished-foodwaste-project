@@ -4,6 +4,29 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the class edu.ntnu.iir.bidata.fridser.logic.FoodStorage
+ *
+ * <p>The following is tested:</p>
+ *
+ * <b>Positive tests:</b>
+ *
+ * <ul>
+ *   <li>creation of edu.ntnu.iir.bidata.fridser.logic.FoodStorage object with valid Ingredient being added to ingredients</li>
+ *   <li>that the accessor method returning objects at a specific index returns the correct object</li>
+ *   <li>That two Ingredients with the same name amd expiry date gets added to the list as one object</li>
+ *   <li>that two ingredients with same name and different expiry dates gets addded to the list as two separate objects</li>
+ *   <li></li>
+ * </ul>
+ *
+ * <b>Negative tests:</b>
+ *
+ * <ul>
+ *   <li></li>
+ *   <li></li>
+ * </ul>
+ */
+
 public class FoodStorageTest {
 
 

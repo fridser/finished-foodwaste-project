@@ -141,14 +141,21 @@ public class FoodStorage {
     }
 
     /**
-     * Uses a specified amount of ingredient of a specified name. If the
-     * amount is more than the amount of the first ingredient, the amount of the
-     * first ingredient is deleted and
-     *
+     * Uses a specified amount of ingredient of a specified name.
+     * <ul>
+     *     <li>If the amount subtracted is less than the amount of the ingredient,
+     *     the amount is subtracted from the ingredient's amount, and the subtracted amount
+     *     is set to zero</li>
+     *     <li>If the amount is more than the amount of the first ingredient, the amount of the
+     *      first ingredient is subtracted from the specified amount and the ingredietn is
+     *      deleted, then the new amount subtracted is compared to the second object with the
+     *      specified name</li>
+     * </ul>
      * @param amount
      * @param ingredientName
      */
     public void useIngredient(double amount, String ingredientName){
+        sortByDate2();
         if (getAmountOfIngredients(ingredientName)<amount){
             throw new IllegalArgumentException("You do not have enough of the ingredient");
         }
@@ -225,7 +232,9 @@ public class FoodStorage {
                     index = sortedList.indexOf(sortedIngredient);
                     sorted = true;
                 }
-                indexOfSortedIngredient++;
+                else {
+                    indexOfSortedIngredient++;
+                }
 
             }
             sortedList.add(index,ingredient);
