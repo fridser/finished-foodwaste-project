@@ -1,14 +1,10 @@
 package edu.ntnu.iir.bidata.fridser.logic;
 
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-
-
-
 
 /**
  * can add and remove ingredients in a list
@@ -23,9 +19,9 @@ public class FoodStorage {
 
 
     /**
-     * Creates an instance of edu.ntnu.iir.bidata.fridser.logic.FoodStorage object
+     * Creates an instance of edu.ntnu.iir.bidata.fridser.logic.FoodStorage object.
      */
-    public FoodStorage(){
+    public FoodStorage() {
         ingredients = new ArrayList<>();
     }
 
@@ -35,34 +31,34 @@ public class FoodStorage {
      *
      * @param ingredient Ingredient to be added
      */
-    public void addIngredient(Ingredient ingredient){
+    public void addIngredient(Ingredient ingredient) {
         boolean foundSame = false;
         int index = 0;
-        while ((index < this.ingredients.size())&&(!foundSame)){
+        while ((index < this.ingredients.size()) && (!foundSame)) {
             Ingredient ingredient2 = getIngredient(index);
-            if (isSame(ingredient,ingredient2)){
+            if (isSame(ingredient, ingredient2)) {
                 ingredient2.addAmount(ingredient.getAmount());
-                ingredient2.setPrice((ingredient.getPrice()+ingredient2.getPrice())/2);
+                ingredient2.setPrice((ingredient.getPrice() + ingredient2.getPrice()) / 2);
                 foundSame = true;
             }
             index++;
         }
-        if (!foundSame){
+        if (!foundSame) {
             ingredients.add(ingredient);
         }
     }
 
     /**
-     * Deletes the specified Ingredient from the list
+     * Deletes the specified Ingredient from the list.
      *
      * @param ingredient Ingredient to be deleted
      */
-    public boolean deleteIngredient(Ingredient ingredient){
+    public boolean deleteIngredient(Ingredient ingredient) {
         Iterator<Ingredient> it = this.ingredients.iterator();
         boolean deleted = false;
-        while(it.hasNext() && !deleted){
+        while (it.hasNext() && !deleted) {
             Ingredient ingredient1 = it.next();
-            if(ingredient1.equals(ingredient)){
+            if (ingredient1.equals(ingredient)) {
                 it.remove();
                 deleted = true;
             }
@@ -75,7 +71,7 @@ public class FoodStorage {
      *
      * @return numberOfIngredients The amount of ingredient in the FoodStorage
      */
-    public int getNumberOfIngredients(){
+    public int getNumberOfIngredients() {
         return this.ingredients.size();
     }
 
@@ -85,7 +81,7 @@ public class FoodStorage {
      * @param index The index of the ingredient
      * @return Ingredient The ingredient at the index
      */
-    public Ingredient getIngredient(int index){
+    public Ingredient getIngredient(int index) {
         return this.ingredients.get(index);
     }
 
@@ -97,7 +93,7 @@ public class FoodStorage {
      */
     public Ingredient findIngredientByName(String name)
     {
-        if ((name.isBlank())||(name == null)) {
+        if ((name.isBlank()) || (name == null)) {
             throw new IllegalArgumentException("Name cannot be empty");
         }
         Ingredient foundIngredient = null;
@@ -105,13 +101,11 @@ public class FoodStorage {
         int index = 0;
         boolean ingredientNotFound = true;
 
-        while ((index < this.ingredients.size()) && ingredientNotFound )
-        {
+        while ((index < this.ingredients.size()) && ingredientNotFound) {
             Ingredient ingredient = this.ingredients.get(index);
 
 
-            if (ingredient.getIngredientName().equals(name))
-            {
+            if (ingredient.getIngredientName().equals(name)) {
                 ingredientNotFound = false;
                 foundIngredient = ingredient;
             }
@@ -128,9 +122,9 @@ public class FoodStorage {
      *
      * @param name The name of the ingredients to be deleted
      */
-    public void deleteAllIngredientWithSameName(String name){
+    public void deleteAllIngredientWithSameName(String name) {
         Iterator<Ingredient> it = this.ingredients.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Ingredient ingredient = it.next();
             if (ingredient.getIngredientName().equals(name)){
                 it.remove();
@@ -147,13 +141,13 @@ public class FoodStorage {
      * @return true If the ingredients have the same name and expiry date
      * @return false If the ingredients do not have the same name and expiry date
      */
-    public boolean isSame(Ingredient ingredient1,Ingredient ingredient2){
+    public boolean isSame(Ingredient ingredient1, Ingredient ingredient2) {
         if ((ingredient1.getIngredientName().equals(ingredient2.getIngredientName()))
                 && (ingredient1.getExpiryDate().equals(ingredient2.getExpiryDate()))
                 && (ingredient1.getUnit().equals(ingredient2.getUnit()))){
             return true;
         }
-        else{
+        else {
             return false;
         }
     }
@@ -173,10 +167,10 @@ public class FoodStorage {
      * @param amount The amount of the ingredient to be used
      * @param ingredientName The name of the ingredient to be used
      */
-    public boolean useIngredient(double amount, String ingredientName){
+    public boolean useIngredient(double amount, String ingredientName) {
         boolean success = false;
         sortByDate();
-        if (getAmountOfIngredients(ingredientName) < amount){
+        if (getAmountOfIngredients(ingredientName) < amount) {
             success = false;
         }
         else {
@@ -207,15 +201,15 @@ public class FoodStorage {
      * @param ingredientName The name of the ingredient
      * @return amount The amount of the ingredient
      */
-    public double getAmountOfIngredients(String ingredientName){
-        if ((ingredientName.isBlank())||(ingredientName == null)) {
+    public double getAmountOfIngredients(String ingredientName) {
+        if ((ingredientName.isBlank()) || (ingredientName == null)) {
             throw new IllegalArgumentException("Name cannot be empty");
         }
         double amount = 0;
         Iterator<Ingredient> it = ingredients.iterator();
-        while (it.hasNext()){
+        while (it.hasNext()) {
             Ingredient ingredient = it.next();
-            if (ingredient.getIngredientName().equals(ingredientName)){
+            if (ingredient.getIngredientName().equals(ingredientName)) {
                 amount += ingredient.getAmount();
             }
         }
@@ -228,7 +222,7 @@ public class FoodStorage {
      *
      * @return it, list of ingredient in FoodStorage
      */
-    public Iterator getIngredientList(){
+    public Iterator getIngredientList() {
         Iterator<Ingredient> it = ingredients.iterator();
         return it;
     }
@@ -242,13 +236,13 @@ public class FoodStorage {
      *
      * @return ArrayList<Ingredient> An arraylist of te sorted ingredients
      */
-    public ArrayList<Ingredient> sortByDateOld(){
+    public ArrayList<Ingredient> sortByDateOld() {
         ArrayList<Ingredient> sortedList = new ArrayList<>();
         int index = 0;
-        for (Ingredient ingredient:ingredients){
+        for (Ingredient ingredient : ingredients) {
             int indexOfSortedIngredient = 0;
             boolean sorted = false;
-            while ((indexOfSortedIngredient < sortedList.size())&&(!sorted)){
+            while ((indexOfSortedIngredient < sortedList.size()) && (!sorted)) {
                 Ingredient sortedIngredient = sortedList.get(indexOfSortedIngredient);
                 if (sortedIngredient.getExpiryDate().isAfter(ingredient.getExpiryDate())) {
                     index = sortedList.indexOf(sortedIngredient);
@@ -269,14 +263,14 @@ public class FoodStorage {
     /**
      * Sorts the ingredients by date.
      */
-    public void sortByDate(){
+    public void sortByDate() {
         Collections.sort(ingredients, Comparator.comparing(Ingredient::getExpiryDate));
     }
 
     /**
      * Sorts the ingredients alphabetically
      */
-    public void sortAlphabetically(){
+    public void sortAlphabetically() {
         Collections.sort(ingredients, Comparator.comparing(Ingredient::getIngredientName));
     }
 

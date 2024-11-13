@@ -19,7 +19,7 @@ public class Recipe {
      * @param recipeName
      * @param description
      */
-    public Recipe(String recipeName, String description){
+    public Recipe(String recipeName, String description) {
         setRecipeName(recipeName);
         setDescription(description);
         this.ingredientList = new FoodStorage();
@@ -30,7 +30,7 @@ public class Recipe {
      *
      * @param ingredient The ingredient being added.
      */
-    public void addIngredient(Ingredient ingredient){
+    public void addIngredient(Ingredient ingredient) {
         this.ingredientList.addIngredient(ingredient);
     }
 
@@ -39,8 +39,8 @@ public class Recipe {
      *
      * @param newName The new name of the recipe
      */
-    public void setRecipeName(String newName){
-        if ((newName.isBlank())||(newName == null)) {
+    public void setRecipeName(String newName) {
+        if ((newName.isBlank()) || (newName == null)) {
             throw new IllegalArgumentException("Recipe name cannot be empty");
         }
         this.recipeName = newName;
@@ -51,7 +51,7 @@ public class Recipe {
      *
      * @return recipeName, The name of the recipe.
      */
-    public String getRecipeName(){
+    public String getRecipeName() {
         return recipeName;
     }
 
@@ -60,8 +60,8 @@ public class Recipe {
      *
      * @param newDescription The new description of the recipe
      */
-    public void setDescription(String newDescription){
-        if ((newDescription.isBlank())||(newDescription == null)) {
+    public void setDescription(String newDescription) {
+        if ((newDescription.isBlank()) || (newDescription == null)) {
             throw new IllegalArgumentException("Description cannot be empty");
         }
         this.description = newDescription;
@@ -72,7 +72,7 @@ public class Recipe {
      *
      * @return description, The description of the recipe.
      */
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
@@ -85,13 +85,13 @@ public class Recipe {
      * @return enoughIngredients Boolean true if there is enough ingredients
      * to make the recipe, false if there isn't.
      */
-    public boolean canUseRecipe(FoodStorage foodStorage){
+    public boolean canUseRecipe(FoodStorage foodStorage) {
         boolean enoughIngredients = true;
         Iterator<Ingredient> it = ingredientList.getIngredientList();
-        while ((it.hasNext())&&(enoughIngredients)){
+        while ((it.hasNext()) && (enoughIngredients)){
             Ingredient ingredient = it.next();
             if (ingredient.getAmount() >
-                    foodStorage.getAmountOfIngredients(ingredient.getIngredientName())){
+                    foodStorage.getAmountOfIngredients(ingredient.getIngredientName())) {
                 enoughIngredients = false;
             }
         }
@@ -105,7 +105,7 @@ public class Recipe {
      *
      * @return it, The iterator of the list of ingredients.
      */
-    public Iterator<Ingredient> getIngredientList(){
+    public Iterator<Ingredient> getIngredientList() {
         Iterator<Ingredient> it = this.ingredientList.getIngredientList();
         return it;
     }

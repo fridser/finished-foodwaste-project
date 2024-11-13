@@ -46,10 +46,13 @@ public class FoodStorageTest {
      *
      */
     @Test
-    public void createFoodStorageWithValidIngredients(){
-        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",15.2,2025,3,12);
-        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",25.9,2025,1,1);
+    public void createFoodStorageWithValidIngredients() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
 
         FoodStorage fd = new FoodStorage();
 
@@ -70,9 +73,11 @@ public class FoodStorageTest {
      * returns the sum of the two amounts of ingredients.
      */
     @Test
-    public void addIngredientsWithTheSameName(){
-        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-        Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",15.2,2025,3,12);
+    public void addIngredientsWithTheSameName() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
 
         FoodStorage fd = new FoodStorage();
 
@@ -90,9 +95,11 @@ public class FoodStorageTest {
      * of the two ingredients added up.
      */
     @Test
-    public void addItemsWithTheSameNameAndExpiryDate(){
-        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-        Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",15.2,2024,12,12);
+    public void addItemsWithTheSameNameAndExpiryDate() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
+                15.2,2024,12,12);
 
         FoodStorage fd = new FoodStorage();
 
@@ -108,10 +115,13 @@ public class FoodStorageTest {
      * index 1 is now at index 0, and that the list is one less size.
      */
     @Test
-    public void deleteValidIngredient(){
-        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",15.2,2025,3,12);
-        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",25.9,2025,1,1);
+    public void deleteValidIngredient() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
 
         FoodStorage fd = new FoodStorage();
 
@@ -131,10 +141,13 @@ public class FoodStorageTest {
      * ingredient
      */
     @Test
-    public void findIngredientByNameWithOnlyOneInstanceOfTheName(){
-        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",15.2,2025,3,12);
-        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",25.9,2025,1,1);
+    public void findIngredientByNameWithOnlyOneInstanceOfTheName() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
 
         FoodStorage fd = new FoodStorage();
 
@@ -152,11 +165,15 @@ public class FoodStorageTest {
      * ingredient.
      */
     @Test
-    public void useLessAmountThanTheFirstIngredient(){
-        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",15.2,2025,3,12);
-        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",25.9,2025,1,1);
-        Ingredient ingredient4 = new Ingredient("Apple",5,"Stk",15.2,2025,3,12);
+    public void useLessAmountThanTheFirstIngredient() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
+        Ingredient ingredient4 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
 
         FoodStorage fd = new FoodStorage();
 
@@ -175,11 +192,15 @@ public class FoodStorageTest {
      * than the first
      */
     @Test
-    public void useMoreAmountThanFirstIngredient(){
-        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",15.2,2025,3,12);
-        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",25.9,2025,1,1);
-        Ingredient ingredient4 = new Ingredient("Apple",5,"Stk",15.2,2025,3,12);
+    public void useMoreAmountThanFirstIngredient() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
+        Ingredient ingredient4 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
 
         FoodStorage fd = new FoodStorage();
 
@@ -199,10 +220,13 @@ public class FoodStorageTest {
      * with lower expiration dates.
      */
     @Test
-    public void useIngredientsWithDifferentDates(){
-        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-        Ingredient ingredient2 = new Ingredient("Apple",2,"Stk",25.9,2023,3,12);
-        Ingredient ingredient3 = new Ingredient("Apple",5,"Stk",15.2,2025,1,1);
+    public void useIngredientsWithDifferentDates() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Apple",2,"Stk",
+                25.9,2023,3,12);
+        Ingredient ingredient3 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,1,1);
 
         FoodStorage fd = new FoodStorage();
 
@@ -226,10 +250,12 @@ public class FoodStorageTest {
      * Checks if an exception is caught
      */
     @Test
-    public void useIngredientWithNegativeAmount(){
+    public void useIngredientWithNegativeAmount() {
         try{
-            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",15.2,2025,3,12);
+            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                    12.3,2024,12,12);
+            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
+                    15.2,2025,3,12);
 
             FoodStorage fd = new FoodStorage();
 
@@ -238,7 +264,7 @@ public class FoodStorageTest {
 
             fd.useIngredient(-3,"Apple");
             fail();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertTrue(true);
 
         }
@@ -249,10 +275,12 @@ public class FoodStorageTest {
      * Checks to see if an exception is caugth.
      */
     @Test
-    public void useTooMuchOfIngredient(){
+    public void useTooMuchOfIngredient() {
         try{
-            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",15.2,2025,3,12);
+            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                    12.3,2024,12,12);
+            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
+                    15.2,2025,3,12);
 
             FoodStorage fd = new FoodStorage();
 
@@ -261,7 +289,7 @@ public class FoodStorageTest {
 
             fd.useIngredient(10,"Apple");
             fail();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertTrue(true);
 
         }
@@ -272,10 +300,12 @@ public class FoodStorageTest {
      * Checks to see if an exception is caught
      */
     @Test
-    public void useIngredientWithInvalidName(){
+    public void useIngredientWithInvalidName() {
         try{
-            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",15.2,2025,3,12);
+            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                    12.3,2024,12,12);
+            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
+                    15.2,2025,3,12);
 
             FoodStorage fd = new FoodStorage();
 
@@ -284,7 +314,7 @@ public class FoodStorageTest {
 
             fd.useIngredient(3,"");
             fail();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertTrue(true);
 
         }
@@ -295,10 +325,12 @@ public class FoodStorageTest {
      * Checks to see if an exception is caught
      */
     @Test
-    public void findIngredientWithInvalidName(){
+    public void findIngredientWithInvalidName() {
         try{
-            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",12.3,2024,12,12);
-            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",15.2,2025,3,12);
+            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                    12.3,2024,12,12);
+            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
+                    15.2,2025,3,12);
 
             FoodStorage fd = new FoodStorage();
 
@@ -307,7 +339,7 @@ public class FoodStorageTest {
 
             fd.findIngredientByName("");
             fail();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertTrue(true);
 
         }

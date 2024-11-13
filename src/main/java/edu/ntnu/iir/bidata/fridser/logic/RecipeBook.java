@@ -17,7 +17,7 @@ public class RecipeBook {
     /**
      * Constructor for the RecipeBook class.
      */
-    public RecipeBook(){
+    public RecipeBook() {
         this.recipeList = new HashMap<>();
     }
 
@@ -26,7 +26,7 @@ public class RecipeBook {
      *
      * @param recipe The recipe being added.
      */
-    public void addRecipe(Recipe recipe){
+    public void addRecipe(Recipe recipe) {
         this.recipeList.put(recipe.getRecipeName(),recipe);
     }
 }

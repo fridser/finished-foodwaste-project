@@ -45,8 +45,9 @@ public class IngredientTest {
      * checks that the name field returns the correct info
      */
     @Test
-    public void createInstanceWithValidName(){
-        Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
+    public void createInstanceWithValidName() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+                12.9,2000,1,1);
 
         assertEquals("Apple",ingredient.getIngredientName());
     }
@@ -56,11 +57,12 @@ public class IngredientTest {
      * checks if an exception is caught
      */
     @Test
-    public void createInstanceWithInvalidName(){
+    public void createInstanceWithInvalidName() {
         try{
-            Ingredient ingredient = new Ingredient("", 2, "Kg", 12.9,2000, 1, 1);
+            Ingredient ingredient = new Ingredient("", 2, "Kg",
+                    12.9,2000, 1, 1);
             fail();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertTrue(true);
 
         }
@@ -72,8 +74,9 @@ public class IngredientTest {
      * Checks that the amount field returns the correct info
      */
     @Test
-    public void createInstanceWithValidAmount(){
-        Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
+    public void createInstanceWithValidAmount() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+                12.9,2000,1,1);
         assertEquals(2,ingredient.getAmount());
     }
 
@@ -82,11 +85,12 @@ public class IngredientTest {
      * Checks if an exception is caught
      */
     @Test
-    public void createInstanceWithInvalidAmount(){
+    public void createInstanceWithInvalidAmount() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", -2, "Kg", 12.9,2000, 1, 1);
+            Ingredient ingredient = new Ingredient("Apple", -2, "Kg",
+                    12.9,2000, 1, 1);
             fail();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertTrue(true);
 
         }
@@ -98,8 +102,9 @@ public class IngredientTest {
      * checks that the unit field returns the correct info
      */
     @Test
-    public void createInstanceWithValidUnit(){
-        Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
+    public void createInstanceWithValidUnit() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+                12.9,2000,1,1);
         assertEquals("Kg",ingredient.getUnit());
     }
 
@@ -108,9 +113,10 @@ public class IngredientTest {
      * checks if an exception is caught
      */
     @Test
-    public void createInstanceWithInvalidUnit(){
+    public void createInstanceWithInvalidUnit() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "", 12.9,2000, 1, 1);
+            Ingredient ingredient = new Ingredient("Apple", 2, "",
+                    12.9,2000, 1, 1);
             fail();
         } catch (IllegalArgumentException e){
             assertTrue(true);
@@ -124,8 +130,9 @@ public class IngredientTest {
      * checks that the price field returns the correct info
      */
     @Test
-    public void createInstanceWithValidPrice(){
-        Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
+    public void createInstanceWithValidPrice() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+                12.9,2000,1,1);
         assertEquals(12.9,ingredient.getPrice());
     }
 
@@ -134,11 +141,12 @@ public class IngredientTest {
      * checks if an exception is caught
      */
     @Test
-    public void createInstanceWithInvalidPrice(){
+    public void createInstanceWithInvalidPrice() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg", -12.9,2000, 1, 1);
+            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+                    -12.9,2000, 1, 1);
             fail();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertTrue(true);
 
         }
@@ -152,9 +160,10 @@ public class IngredientTest {
      * checks if an exception is caught
      */
     @Test
-    public void changeNameWithInvalidNewName(){
+    public void changeNameWithInvalidNewName() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
+            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+                    12.9,2000,1,1);
             ingredient.setIngredientName("");
             fail();
         } catch (IllegalArgumentException e) {
@@ -170,9 +179,10 @@ public class IngredientTest {
      * checks if an exception is caught
      */
     @Test
-    public void changeAmountWithInvalidNewAmount(){
+    public void changeAmountWithInvalidNewAmount() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
+            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+                    12.9,2000,1,1);
             ingredient.setAmount(-2);
             fail();
         } catch (IllegalArgumentException e) {
@@ -184,13 +194,14 @@ public class IngredientTest {
 
     /**
      * Tries to create an object with valid parameters and change the unit to
-     * an empty unit
-     * checks if an exception is caught
+     * an empty unit.
+     * Checks if an exception is caught.
      */
     @Test
-    public void changeUnitWithInvalidNewUnit(){
+    public void changeUnitWithInvalidNewUnit() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
+            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+                    12.9,2000,1,1);
             ingredient.setUnit("");
             fail();
         } catch (IllegalArgumentException e) {
@@ -202,13 +213,14 @@ public class IngredientTest {
 
     /**
      * Tries to create an object with valid parameters and change the price to
-     * a negative amount
-     * checks if an exception is caught
+     * a negative amount.
+     * Checks if an exception is caught.
      */
     @Test
-    public void changePriceWithInvalidNewPrice(){
+    public void changePriceWithInvalidNewPrice() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
+            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+                    12.9,2000,1,1);
             ingredient.setPrice(-3);
             fail();
         } catch (IllegalArgumentException e) {
@@ -222,8 +234,9 @@ public class IngredientTest {
      * amount.
      */
     @Test
-    public void reduceValidAmount(){
-        Ingredient ingredient = new Ingredient("Apple", 8, "Kg", 12.9,2000,1,1);
+    public void reduceValidAmount() {
+        Ingredient ingredient = new Ingredient("Apple", 8, "Kg",
+                12.9,2000,1,1);
         ingredient.reduceAmount(5);
 
         assertEquals(3,ingredient.getAmount());
@@ -235,9 +248,10 @@ public class IngredientTest {
      * Checks if an exception is caught.
      */
     @Test
-    public void reduceWithMoreAmountThanIsInTheIngredientAmount(){
+    public void reduceWithMoreAmountThanIsInTheIngredientAmount() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg", 12.9,2000,1,1);
+            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+                    12.9,2000,1,1);
             ingredient.reduceAmount(5);
             fail();
         } catch (IllegalArgumentException e) {
@@ -250,8 +264,9 @@ public class IngredientTest {
      * equal to the sum of the initial amount and the added amount.
      */
     @Test
-    public void addValidAmount(){
-        Ingredient ingredient = new Ingredient("Apple", 3, "Kg", 12.9,2000,1,1);
+    public void addValidAmount() {
+        Ingredient ingredient = new Ingredient("Apple", 3, "Kg",
+                12.9,2000,1,1);
         ingredient.addAmount(5);
 
         assertEquals(8,ingredient.getAmount());
@@ -262,9 +277,10 @@ public class IngredientTest {
      * Checks if an exception is caught.
      */
     @Test
-    public void addInvalidAmount(){
+    public void addInvalidAmount() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 3, "Kg", 12.9,2000,1,1);
+            Ingredient ingredient = new Ingredient("Apple", 3, "Kg",
+                    12.9,2000,1,1);
             ingredient.addAmount(-5);
             fail();
         } catch (IllegalArgumentException e) {
