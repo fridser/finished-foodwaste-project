@@ -4,6 +4,7 @@ package edu.ntnu.iir.bidata.fridser.logic;
 
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
 
+import java.time.LocalDate;
 import java.util.Iterator;
 
 
@@ -108,6 +109,52 @@ public class Recipe {
     public Iterator<Ingredient> getIngredientList() {
         Iterator<Ingredient> it = this.ingredientList.getIngredientList();
         return it;
+    }
+
+    /**
+     * Counts how many different ingredients used in the recipe who will
+     * expire within a week. Ingredients with the same name will only
+     * be counted once.
+     *
+     * @param currentDate The date the ingredient is compared to
+     * @param fd The FoodStorage the ingredients reside in
+     * @return count, how many different ingredients in the recipe who will
+     * expire within a week.
+     */
+    public int getUrgent(LocalDate currentDate, FoodStorage fd) {
+        int count = 0;
+        fd.sortByDate();
+        Iterator<Ingredient> it = this.ingredientList.getIngredientList();
+        while (it.hasNext()) {
+            Ingredient ingredient = it.next();
+            if (fd.findIngredientByName(ingredient.getIngredientName()).isUrgent(currentDate)) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Counts how many different ingredients used in the recipe who will
+     * expire within a day. Ingredients with the same name will only
+     * be counted once.
+     *
+     * @param currentDate The date the ingredient is compared to
+     * @param fd The FoodStorage the ingredients reside in
+     * @return count, how many different ingredients in the recipe who will
+     * expire within a day.
+     */
+    public int getDire(LocalDate currentDate, FoodStorage fd) {
+        int count = 0;
+        fd.sortByDate();
+        Iterator<Ingredient> it = this.ingredientList.getIngredientList();
+        while (it.hasNext()) {
+            Ingredient ingredient = it.next();
+            if (fd.findIngredientByName(ingredient.getIngredientName()).isDire(currentDate)) {
+                count += 1;
+            }
+        }
+        return count;
     }
 
 

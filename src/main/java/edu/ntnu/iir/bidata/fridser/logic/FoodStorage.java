@@ -1,6 +1,8 @@
 package edu.ntnu.iir.bidata.fridser.logic;
 
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -168,6 +170,12 @@ public class FoodStorage {
      * @param ingredientName The name of the ingredient to be used
      */
     public boolean useIngredient(double amount, String ingredientName) {
+        if ((amount < 0)) {
+            throw new IllegalArgumentException("Used amount cannot be less than zero");
+        }
+        if ((amount < 0)) {
+            throw new IllegalArgumentException("Used amount cannot be zero");
+        }
         boolean success = false;
         sortByDate();
         if (getAmountOfIngredients(ingredientName) < amount) {
@@ -273,6 +281,43 @@ public class FoodStorage {
     public void sortAlphabetically() {
         Collections.sort(ingredients, Comparator.comparing(Ingredient::getIngredientName));
     }
+
+    /**
+     * Returns the expired ingredients as an iterator.
+     *
+     * @param currentDate The current date that the ingredients are compared to.
+     * @return it, The iterator containing the expired ingredients.
+     */
+    public Iterator<Ingredient> getExpiredIngredients(LocalDate currentDate) {
+        Iterator<Ingredient> it = this.ingredients.iterator();
+        while (it.hasNext()) {
+            if (!it.next().isExpired(currentDate)) {
+                it.remove();
+            }
+
+        }
+        return it;
+    }
+
+    /**
+     * Removes the ingredients that are expired.
+     *
+     * @param currentDate The date the ingredients are compared to.
+     */
+    public void removeExpiredIngredients(LocalDate currentDate) {
+        Iterator<Ingredient> it = this.ingredients.iterator();
+        while (it.hasNext()) {
+            Ingredient ingredient = it.next();
+            if (ingredient.isExpired(currentDate)) {
+                it.remove();
+            }
+        }
+
+    }
+
+
+
+
 
     //TODO: make a method that checks if we have enough of a ingredient
     //TODO: make a method that checks if we have enough of a list of ingredients

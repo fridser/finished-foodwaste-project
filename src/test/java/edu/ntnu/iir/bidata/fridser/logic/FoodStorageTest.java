@@ -242,6 +242,25 @@ public class FoodStorageTest {
 
     }
 
+    /**
+     * Tries to use more of an ingredient than there are in a foodstorage.
+     * Asserts false.
+     */
+    @Test
+    public void useTooMuchOfIngredient() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+
+        assertFalse(fd.useIngredient(10,"Apple"));
+    }
+
 
     //----------------------NEGATIVE TESTS------------------------------------
 
@@ -270,30 +289,6 @@ public class FoodStorageTest {
         }
     }
 
-    /**
-     * Tries to use more of an ingredient than there are in a foodstorage.
-     * Checks to see if an exception is caugth.
-     */
-    @Test
-    public void useTooMuchOfIngredient() {
-        try{
-            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
-                    12.3,2024,12,12);
-            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
-                    15.2,2025,3,12);
-
-            FoodStorage fd = new FoodStorage();
-
-            fd.addIngredient(ingredient1);
-            fd.addIngredient(ingredient2);
-
-            fd.useIngredient(10,"Apple");
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertTrue(true);
-
-        }
-    }
 
     /**
      * Tries to use an ingredient with a blank name

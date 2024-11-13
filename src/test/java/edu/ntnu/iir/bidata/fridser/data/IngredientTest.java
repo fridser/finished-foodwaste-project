@@ -46,7 +46,7 @@ public class IngredientTest {
      */
     @Test
     public void createInstanceWithValidName() {
-        Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                 12.9,2000,1,1);
 
         assertEquals("Apple",ingredient.getIngredientName());
@@ -59,7 +59,7 @@ public class IngredientTest {
     @Test
     public void createInstanceWithInvalidName() {
         try{
-            Ingredient ingredient = new Ingredient("", 2, "Kg",
+            Ingredient ingredient = new Ingredient("", 2, "Stk",
                     12.9,2000, 1, 1);
             fail();
         } catch (IllegalArgumentException e) {
@@ -75,7 +75,7 @@ public class IngredientTest {
      */
     @Test
     public void createInstanceWithValidAmount() {
-        Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                 12.9,2000,1,1);
         assertEquals(2,ingredient.getAmount());
     }
@@ -87,7 +87,7 @@ public class IngredientTest {
     @Test
     public void createInstanceWithInvalidAmount() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", -2, "Kg",
+            Ingredient ingredient = new Ingredient("Apple", -2, "Stk",
                     12.9,2000, 1, 1);
             fail();
         } catch (IllegalArgumentException e) {
@@ -103,9 +103,9 @@ public class IngredientTest {
      */
     @Test
     public void createInstanceWithValidUnit() {
-        Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                 12.9,2000,1,1);
-        assertEquals("Kg",ingredient.getUnit());
+        assertEquals("Stk",ingredient.getUnit());
     }
 
     /**
@@ -131,7 +131,7 @@ public class IngredientTest {
      */
     @Test
     public void createInstanceWithValidPrice() {
-        Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                 12.9,2000,1,1);
         assertEquals(12.9,ingredient.getPrice());
     }
@@ -143,7 +143,7 @@ public class IngredientTest {
     @Test
     public void createInstanceWithInvalidPrice() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+            Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                     -12.9,2000, 1, 1);
             fail();
         } catch (IllegalArgumentException e) {
@@ -162,7 +162,7 @@ public class IngredientTest {
     @Test
     public void changeNameWithInvalidNewName() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+            Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                     12.9,2000,1,1);
             ingredient.setIngredientName("");
             fail();
@@ -181,7 +181,7 @@ public class IngredientTest {
     @Test
     public void changeAmountWithInvalidNewAmount() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+            Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                     12.9,2000,1,1);
             ingredient.setAmount(-2);
             fail();
@@ -200,7 +200,7 @@ public class IngredientTest {
     @Test
     public void changeUnitWithInvalidNewUnit() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+            Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                     12.9,2000,1,1);
             ingredient.setUnit("");
             fail();
@@ -219,7 +219,7 @@ public class IngredientTest {
     @Test
     public void changePriceWithInvalidNewPrice() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+            Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                     12.9,2000,1,1);
             ingredient.setPrice(-3);
             fail();
@@ -235,7 +235,7 @@ public class IngredientTest {
      */
     @Test
     public void reduceValidAmount() {
-        Ingredient ingredient = new Ingredient("Apple", 8, "Kg",
+        Ingredient ingredient = new Ingredient("Apple", 8, "Stk",
                 12.9,2000,1,1);
         ingredient.reduceAmount(5);
 
@@ -250,7 +250,7 @@ public class IngredientTest {
     @Test
     public void reduceWithMoreAmountThanIsInTheIngredientAmount() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 2, "Kg",
+            Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                     12.9,2000,1,1);
             ingredient.reduceAmount(5);
             fail();
@@ -265,7 +265,7 @@ public class IngredientTest {
      */
     @Test
     public void addValidAmount() {
-        Ingredient ingredient = new Ingredient("Apple", 3, "Kg",
+        Ingredient ingredient = new Ingredient("Apple", 3, "Stk",
                 12.9,2000,1,1);
         ingredient.addAmount(5);
 
@@ -279,7 +279,7 @@ public class IngredientTest {
     @Test
     public void addInvalidAmount() {
         try{
-            Ingredient ingredient = new Ingredient("Apple", 3, "Kg",
+            Ingredient ingredient = new Ingredient("Apple", 3, "Stk",
                     12.9,2000,1,1);
             ingredient.addAmount(-5);
             fail();
