@@ -3,6 +3,9 @@ package edu.ntnu.iir.bidata.fridser.logic;
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -262,6 +265,198 @@ public class FoodStorageTest {
         assertEquals(8,fd.getAmountOfIngredients("Apple"));
     }
 
+    /**
+     * Deletes all ingredients with the same name. Checks that the ingredients
+     * with the specified name are removed and the others remain.
+     * Written with copilot.
+     */
+    @Test
+    public void deleteAllIngredientsWithSameName() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+        fd.addIngredient(ingredient3);
+
+        fd.deleteAllIngredientWithSameName("Apple");
+
+        assertEquals(1, fd.getNumberOfIngredients());
+        assertEquals(ingredient3, fd.getIngredient(0));
+    }
+
+    /**
+     * Adds multiple ingredients and checks if the getIngredientList method
+     * returns an iterator containing all the ingredients.
+     * Written with copilot.
+     */
+    @Test
+    public void getIngredientListWithMultipleIngredients() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+        fd.addIngredient(ingredient3);
+
+        Iterator<Ingredient> it = fd.getIngredientList();
+        assertTrue(it.hasNext());
+        assertEquals(ingredient1, it.next());
+        assertEquals(ingredient2, it.next());
+        assertEquals(ingredient3, it.next());
+        assertFalse(it.hasNext());
+    }
+
+    /**
+     * Checks if the getIngredientList method returns an empty iterator
+     * when no ingredients are added.
+     * Written with copilot.
+     */
+    @Test
+    public void getIngredientListWithNoIngredients() {
+        FoodStorage fd = new FoodStorage();
+        Iterator<Ingredient> it = fd.getIngredientList();
+        assertFalse(it.hasNext());
+    }
+
+    /**
+     * Adds multiple ingredients and checks if the sortAlphabetically method
+     * sorts them in alphabetical order.
+     * Written with copilot.
+     */
+    @Test
+    public void sortAlphabeticallyWithMultipleIngredients() {
+        Ingredient ingredient1 = new Ingredient("Banana",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+        fd.addIngredient(ingredient3);
+
+        fd.sortAlphabetically();
+
+        assertEquals(ingredient2, fd.getIngredient(0));
+        assertEquals(ingredient1, fd.getIngredient(1));
+        assertEquals(ingredient3, fd.getIngredient(2));
+    }
+
+    /**
+     * Adds multiple ingredients with different expiry dates and checks if the getExpiredIngredients method
+     * returns only the expired ingredients.
+     * Written with copilot.
+     */
+    @Test
+    public void getExpiredIngredientsWithMultipleIngredients() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2022,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2021,1,1);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+        fd.addIngredient(ingredient3);
+
+        Iterator<Ingredient> it = fd.getExpiredIngredients(LocalDate.of(2023, 1, 1));
+        assertTrue(it.hasNext());
+        assertEquals(ingredient1, it.next());
+        assertEquals(ingredient3, it.next());
+        assertFalse(it.hasNext());
+    }
+
+    /**
+     * Checks if the getExpiredIngredients method returns an empty iterator
+     * when no ingredients are expired.
+     * Written with copilot.
+     */
+    @Test
+    public void getExpiredIngredientsWithNoExpiredIngredients() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+
+        Iterator<Ingredient> it = fd.getExpiredIngredients(LocalDate.of(2023, 1, 1));
+        assertFalse(it.hasNext());
+    }
+
+    /**
+     * Adds multiple ingredients with different expiry dates and checks if the
+     * removeExpiredIngredients method removes only the expired ingredients.
+     * Written with copilot.
+     */
+    @Test
+    public void removeExpiredIngredientsWithMultipleIngredients() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2022,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2021,1,1);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+        fd.addIngredient(ingredient3);
+
+        fd.removeExpiredIngredients(LocalDate.of(2023, 1, 1));
+
+        assertEquals(1, fd.getNumberOfIngredients());
+        assertEquals(ingredient2, fd.getIngredient(0));
+    }
+
+    /**
+     * Adds multiple ingredients with the same expiry date and checks if the
+     * removeExpiredIngredients method removes all of them when they are expired.
+     * Written with copilot.
+     */
+    @Test
+    public void removeExpiredIngredientsWithSameExpiryDate() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2022,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2022,12,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2022,12,12);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+        fd.addIngredient(ingredient3);
+
+        fd.removeExpiredIngredients(LocalDate.of(2023, 1, 1));
+
+        assertEquals(0, fd.getNumberOfIngredients());
+    }
+
 
     //----------------------NEGATIVE TESTS------------------------------------
 
@@ -338,6 +533,22 @@ public class FoodStorageTest {
         } catch (IllegalArgumentException e) {
             assertTrue(true);
 
+        }
+    }
+
+    /**
+     * Tries to get an ingredient with an index greater than the list size.
+     * Checks to see if an exception is caught.
+     * Written with copilot.
+     */
+    @Test
+    public void getIngredientWithIndexGreaterThanSize() {
+        try {
+            FoodStorage fd = new FoodStorage();
+            fd.getIngredient(1);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue(true);
         }
     }
 }

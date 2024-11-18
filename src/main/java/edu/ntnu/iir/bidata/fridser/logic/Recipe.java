@@ -10,19 +10,19 @@ import java.util.Iterator;
 
 public class Recipe {
     private String recipeName;
-    private String description;
+    private String instruction;
     private int portions;
     private FoodStorage ingredientList;
 
     /**
      * Creates a new instance if Recipe.
      *
-     * @param recipeName
-     * @param description
+     * @param recipeName The name of the recipe.
+     * @param instruction The instruction detailing how to cook the recipe.
      */
-    public Recipe(String recipeName, String description) {
+    public Recipe(String recipeName, String instruction) {
         setRecipeName(recipeName);
-        setDescription(description);
+        setInstruction(instruction);
         this.ingredientList = new FoodStorage();
     }
 
@@ -57,15 +57,15 @@ public class Recipe {
     }
 
     /**
-     * Changes the description to the new description
+     * Changes the instruction to the new instruction
      *
-     * @param newDescription The new description of the recipe
+     * @param newDescription The new instruction of the recipe
      */
-    public void setDescription(String newDescription) {
+    public void setInstruction(String newDescription) {
         if ((newDescription.isBlank()) || (newDescription == null)) {
             throw new IllegalArgumentException("Description cannot be empty");
         }
-        this.description = newDescription;
+        this.instruction = newDescription;
     }
 
     /**
@@ -73,8 +73,8 @@ public class Recipe {
      *
      * @return description, The description of the recipe.
      */
-    public String getDescription() {
-        return description;
+    public String getInstruction() {
+        return instruction;
     }
 
     /**
@@ -121,7 +121,7 @@ public class Recipe {
      * @return count, how many different ingredients in the recipe who will
      * expire within a week.
      */
-    public int getUrgent(LocalDate currentDate, FoodStorage fd) {
+    public int getUrgentValue(LocalDate currentDate, FoodStorage fd) {
         int count = 0;
         fd.sortByDate();
         Iterator<Ingredient> it = this.ingredientList.getIngredientList();
@@ -144,7 +144,7 @@ public class Recipe {
      * @return count, how many different ingredients in the recipe who will
      * expire within a day.
      */
-    public int getDire(LocalDate currentDate, FoodStorage fd) {
+    public int getDireValue(LocalDate currentDate, FoodStorage fd) {
         int count = 0;
         fd.sortByDate();
         Iterator<Ingredient> it = this.ingredientList.getIngredientList();

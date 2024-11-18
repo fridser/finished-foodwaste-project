@@ -204,7 +204,9 @@ public class Ingredient {
    */
   public boolean isUrgent(LocalDate currentDate) {
     boolean urgent = false;
-    if (currentDate.isAfter(expiryDate.minusDays(7))) {
+    if (isExpired(currentDate)) {
+      urgent = false;
+    }else if (currentDate.isAfter(expiryDate.minusDays(7))) {
       urgent = true;
     }
     return urgent;
@@ -218,7 +220,9 @@ public class Ingredient {
    */
   public boolean isDire(LocalDate currentDate) {
     boolean dire = false;
-    if (currentDate.isAfter(expiryDate.minusDays(1))) {
+    if (isExpired(currentDate)) {
+      dire = false;
+    } else if (currentDate.isAfter(expiryDate.minusDays(2))) {
       dire = true;
     }
     return dire;

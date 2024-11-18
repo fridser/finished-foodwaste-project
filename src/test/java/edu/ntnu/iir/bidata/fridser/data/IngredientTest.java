@@ -1,6 +1,9 @@
 package edu.ntnu.iir.bidata.fridser.data;
 
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -39,6 +42,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class IngredientTest {
 
+
+//---------------------------------POSITIVE TESTS-----------------------------------------
+
+
     /**
      * creates an object with valid Name
      * Uses set method in constructor
@@ -51,6 +58,253 @@ public class IngredientTest {
 
         assertEquals("Apple",ingredient.getIngredientName());
     }
+
+
+    /**
+     * Creates an object with valid amount
+     * Uses set method in constructor
+     * Checks that the amount field returns the correct info
+     */
+    @Test
+    public void createInstanceWithValidAmount() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9,2000,1,1);
+        assertEquals(2,ingredient.getAmount());
+    }
+
+    /**
+     * creates an object with valid unit
+     * Uses set method in constructor
+     * checks that the unit field returns the correct info
+     */
+    @Test
+    public void createInstanceWithValidUnit() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9,2000,1,1);
+        assertEquals("Stk",ingredient.getUnit());
+    }
+
+    /**
+     * creates an object with valid price
+     * Uses set method in constructor
+     * checks that the price field returns the correct info
+     */
+    @Test
+    public void createInstanceWithValidPrice() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9,2000,1,1);
+        assertEquals(12.9,ingredient.getPrice());
+    }
+
+
+    /**
+     * Reduces the amount of the object with a valid reduced amount.
+     * Checks that the amount is equal to the initial amount minus the reduced
+     * amount.
+     */
+    @Test
+    public void reduceValidAmount() {
+        Ingredient ingredient = new Ingredient("Apple", 8, "Stk",
+                12.9,2000,1,1);
+        ingredient.reduceAmount(5);
+
+        assertEquals(3,ingredient.getAmount());
+    }
+
+    /**
+     * Adds a valid amount to the object. Checks that the amount of the object is
+     * equal to the sum of the initial amount and the added amount.
+     */
+    @Test
+    public void addValidAmount() {
+        Ingredient ingredient = new Ingredient("Apple", 3, "Stk",
+                12.9,2000,1,1);
+        ingredient.addAmount(5);
+
+        assertEquals(8,ingredient.getAmount());
+    }
+
+    /**
+     * Checks if two ingredients with the same name, expiry date,
+     * and unit are considered the same.
+     * Written with copilot.
+     */
+    @Test
+    public void isSameWithIdenticalIngredients() {
+        Ingredient ingredient1 = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 1);
+        Ingredient ingredient2 = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 1);
+        assertTrue(ingredient1.isSame(ingredient2));
+    }
+
+    /**
+     * Checks if two ingredients with different names are not
+     * considered the same.
+     * Written with copilot.
+     */
+    @Test
+    public void isSameWithDifferentNames() {
+        Ingredient ingredient1 = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 1);
+        Ingredient ingredient2 = new Ingredient("Orange", 2, "Stk",
+                12.9, 2023, 1, 1);
+        assertFalse(ingredient1.isSame(ingredient2));
+    }
+
+    /**
+     * Checks if two ingredients with different expiry dates are not
+     * considered the same.
+     * Written with copilot.
+     */
+    @Test
+    public void isSameWithDifferentExpiryDates() {
+        Ingredient ingredient1 = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 1);
+        Ingredient ingredient2 = new Ingredient("Apple", 2, "Stk",
+                12.9, 2024, 1, 1);
+        assertFalse(ingredient1.isSame(ingredient2));
+    }
+
+    /**
+     * Checks if two ingredients with different units are not
+     * considered the same.
+     * Written with copilot.
+     */
+    @Test
+    public void isSameWithDifferentUnits() {
+        Ingredient ingredient1 = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 1);
+        Ingredient ingredient2 = new Ingredient("Apple", 2, "Grams",
+                12.9, 2023, 1, 1);
+        assertFalse(ingredient1.isSame(ingredient2));
+    }
+
+    /**
+     * Checks if an ingredient is expired when the current
+     * date is after the expiry date.
+     * Written with copilot.
+     */
+    @Test
+    public void isExpiredWhenCurrentDateIsAfterExpiryDate() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 1);
+        assertTrue(ingredient.isExpired(LocalDate.of(2023, 1, 2)));
+    }
+
+    /**
+     * Checks if an ingredient is not expired when the current date
+     * is before the expiry date.
+     * Written with copilot.
+     */
+    @Test
+    public void isExpiredWhenCurrentDateIsBeforeExpiryDate() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 1);
+        assertFalse(ingredient.isExpired(LocalDate.of(2022, 12, 31)));
+    }
+
+    /**
+     * Checks if an ingredient is not expired when the current date
+     * is the same as the expiry date.
+     * Written with copilot.
+     */
+    @Test
+    public void isExpiredWhenCurrentDateIsSameAsExpiryDate() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 1);
+        assertFalse(ingredient.isExpired(LocalDate.of(2023, 1, 1)));
+    }
+
+    /**
+     * Checks if an ingredient is urgent when the current date
+     * is within a week before the expiry date.
+     * Written with copilot.
+     */
+    @Test
+    public void isUrgentWhenCurrentDateIsWithinAWeekBeforeExpiryDate() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 8);
+        assertTrue(ingredient.isUrgent(LocalDate.of(2023, 1, 2)));
+    }
+
+    /**
+     * Checks if an ingredient is not urgent when the current date
+     * is more than a week before the expiry date.
+     * Written with copilot.
+     */
+    @Test
+    public void isUrgentWhenCurrentDateIsMoreThanAWeekBeforeExpiryDate() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 15);
+        assertFalse(ingredient.isUrgent(LocalDate.of(2023, 1, 1)));
+    }
+
+    /**
+     * Checks if an ingredient is urgent when the current date
+     * is exactly a week before the expiry date.
+     * Written with copilot.
+     */
+    @Test
+    public void isUrgentWhenCurrentDateIsExactlyAWeekBeforeExpiryDate() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 8);
+        assertTrue(ingredient.isUrgent(LocalDate.of(2023, 1, 1)));
+    }
+
+
+    /**
+     * Checks if an ingredient is not urgent when the current date
+     * is after the expiry date.
+     * Written with copilot.
+     */
+    @Test
+    public void isUrgentWhenCurrentDateIsAfterExpiryDate() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 1);
+        assertFalse(ingredient.isUrgent(LocalDate.of(2023, 1, 2)));
+    }
+
+    /**
+     * Checks if an ingredient is dire when the current date
+     * is the day before the expiry date.
+     * Written with copilot.
+     */
+    @Test
+    public void isDireWhenCurrentDateIsDayBeforeExpiryDate() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 2);
+        assertTrue(ingredient.isDire(LocalDate.of(2023, 1, 1)));
+    }
+
+    /**
+     * Checks if an ingredient is not dire when the current date
+     * is more than a day before the expiry date.
+     * Written with copilot.
+     */
+    @Test
+    public void isDireWhenCurrentDateIsMoreThanDayBeforeExpiryDate() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 3);
+        assertFalse(ingredient.isDire(LocalDate.of(2023, 1, 1)));
+    }
+
+    /**
+     * Checks if an ingredient is dire when the current date
+     * is the same as the expiry date.
+     * Written with copilot.
+     */
+    @Test
+    public void isDireWhenCurrentDateIsSameAsExpiryDate() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                12.9, 2023, 1, 1);
+        assertTrue(ingredient.isDire(LocalDate.of(2023, 1, 1)));
+    }
+
+
+
+
+//-------------------------------------------NEGATIVE TESTS---------------------------
 
     /**
      * Creates an object with empty name
@@ -66,18 +320,6 @@ public class IngredientTest {
             assertTrue(true);
 
         }
-    }
-
-    /**
-     * Creates an object with valid amount
-     * Uses set method in constructor
-     * Checks that the amount field returns the correct info
-     */
-    @Test
-    public void createInstanceWithValidAmount() {
-        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
-                12.9,2000,1,1);
-        assertEquals(2,ingredient.getAmount());
     }
 
     /**
@@ -97,18 +339,6 @@ public class IngredientTest {
     }
 
     /**
-     * creates an object with valid unit
-     * Uses set method in constructor
-     * checks that the unit field returns the correct info
-     */
-    @Test
-    public void createInstanceWithValidUnit() {
-        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
-                12.9,2000,1,1);
-        assertEquals("Stk",ingredient.getUnit());
-    }
-
-    /**
      * Creates an object with empty unit
      * checks if an exception is caught
      */
@@ -122,18 +352,6 @@ public class IngredientTest {
             assertTrue(true);
 
         }
-    }
-
-    /**
-     * creates an object with valid price
-     * Uses set method in constructor
-     * checks that the price field returns the correct info
-     */
-    @Test
-    public void createInstanceWithValidPrice() {
-        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
-                12.9,2000,1,1);
-        assertEquals(12.9,ingredient.getPrice());
     }
 
     /**
@@ -152,8 +370,6 @@ public class IngredientTest {
         }
     }
 
-
-
     /**
      * Tries to create an object with valid parameters and change the name to
      * an empty name
@@ -170,8 +386,6 @@ public class IngredientTest {
             assertTrue(true);
         }
     }
-
-
 
     /**
      * Tries to create an object with valid parameters and change the amount to
@@ -190,8 +404,6 @@ public class IngredientTest {
         }
     }
 
-
-
     /**
      * Tries to create an object with valid parameters and change the unit to
      * an empty unit.
@@ -209,8 +421,6 @@ public class IngredientTest {
         }
     }
 
-
-
     /**
      * Tries to create an object with valid parameters and change the price to
      * a negative amount.
@@ -226,20 +436,6 @@ public class IngredientTest {
         } catch (IllegalArgumentException e) {
             assertTrue(true);
         }
-    }
-
-    /**
-     * Reduces the amount of the object with a valid reduced amount.
-     * Checks that the amount is equal to the initial amount minus the reduced
-     * amount.
-     */
-    @Test
-    public void reduceValidAmount() {
-        Ingredient ingredient = new Ingredient("Apple", 8, "Stk",
-                12.9,2000,1,1);
-        ingredient.reduceAmount(5);
-
-        assertEquals(3,ingredient.getAmount());
     }
 
     /**
@@ -260,19 +456,6 @@ public class IngredientTest {
     }
 
     /**
-     * Adds a valid amount to the object. Checks that the amount of the object is
-     * equal to the sum of the initial amount and the added amount.
-     */
-    @Test
-    public void addValidAmount() {
-        Ingredient ingredient = new Ingredient("Apple", 3, "Stk",
-                12.9,2000,1,1);
-        ingredient.addAmount(5);
-
-        assertEquals(8,ingredient.getAmount());
-    }
-
-    /**
      * Tries to add a negative amount to the objects initial amount.
      * Checks if an exception is caught.
      */
@@ -287,6 +470,7 @@ public class IngredientTest {
             assertTrue(true);
         }
     }
+
 
 
 }

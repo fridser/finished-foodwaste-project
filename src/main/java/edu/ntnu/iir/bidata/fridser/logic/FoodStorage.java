@@ -84,6 +84,9 @@ public class FoodStorage {
      * @return Ingredient The ingredient at the index
      */
     public Ingredient getIngredient(int index) {
+        if((index > (ingredients.size()-1))) {
+            throw new IllegalArgumentException("Invalid index");
+        }
         return this.ingredients.get(index);
     }
 
