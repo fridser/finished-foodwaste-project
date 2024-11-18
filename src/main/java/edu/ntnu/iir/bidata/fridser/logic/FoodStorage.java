@@ -38,7 +38,7 @@ public class FoodStorage {
         int index = 0;
         while ((index < this.ingredients.size()) && (!foundSame)) {
             Ingredient ingredient2 = getIngredient(index);
-            if (isSame(ingredient, ingredient2)) {
+            if (ingredient.isSame( ingredient2)) {
                 ingredient2.addAmount(ingredient.getAmount());
                 ingredient2.setPrice((ingredient.getPrice() + ingredient2.getPrice()) / 2);
                 foundSame = true;
@@ -131,26 +131,6 @@ public class FoodStorage {
             if (ingredient.getIngredientName().equals(name)){
                 it.remove();
             }
-        }
-    }
-
-    /**
-     * Checks if two ingredients have the same name, expiry date and unit.
-     * If they do it returns true.
-     *
-     * @param ingredient1 First ingredient to be compared
-     * @param ingredient2 Second ingredient to be compared
-     * @return true If the ingredients have the same name and expiry date
-     * @return false If the ingredients do not have the same name and expiry date
-     */
-    public boolean isSame(Ingredient ingredient1, Ingredient ingredient2) {
-        if ((ingredient1.getIngredientName().equals(ingredient2.getIngredientName()))
-                && (ingredient1.getExpiryDate().equals(ingredient2.getExpiryDate()))
-                && (ingredient1.getUnit().equals(ingredient2.getUnit()))){
-            return true;
-        }
-        else {
-            return false;
         }
     }
 

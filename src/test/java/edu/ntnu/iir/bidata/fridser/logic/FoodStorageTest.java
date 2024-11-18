@@ -244,7 +244,7 @@ public class FoodStorageTest {
 
     /**
      * Tries to use more of an ingredient than there are in a foodstorage.
-     * Asserts false.
+     * Asserts false. Checks that the ingredients haven't been used by using getAmountOfIngredients.
      */
     @Test
     public void useTooMuchOfIngredient() {
@@ -259,6 +259,7 @@ public class FoodStorageTest {
         fd.addIngredient(ingredient2);
 
         assertFalse(fd.useIngredient(10,"Apple"));
+        assertEquals(8,fd.getAmountOfIngredients("Apple"));
     }
 
 

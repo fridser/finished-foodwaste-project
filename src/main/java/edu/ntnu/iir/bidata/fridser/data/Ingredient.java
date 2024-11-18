@@ -224,6 +224,26 @@ public class Ingredient {
     return dire;
   }
 
+  /**
+   * Checks if another ingredient has the same name, expiry date and unit
+   * as this ingredient.
+   * If they do it returns true.
+   *
+   * @param ingredient Ingredient to be compared to
+   * @return true If the ingredients have the same name and expiry date
+   * @return false If the ingredients do not have the same name and expiry date
+   */
+  public boolean isSame(Ingredient ingredient) {
+    if ((ingredient.getIngredientName().equals(this.ingredientName))
+            && (ingredient.getExpiryDate().equals(this.expiryDate))
+            && (ingredient.getUnit().equals(this.unit))){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
 
 
 
