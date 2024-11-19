@@ -106,9 +106,13 @@ public class Recipe {
      *
      * @return it, The iterator of the list of ingredients.
      */
-    public Iterator<Ingredient> getIngredientList() {
+    public Iterator<Ingredient> getIngredientIterator() {
         Iterator<Ingredient> it = this.ingredientList.getIngredientList();
         return it;
+    }
+
+    public FoodStorage getIngredientList() {
+        return ingredientList;
     }
 
     /**

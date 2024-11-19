@@ -56,7 +56,7 @@ public class IngredientTest {
         Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                 12.9,2000,1,1);
 
-        assertEquals("Apple",ingredient.getIngredientName());
+        assertEquals("Apple", ingredient.getIngredientName());
     }
 
 
@@ -69,7 +69,7 @@ public class IngredientTest {
     public void createInstanceWithValidAmount() {
         Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                 12.9,2000,1,1);
-        assertEquals(2,ingredient.getAmount());
+        assertEquals(2, ingredient.getAmount());
     }
 
     /**
@@ -81,7 +81,7 @@ public class IngredientTest {
     public void createInstanceWithValidUnit() {
         Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                 12.9,2000,1,1);
-        assertEquals("Stk",ingredient.getUnit());
+        assertEquals("Stk", ingredient.getUnit());
     }
 
     /**
@@ -93,7 +93,21 @@ public class IngredientTest {
     public void createInstanceWithValidPrice() {
         Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                 12.9,2000,1,1);
-        assertEquals(12.9,ingredient.getPrice());
+        assertEquals(12.9, ingredient.getPrice());
+    }
+
+    /**
+     * Creates an instance of ingredient with valid parameters
+     * using the constructor meant for recipes.
+     * Checks that the name, amount and unit field are correct.
+     */
+    @Test
+    public void createInstanceWithValidParametersUsingRecipeConstructor() {
+        Ingredient ingredient = new Ingredient("Apple", 2, "Stk");
+
+        assertEquals("Apple", ingredient.getIngredientName());
+        assertEquals(2, ingredient.getAmount());
+        assertEquals("Stk", ingredient.getUnit());
     }
 
 
