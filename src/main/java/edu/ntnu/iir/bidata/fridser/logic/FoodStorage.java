@@ -269,17 +269,20 @@ public class FoodStorage {
      * Returns the expired ingredients as an iterator.
      *
      * @param currentDate The current date that the ingredients are compared to.
-     * @return it, The iterator containing the expired ingredients.
+     * @return ei, The iterator containing the expired ingredients.
      */
-    public Iterator<Ingredient> getExpiredIngredients(LocalDate currentDate) {
+    public Iterator getExpiredIngredients(LocalDate currentDate) {
         Iterator<Ingredient> it = this.ingredients.iterator();
+        ArrayList<Ingredient> expiredIngredients = new ArrayList<>();
         while (it.hasNext()) {
-            if (!it.next().isExpired(currentDate)) {
-                it.remove();
+            Ingredient ingredient = it.next();
+            if (ingredient.isExpired(currentDate)) {
+                expiredIngredients.add(ingredient);
             }
 
         }
-        return it;
+        Iterator<Ingredient> ei = expiredIngredients.iterator();
+        return ei;
     }
 
     /**

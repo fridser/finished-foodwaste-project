@@ -15,7 +15,7 @@ import java.util.Iterator;
 
 
 public class RecipeBook {
-    private HashMap<String,Recipe> recipeList;
+    private HashMap<String, Recipe> recipeList;
 
     /**
      * Constructor for the RecipeBook class.
@@ -41,9 +41,39 @@ public class RecipeBook {
      */
     public Recipe getRecipe(String recipeName) {
         if ((recipeName.isBlank()) || (recipeName == null)) {
-            throw new IllegalArgumentException("The name of the recipe cannot be empty");
+            throw new IllegalArgumentException("The name of the recipe " +
+                    "cannot be empty");
         }
         return this.recipeList.get(recipeName);
+    }
+
+    /**
+     * Removes the recipe belonging to the name key specified.
+     *
+     * @param name The name of the recipe being removed.
+     */
+    public void deleteRecipe(String name) {
+        this.recipeList.remove(name);
+    }
+
+    /**
+     * Returns true if the recipeList contains a recipe with the stated name.
+     *
+     * @param key The name of the recipe that is being checked.
+     * @return boolean, true if the key exists in the recipeList already.
+     */
+    public boolean containsKey(String key) {
+        return this.recipeList.containsKey(key);
+    }
+
+    /**
+     * Returns true if the recipeList contains the stated recipe already.
+     *
+     * @param recipe The recipe that is being checked.
+     * @return boolean, true if the recipe exists in the recipeList already.
+     */
+    public boolean containsRecipe(Recipe recipe) {
+        return this.recipeList.containsValue(recipe);
     }
 
 
@@ -55,7 +85,7 @@ public class RecipeBook {
      * @return recipe, the recipe who uses the most amount of Ingredients
      * that are about to expire.
      */
-    public Recipe getRecommendedRecipe(LocalDate currentDate, FoodStorage fd) {
+    public Recipe recommendRecipe(LocalDate currentDate, FoodStorage fd) {
         Recipe bestRecipe = null;
         Iterator<Recipe> it = this.recipeList.values().iterator();
         while (it.hasNext()) {
@@ -63,10 +93,13 @@ public class RecipeBook {
             if (bestRecipe == null) {
                 bestRecipe = currentRecipe;
             }
-            if (currentRecipe.getDireValue(currentDate, fd) > bestRecipe.getDireValue(currentDate, fd)) {
+            if (currentRecipe.getDireValue(currentDate, fd) >
+                    bestRecipe.getDireValue(currentDate, fd)) {
                 bestRecipe = currentRecipe;
-            } else if (currentRecipe.getDireValue(currentDate, fd) == bestRecipe.getDireValue(currentDate, fd)) {
-                if (currentRecipe.getUrgentValue(currentDate, fd) > bestRecipe.getUrgentValue(currentDate, fd)) {
+            } else if (currentRecipe.getDireValue(currentDate, fd) ==
+                    bestRecipe.getDireValue(currentDate, fd)) {
+                if (currentRecipe.getUrgentValue(currentDate, fd) >
+                        bestRecipe.getUrgentValue(currentDate, fd)) {
                     bestRecipe = currentRecipe;
                 }
             }
@@ -81,7 +114,7 @@ public class RecipeBook {
      * @param fd The FoodStorage containing the ingredients used in the recipe.
      * @return pr, The iterator containing the possible recipes.
      */
-    public Iterator<Recipe> getPossibleRecipes(FoodStorage fd) {
+    public Iterator getPossibleRecipes(FoodStorage fd) {
         Iterator<Recipe> it = this.recipeList.values().iterator();
         ArrayList<Recipe> possibleRecipes = new ArrayList<>();
         while (it.hasNext()) {

@@ -379,10 +379,12 @@ public class FoodStorageTest {
         fd.addIngredient(ingredient3);
 
         Iterator<Ingredient> it = fd.getExpiredIngredients(LocalDate.of(2023, 1, 1));
+
         assertTrue(it.hasNext());
         assertEquals(ingredient1, it.next());
         assertEquals(ingredient3, it.next());
         assertFalse(it.hasNext());
+
     }
 
     /**

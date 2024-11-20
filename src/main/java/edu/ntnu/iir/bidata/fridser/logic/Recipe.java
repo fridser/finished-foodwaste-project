@@ -5,6 +5,7 @@ package edu.ntnu.iir.bidata.fridser.logic;
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 
@@ -99,6 +100,29 @@ public class Recipe {
         return enoughIngredients;
 
     }
+
+    /**
+     * Returns the ingredients and how much each of the ingredients are lacking
+     * to be able to make the recipe.
+     *
+     * @param fd The FoodStorage containing the ingredients
+     * @return it, the iterator containing the lacking ingredients.
+     */
+    public Iterator getLackingIngredients(FoodStorage fd) {
+        Iterator<Ingredient> it = ingredientList.getIngredientList();
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        while (it.hasNext()) {
+            Ingredient ingredient = it.next();
+            if (ingredient.getAmount() >
+                    fd.getAmountOfIngredients(ingredient.getIngredientName())) {
+                ingredients.add(ingredient);
+                ingredient.setAmount(ingredient.getAmount() -
+                        fd.getAmountOfIngredients(ingredient.getIngredientName()));
+            }
+        }
+        return ingredients.iterator();
+    }
+
 
     /**
      * Returns the list of ingredients needed to make the recipe as

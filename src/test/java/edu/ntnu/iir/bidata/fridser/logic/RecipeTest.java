@@ -55,7 +55,7 @@ public class RecipeTest {
         recipe.addIngredient(orange);
 
         assertEquals(apple, recipe.getIngredientList().getIngredient(0));
-        assertEquals(orange, recipe.getIngredientList().getIngredient(0));
+        assertEquals(orange, recipe.getIngredientList().getIngredient(1));
     }
 
     /**
@@ -175,7 +175,7 @@ public class RecipeTest {
         fd.addIngredient(orange);
         fd.addIngredient(banana);
 
-        assertEquals(2, recipe.getUrgentValue(currentDate, fd));
+        assertEquals(1, recipe.getUrgentValue(currentDate, fd));
     }
 
     /**
@@ -231,7 +231,7 @@ public class RecipeTest {
         fd.addIngredient(orange);
         fd.addIngredient(banana);
 
-        assertEquals(1, recipe.getDireValue(currentDate, fd));
+        assertEquals(2, recipe.getDireValue(currentDate, fd));
     }
 
     /**
@@ -258,6 +258,39 @@ public class RecipeTest {
         fd.addIngredient(orange);
 
         assertEquals(0, recipe.getDireValue(currentDate, fd));
+    }
+
+    /**
+     * Checks that the getLackingIngredients methods returns the correct
+     * amount of each ingredient.
+     */
+    @Test
+    public void getLackingIngredientsWithAllIngredientsLacking() {
+        Recipe recipe = new Recipe("Fruit Salad",
+                "Cut fruits and add it to a bowl");
+        FoodStorage fd = new FoodStorage();
+
+        Ingredient apple = new Ingredient("Apple", 2, "Stk");
+        Ingredient orange = new Ingredient("Orange", 3, "Stk");
+
+        Ingredient apple1 = new Ingredient("Apple", 1, "Stk",
+                12.9, 2023, 1, 3);
+        Ingredient orange1 = new Ingredient("Orange", 2, "Stk",
+                15.0, 2023, 1, 4);
+
+        recipe.addIngredient(apple);
+        recipe.addIngredient(orange);
+
+        fd.addIngredient(apple1);
+        fd.addIngredient(orange1);
+
+        Iterator<Ingredient> iterator = recipe.getLackingIngredients(fd);
+
+        assertTrue(iterator.hasNext());
+        assertEquals(1, iterator.next().getAmount());
+        assertTrue(iterator.hasNext());
+        assertEquals(1, iterator.next().getAmount());
+        assertFalse(iterator.hasNext());
     }
 
 

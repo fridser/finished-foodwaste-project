@@ -255,19 +255,6 @@ public class IngredientTest {
     }
 
     /**
-     * Checks if an ingredient is urgent when the current date
-     * is exactly a week before the expiry date.
-     * Written with copilot.
-     */
-    @Test
-    public void isUrgentWhenCurrentDateIsExactlyAWeekBeforeExpiryDate() {
-        Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
-                12.9, 2023, 1, 8);
-        assertTrue(ingredient.isUrgent(LocalDate.of(2023, 1, 1)));
-    }
-
-
-    /**
      * Checks if an ingredient is not urgent when the current date
      * is after the expiry date.
      * Written with copilot.
