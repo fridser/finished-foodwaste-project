@@ -149,7 +149,7 @@ public class FoodStorage {
         if ((amount < 0)) {
             throw new IllegalArgumentException("Used amount cannot be less than zero");
         }
-        if ((amount < 0)) {
+        if ((amount == 0)) {
             throw new IllegalArgumentException("Used amount cannot be zero");
         }
         boolean success = false;

@@ -30,6 +30,10 @@ public class RecipeBook {
      * @param recipe The recipe being added.
      */
     public void addRecipe(Recipe recipe) {
+        if(recipeList.containsKey(recipe.getRecipeName())) {
+            throw new IllegalArgumentException("Cannot put two recipes with same" +
+                    "name in the list.");
+        }
         this.recipeList.put(recipe.getRecipeName(),recipe);
     }
 
