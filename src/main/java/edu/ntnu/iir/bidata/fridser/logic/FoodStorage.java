@@ -121,20 +121,13 @@ public class FoodStorage {
         return foundIngredient;
     }
 
-
     /**
      * Deletes all the ingredients with the given name.
      *
      * @param name The name of the ingredients to be deleted
      */
-    public void deleteAllIngredientWithSameName(String name) {
-        Iterator<Ingredient> it = this.ingredients.iterator();
-        while (it.hasNext()) {
-            Ingredient ingredient = it.next();
-            if (ingredient.getIngredientName().equals(name)){
-                it.remove();
-            }
-        }
+    public void deleteAllIngredientsWithSameName(String name) {
+        this.ingredients.removeIf(i -> i.getIngredientName().equals(name));
     }
 
     /**
@@ -218,39 +211,6 @@ public class FoodStorage {
         return it;
     }
 
-
-    /**
-     * Returns an arraylist sorted by date.
-     *
-     * I found a better way to do this five minutes after I wrote this,
-     * but look! My brainchild! Isn't she beautiful?
-     *
-     * @return ArrayList<Ingredient> An arraylist of te sorted ingredients
-     */
-    public ArrayList<Ingredient> sortByDateOld() {
-        ArrayList<Ingredient> sortedList = new ArrayList<>();
-        int index = 0;
-        for (Ingredient ingredient : ingredients) {
-            int indexOfSortedIngredient = 0;
-            boolean sorted = false;
-            while ((indexOfSortedIngredient < sortedList.size()) && (!sorted)) {
-                Ingredient sortedIngredient = sortedList.get(indexOfSortedIngredient);
-                if (sortedIngredient.getExpiryDate().isAfter(ingredient.getExpiryDate())) {
-                    index = sortedList.indexOf(sortedIngredient);
-                    sorted = true;
-                }
-                else {
-                    indexOfSortedIngredient++;
-                }
-
-            }
-            sortedList.add(index,ingredient);
-
-        }
-        return sortedList;
-
-    }
-
     /**
      * Sorts the ingredients by date.
      */
@@ -291,14 +251,7 @@ public class FoodStorage {
      * @param currentDate The date the ingredients are compared to.
      */
     public void removeExpiredIngredients(LocalDate currentDate) {
-        Iterator<Ingredient> it = this.ingredients.iterator();
-        while (it.hasNext()) {
-            Ingredient ingredient = it.next();
-            if (ingredient.isExpired(currentDate)) {
-                it.remove();
-            }
-        }
-
+        this.ingredients.removeIf(n -> n.isExpired(currentDate));
     }
 
 

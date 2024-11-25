@@ -98,4 +98,18 @@ public class UserInterface {
         }
         return cost;
     }
+
+    public void showStartMenu() {
+        System.out.println("Hello User!");
+        System.out.println("Welcome to the FoodWaster app.");
+        System.out.println("1. Start, 2. Info, 3. Help, 4. Quit");
+    }
+
+    public void showHelp() {
+
+    }
+
+    public void showInfo() {
+
+    }
 }

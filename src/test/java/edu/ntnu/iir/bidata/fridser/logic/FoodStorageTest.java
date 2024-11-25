@@ -285,7 +285,7 @@ public class FoodStorageTest {
         fd.addIngredient(ingredient2);
         fd.addIngredient(ingredient3);
 
-        fd.deleteAllIngredientWithSameName("Apple");
+        fd.deleteAllIngredientsWithSameName("Apple");
 
         assertEquals(1, fd.getNumberOfIngredients());
         assertEquals(ingredient3, fd.getIngredient(0));
@@ -553,4 +553,8 @@ public class FoodStorageTest {
             assertTrue(true);
         }
     }
+
+
+
+
 }
