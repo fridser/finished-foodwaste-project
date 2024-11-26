@@ -142,31 +142,25 @@ public class FoodStorage {
      *      specified name</li>
      * </ul>
      *
-     * @param amount The amount of the ingredient to be used
-     * @param ingredientName The name of the ingredient to be used
+     * @param ingredient The ingredient being used.
      */
-    public boolean useIngredient(double amount, String ingredientName) {
-        if ((amount < 0)) {
-            throw new IllegalArgumentException("Used amount cannot be less than zero");
-        }
-        if ((amount == 0)) {
+    public boolean useIngredient(Ingredient ingredient) {
+        if ((ingredient.getAmount() == 0)) {
             throw new IllegalArgumentException("Used amount cannot be zero");
         }
         boolean success = false;
+        double amount = ingredient.getAmount();
         sortByDate();
-        if (getAmountOfIngredients(ingredientName) < amount) {
-            success = false;
-        }
-        else {
+        if (canUseIngredient(ingredient)) {
             Iterator<Ingredient> it = this.ingredients.iterator();
             while ((it.hasNext()) && (amount > 0)) {
-                Ingredient ingredient = it.next();
-                if (ingredient.getIngredientName().equals(ingredientName)) {
-                    if (ingredient.getAmount() < amount) {
-                        amount -= ingredient.getAmount();
+                Ingredient ingredient1 = it.next();
+                if (ingredient1.getIngredientName().equals(ingredient.getIngredientName())) {
+                    if (ingredient1.getAmount() < amount) {
+                        amount -= ingredient1.getAmount();
                         it.remove();
                     } else {
-                        ingredient.reduceAmount(amount);
+                        ingredient1.reduceAmount(amount);
                         amount = 0;
                     }
                 }
@@ -254,12 +248,53 @@ public class FoodStorage {
         this.ingredients.removeIf(n -> n.isExpired(currentDate));
     }
 
+    /**
+     * Checks if we have enough of an ingredient to use it.
+     *
+     * @param ingredient The ingredient that we want to use.
+     * @return boolean, True if we have enough of the ingredient.
+     */
+    public boolean canUseIngredient(Ingredient ingredient) {
+        boolean canUse = false;
+        double amount = ingredient.getAmount();
+        if (getAmountOfIngredients(ingredient.getIngredientName()) > amount) {
+            canUse = true;
+        }
+        return canUse;
+    }
 
+    /**
+     * Checks if we have enough ingredients to make a recipe.
+     *
+     * @param it The iterator holding the ingredients to use the recipe.
+     * @return boolean, True if we have enough ingredients.
+     */
+    public boolean canUseRecipe(Iterator<Ingredient> it) {
+        boolean canUse = true;
+        while (it.hasNext()) {
+            if(!canUseIngredient(it.next())) {
+                canUse = false;
+            }
+        }
+        return canUse;
+    }
 
-
-
-    //TODO: make a method that checks if we have enough of a ingredient
-    //TODO: make a method that checks if we have enough of a list of ingredients
+    /**
+     * Uses the ingredients in a recipe.
+     *
+     * @param it The iterator holding the ingredients used in the recipe.
+     * @return boolean, True if successfully used the recipe.
+     */
+    public boolean useRecipe(Iterator<Ingredient> it) {
+        boolean success = false;
+        if (canUseRecipe(it)) {
+            while (it.hasNext()) {
+                useIngredient(it.next());
+            }
+            success = true;
+        }
+        return success;
+    }
 
 
 

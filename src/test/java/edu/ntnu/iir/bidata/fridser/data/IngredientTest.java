@@ -309,7 +309,7 @@ public class IngredientTest {
 
     /**
      * Creates an object with empty name
-     * checks if an exception is caught
+     * Checks if an exception is caught
      */
     @Test
     public void createInstanceWithInvalidName() {
@@ -341,7 +341,7 @@ public class IngredientTest {
 
     /**
      * Creates an object with empty unit
-     * checks if an exception is caught
+     * Checks if an exception is caught
      */
     @Test
     public void createInstanceWithInvalidUnit() {
@@ -357,7 +357,7 @@ public class IngredientTest {
 
     /**
      * Creates an object with negative price
-     * checks if an exception is caught
+     * Checks if an exception is caught
      */
     @Test
     public void createInstanceWithInvalidPrice() {
@@ -372,9 +372,25 @@ public class IngredientTest {
     }
 
     /**
+     * Creates an object with a date that doesn't exist.
+     * Checks if an exception is caught.
+     */
+    @Test
+    public void createInstanceWithInvalidDate() {
+        try{
+            Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                    12.9,2000, 2, 30);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue(true);
+
+        }
+    }
+
+    /**
      * Tries to create an object with valid parameters and change the name to
-     * an empty name
-     * checks if an exception is caught
+     * an empty name.
+     * Checks if an exception is caught.
      */
     @Test
     public void changeNameWithInvalidNewName() {
@@ -390,8 +406,8 @@ public class IngredientTest {
 
     /**
      * Tries to create an object with valid parameters and change the amount to
-     * a negative amount
-     * checks if an exception is caught
+     * a negative amount.
+     * Checks if an exception is caught.
      */
     @Test
     public void changeAmountWithInvalidNewAmount() {
@@ -433,6 +449,40 @@ public class IngredientTest {
             Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
                     12.9,2000,1,1);
             ingredient.setPrice(-3);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Tries to create an object with valid parameters and change the
+     * date to a date that doesn't exist.
+     * Checks to see if an exception is caught.
+     */
+    @Test
+    public void setNexExpiryDateWithIllegalDate() {
+        try{
+            Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                    12.9,2000,2,25);
+            ingredient.setExpiryDate(2000, 2, 30);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Tries to create an object with valid parameters and change the year of
+     * date to negative.
+     * Checks to see if an exception is caught.
+     */
+    @Test
+    public void setNewExpiryDateWithNegativeYear() {
+        try{
+            Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
+                    12.9,2000,2,25);
+            ingredient.setExpiryDate(-2000, 1, 1);
             fail();
         } catch (IllegalArgumentException e) {
             assertTrue(true);

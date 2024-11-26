@@ -1,5 +1,6 @@
 package edu.ntnu.iir.bidata.fridser.data;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 
@@ -37,8 +38,8 @@ public class Ingredient {
     setAmount(amount);
     setUnit(unit);
     setPrice(pricePerUnit);
+    setExpiryDate(expiryYear, expiryMonth, expiryDay);
 
-    expiryDate = LocalDate.of(expiryYear, expiryMonth, expiryDay);
   }
 
     /**
@@ -53,7 +54,7 @@ public class Ingredient {
     setAmount(amount);
     setUnit(unit);
     setPrice(1);
-    expiryDate = LocalDate.of(1,1,1);
+    setExpiryDate(2000,1,1);
   }
 
     /**
@@ -105,6 +106,18 @@ public class Ingredient {
         throw new IllegalArgumentException("Illegal amount");
     }
     this.amount = newAmount;
+  }
+
+  public void setExpiryDate(int expiryYear, int expiryMonth, int expiryDay) {
+    if (expiryYear < 0) {
+      throw new IllegalArgumentException("Year cannot be negative");
+    }
+    try {
+      expiryDate = LocalDate.of(expiryYear, expiryMonth, expiryDay);
+    } catch (DateTimeException e) {
+      throw new IllegalArgumentException("Invalid date");
+    }
+
   }
 
 

@@ -101,15 +101,32 @@ public class UserInterface {
 
     public void showStartMenu() {
         System.out.println("Hello User!");
-        System.out.println("Welcome to the FoodWaster app.");
-        System.out.println("1. Start, 2. Info, 3. Help, 4. Quit");
-    }
-
-    public void showHelp() {
-
+        System.out.println("Welcome to the MealPlanner app.");
+        System.out.println("1. Info, 2. Go to FoodStorage, 3. Go to RecipeBook" +
+                " 4. Settings, 5. Quit");
     }
 
     public void showInfo() {
+        System.out.println("We are an app designed to help you manage\n " +
+                "your groceries. There are many functions for you to explore.\n " +
+                "Our goal with this app is to reduce food waste.");
+        System.out.println("FoodStorage");
+        System.out.println("Add your groceries to keep track of them.\n " +
+                "Check if a grocery is about to go out of date, or if it’s \n" +
+                "already expired. ");
+        System.out.println("RecipeBook");
+        System.out.println("In addition to the recipes already pre-installed \n" +
+                "you can add your favourite recipes to the RecipeBook. \n" +
+                "This feature will tell which recipes you can make based on \n" +
+                "what groceries you have, and can even recommend to you a \n" +
+                "recipe based on which groceries are about to expire. ");
+        System.out.println("1. Back, 2. Quit");
 
     }
+
+    public void showSettings() {
+        System.out.println("The current date is:");
+        System.out.println("1. Change date, 2. Back, 3. Quit");
+    }
+
 }
