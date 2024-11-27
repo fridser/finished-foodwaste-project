@@ -13,11 +13,11 @@ public class UserInterface {
     private LocalDate currentDate;
     private FoodStorage fd;
 
-    private static int INFO = 1;
-    private static int FOODSTORAGE = 2;
-    private static int RECIPEBOOK = 3;
-    private static int SETTINGS = 4;
-    private static int QUIT = 5;
+    private static final int INFO = 1;
+    private static final int FOODSTORAGE = 2;
+    private static final int RECIPEBOOK = 3;
+    private static final int SETTINGS = 4;
+    private static final int QUIT = 5;
 
     public UserInterface() {
         init();
@@ -37,11 +37,11 @@ public class UserInterface {
                     break;
 
                 case FOODSTORAGE:
-                    foodStorageMenu();
+                    System.out.println("In development");
                     break;
 
                 case RECIPEBOOK:
-                    recipeBookMenu();
+                    System.out.println("In development");
                     break;
 
                 case SETTINGS:
