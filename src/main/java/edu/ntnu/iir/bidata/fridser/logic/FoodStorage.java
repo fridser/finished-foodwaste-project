@@ -145,9 +145,6 @@ public class FoodStorage {
      * @param ingredient The ingredient being used.
      */
     public boolean useIngredient(Ingredient ingredient) {
-        if ((ingredient.getAmount() == 0)) {
-            throw new IllegalArgumentException("Used amount cannot be zero");
-        }
         boolean success = false;
         double amount = ingredient.getAmount();
         sortByDate();

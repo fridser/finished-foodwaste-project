@@ -185,7 +185,9 @@ public class FoodStorageTest {
         fd.addIngredient(ingredient3);
         fd.addIngredient(ingredient4);
 
-        fd.useIngredient(2,"Apple");
+        Ingredient ingredient5 = new Ingredient("Apple", 2, "Stk");
+
+        fd.useIngredient(ingredient5);
 
         assertEquals(1,fd.getIngredient(0).getAmount());
     }
@@ -212,7 +214,9 @@ public class FoodStorageTest {
         fd.addIngredient(ingredient3);
         fd.addIngredient(ingredient4);
 
-        fd.useIngredient(5,"Apple");
+        Ingredient ingredient5 = new Ingredient("Apple", 5, "Stk");
+
+        fd.useIngredient(ingredient5);
 
         assertEquals(3,fd.getAmountOfIngredients("Apple"));
         assertEquals(3,fd.getNumberOfIngredients());
@@ -237,7 +241,9 @@ public class FoodStorageTest {
         fd.addIngredient(ingredient2);
         fd.addIngredient(ingredient3);
 
-        fd.useIngredient(5,"Apple");
+        Ingredient ingredient5 = new Ingredient("Apple", 5, "Stk");
+
+        fd.useIngredient(ingredient5);
 
         assertEquals(ingredient1,fd.getIngredient(0));
         assertEquals(ingredient3,fd.getIngredient(1));
@@ -261,7 +267,10 @@ public class FoodStorageTest {
         fd.addIngredient(ingredient1);
         fd.addIngredient(ingredient2);
 
-        assertFalse(fd.useIngredient(10,"Apple"));
+        Ingredient ingredient3 = new Ingredient("Apple", 10, "Stk");
+
+
+        assertFalse(fd.useIngredient(ingredient3));
         assertEquals(8,fd.getAmountOfIngredients("Apple"));
     }
 
@@ -462,56 +471,6 @@ public class FoodStorageTest {
 
     //----------------------NEGATIVE TESTS------------------------------------
 
-    /**
-     * Tries to use a negative amount of an ingredient
-     * Checks if an exception is caught
-     */
-    @Test
-    public void useIngredientWithNegativeAmount() {
-        try{
-            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
-                    12.3,2024,12,12);
-            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
-                    15.2,2025,3,12);
-
-            FoodStorage fd = new FoodStorage();
-
-            fd.addIngredient(ingredient1);
-            fd.addIngredient(ingredient2);
-
-            fd.useIngredient(-3,"Apple");
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertTrue(true);
-
-        }
-    }
-
-
-    /**
-     * Tries to use an ingredient with a blank name
-     * Checks to see if an exception is caught
-     */
-    @Test
-    public void useIngredientWithInvalidName() {
-        try{
-            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
-                    12.3,2024,12,12);
-            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
-                    15.2,2025,3,12);
-
-            FoodStorage fd = new FoodStorage();
-
-            fd.addIngredient(ingredient1);
-            fd.addIngredient(ingredient2);
-
-            fd.useIngredient(3,"");
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertTrue(true);
-
-        }
-    }
 
     /**
      * Tries to find an ingredient with a blank name.

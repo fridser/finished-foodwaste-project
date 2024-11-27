@@ -174,8 +174,9 @@ public class Ingredient {
     if ((subtractedAmount < 0)) {
         throw new IllegalArgumentException("Subtracted amount cannot be less than zero");
     }
-    if ((subtractedAmount > this.amount)) {
-        throw new IllegalArgumentException("Subtracted amount cannot be more than amount");
+    if ((subtractedAmount >= this.amount)) {
+        throw new IllegalArgumentException("Subtracted amount cannot be more than" +
+                "or equal to amount");
     }
     if ((subtractedAmount == 0)) {
         throw new IllegalArgumentException("Subtracted amount cannot be zero");
