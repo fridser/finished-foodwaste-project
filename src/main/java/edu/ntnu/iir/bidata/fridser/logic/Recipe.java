@@ -123,7 +123,6 @@ public class Recipe {
         return ingredients.iterator();
     }
 
-
     /**
      * Returns the list of ingredients needed to make the recipe as
      * an iterator

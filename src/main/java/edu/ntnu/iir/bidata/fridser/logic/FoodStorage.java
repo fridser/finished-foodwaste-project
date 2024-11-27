@@ -2,11 +2,9 @@ package edu.ntnu.iir.bidata.fridser.logic;
 
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * can add and remove ingredients in a list
@@ -153,7 +151,7 @@ public class FoodStorage {
             while ((it.hasNext()) && (amount > 0)) {
                 Ingredient ingredient1 = it.next();
                 if (ingredient1.getIngredientName().equals(ingredient.getIngredientName())) {
-                    if (ingredient1.getAmount() < amount) {
+                    if (ingredient1.getAmount() <= amount) {
                         amount -= ingredient1.getAmount();
                         it.remove();
                     } else {
@@ -197,7 +195,7 @@ public class FoodStorage {
      *
      * @return it, list of ingredient in FoodStorage
      */
-    public Iterator getIngredientList() {
+    public Iterator<Ingredient> getIngredientList() {
         Iterator<Ingredient> it = ingredients.iterator();
         return it;
     }
@@ -254,7 +252,7 @@ public class FoodStorage {
     public boolean canUseIngredient(Ingredient ingredient) {
         boolean canUse = false;
         double amount = ingredient.getAmount();
-        if (getAmountOfIngredients(ingredient.getIngredientName()) > amount) {
+        if (getAmountOfIngredients(ingredient.getIngredientName()) >= amount) {
             canUse = true;
         }
         return canUse;
@@ -263,13 +261,13 @@ public class FoodStorage {
     /**
      * Checks if we have enough ingredients to make a recipe.
      *
-     * @param it The iterator holding the ingredients to use the recipe.
+     * @param ar The ArrayList holding the ingredients to use the recipe.
      * @return boolean, True if we have enough ingredients.
      */
-    public boolean canUseRecipe(Iterator<Ingredient> it) {
+    public boolean canUseRecipe(ArrayList<Ingredient> ar) {
         boolean canUse = true;
-        while (it.hasNext()) {
-            if(!canUseIngredient(it.next())) {
+        for (Ingredient i : ar) {
+            if(!canUseIngredient(i)) {
                 canUse = false;
             }
         }
@@ -284,13 +282,23 @@ public class FoodStorage {
      */
     public boolean useRecipe(Iterator<Ingredient> it) {
         boolean success = false;
-        if (canUseRecipe(it)) {
-            while (it.hasNext()) {
-                useIngredient(it.next());
+        ArrayList<Ingredient> ar = turnIteratorIntoArrayList(it);
+
+        if (canUseRecipe(ar)) {
+            for (Ingredient i : ar) {
+                useIngredient(i);
             }
             success = true;
         }
         return success;
+    }
+
+    public ArrayList<Ingredient> turnIteratorIntoArrayList(Iterator<Ingredient> it) {
+        ArrayList<Ingredient> al = new ArrayList<>();
+        while (it.hasNext()) {
+            al.add(it.next());
+        }
+        return al;
     }
 
 

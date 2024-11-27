@@ -187,9 +187,10 @@ public class FoodStorageTest {
 
         Ingredient ingredient5 = new Ingredient("Apple", 2, "Stk");
 
-        fd.useIngredient(ingredient5);
+        boolean success = fd.useIngredient(ingredient5);
 
         assertEquals(1,fd.getIngredient(0).getAmount());
+        assertTrue(success);
     }
 
     /**
@@ -216,10 +217,11 @@ public class FoodStorageTest {
 
         Ingredient ingredient5 = new Ingredient("Apple", 5, "Stk");
 
-        fd.useIngredient(ingredient5);
+        boolean success = fd.useIngredient(ingredient5);
 
         assertEquals(3,fd.getAmountOfIngredients("Apple"));
         assertEquals(3,fd.getNumberOfIngredients());
+        assertTrue(success);
     }
 
     /**
@@ -241,13 +243,14 @@ public class FoodStorageTest {
         fd.addIngredient(ingredient2);
         fd.addIngredient(ingredient3);
 
-        Ingredient ingredient5 = new Ingredient("Apple", 5, "Stk");
+        Ingredient ingredient5 = new Ingredient("Apple", 2, "Stk");
 
-        fd.useIngredient(ingredient5);
+        boolean success = fd.useIngredient(ingredient5);
 
         assertEquals(ingredient1,fd.getIngredient(0));
         assertEquals(ingredient3,fd.getIngredient(1));
-        assertEquals(5,fd.getAmountOfIngredients("Apple"));
+        assertEquals(8,fd.getAmountOfIngredients("Apple"));
+        assertTrue(success);
 
     }
 
@@ -272,6 +275,202 @@ public class FoodStorageTest {
 
         assertFalse(fd.useIngredient(ingredient3));
         assertEquals(8,fd.getAmountOfIngredients("Apple"));
+    }
+
+    /**
+     * Checks that the canUseIngredient returns true if we have enough of
+     * the specified ingredient in the FoodStorage.
+     */
+    @Test
+    public void checkIfTrueWhenWeHaveEnoughIngredientsToUseIngredient() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
+        Ingredient ingredient4 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+        fd.addIngredient(ingredient3);
+        fd.addIngredient(ingredient4);
+
+        Ingredient ingredient5 = new Ingredient("Apple", 5, "Stk");
+
+        assertTrue(fd.canUseIngredient(ingredient5));
+    }
+
+    /**
+     * Checks that the canUseIngredient returns false when there isn't enough
+     * if the stated ingredient in the FoodStorage.
+     */
+    @Test
+    public void checkIfFalseWhenWeDontHaveEnoughIngredientsToUseIngredient() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+
+        Ingredient ingredient3 = new Ingredient("Apple", 10, "Stk");
+
+        assertFalse(fd.canUseIngredient(ingredient3));
+
+    }
+
+    /**
+     * Checks that the canUseRecipe method returns true if theere are
+     * enough ingredients to use the recipe.
+     */
+    @Test
+    public void checkIfTrueWhenThereIsEnoughIngredientsToUseRecipe() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
+        Ingredient ingredient4 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+        fd.addIngredient(ingredient3);
+        fd.addIngredient(ingredient4);
+
+        Ingredient ingredient5 = new Ingredient("Apple", 5, "Stk");
+        Ingredient ingredient6 = new Ingredient("Orange", 3, "Stk");
+
+        Recipe rp = new Recipe("Fruit Salad", "Cut fruits and add" +
+                "them to a bowl");
+
+        rp.addIngredient(ingredient5);
+        rp.addIngredient(ingredient6);
+
+        assertTrue(fd.canUseRecipe(fd.turnIteratorIntoArrayList(rp.getIngredientIterator())));
+
+    }
+
+    /**
+     * Checks that the canUseRecipe method returns false if there are not
+     * enough ingredients to use the recipe.
+     */
+    @Test
+    public void checkIfFalseWhenTheresNotEnoughIngredientsToUseRecipe() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
+        Ingredient ingredient4 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+        fd.addIngredient(ingredient3);
+        fd.addIngredient(ingredient4);
+
+        Ingredient ingredient5 = new Ingredient("Apple", 5, "Stk");
+        Ingredient ingredient6 = new Ingredient("Orange", 6, "Stk");
+
+        Recipe rp = new Recipe("Fruit Salad", "Cut fruits and add" +
+                "them to a bowl");
+
+        rp.addIngredient(ingredient5);
+        rp.addIngredient(ingredient6);
+
+        assertFalse(fd.canUseRecipe(fd.turnIteratorIntoArrayList(rp.getIngredientIterator())));
+    }
+
+    /**
+     * Uses an iterator list of ingredients. Checks that the method returns true.
+     * Checks that the ingredients were used.
+     */
+    @Test
+    public void useRecipeWithEnoughIngredients() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
+        Ingredient ingredient4 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+        fd.addIngredient(ingredient3);
+        fd.addIngredient(ingredient4);
+
+        Ingredient ingredient5 = new Ingredient("Apple", 5, "Stk");
+        Ingredient ingredient6 = new Ingredient("Orange", 3, "Stk");
+
+        Recipe rp = new Recipe("Fruit Salad", "Cut fruits and add" +
+                "them to a bowl");
+
+        rp.addIngredient(ingredient5);
+        rp.addIngredient(ingredient6);
+
+        Iterator<Ingredient> it = rp.getIngredients().iterator();
+
+        boolean success = fd.useRecipe(it);
+
+        assertTrue(success);
+        assertEquals(3, fd.getAmountOfIngredients("Apple"));
+        assertEquals(2, fd.getAmountOfIngredients("Orange"));
+    }
+
+    /**
+     * Tries to use an iterator of ingredients. Checks that the method returns false.
+     * Checks that the ingredients in the iterator weren't used.
+     */
+    @Test
+    public void useRecipeWithNotEnoughIngredients() {
+        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
+                12.3,2024,12,12);
+        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
+                15.2,2025,3,12);
+        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
+                25.9,2025,1,1);
+        Ingredient ingredient4 = new Ingredient("Apple",5,"Stk",
+                15.2,2025,3,12);
+
+        FoodStorage fd = new FoodStorage();
+
+        fd.addIngredient(ingredient1);
+        fd.addIngredient(ingredient2);
+        fd.addIngredient(ingredient3);
+        fd.addIngredient(ingredient4);
+
+        Ingredient ingredient5 = new Ingredient("Apple", 5, "Stk");
+        Ingredient ingredient6 = new Ingredient("Orange", 6, "Stk");
+
+        Recipe rp = new Recipe("Fruit Salad", "Cut fruits and add" +
+                "them to a bowl");
+
+        rp.addIngredient(ingredient5);
+        rp.addIngredient(ingredient6);
+
+        boolean success = fd.useRecipe(rp.getIngredientIterator());
+
+        assertFalse(success);
+        assertEquals(8, fd.getAmountOfIngredients("Apple"));
+        assertEquals(5, fd.getAmountOfIngredients("Orange"));
     }
 
     /**

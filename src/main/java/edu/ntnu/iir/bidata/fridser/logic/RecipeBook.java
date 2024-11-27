@@ -91,7 +91,7 @@ public class RecipeBook {
      */
     public Recipe recommendRecipe(LocalDate currentDate, FoodStorage fd) {
         Recipe bestRecipe = null;
-        Iterator<Recipe> it = this.recipeList.values().iterator();
+        Iterator<Recipe> it = getPossibleRecipes(fd);
         while (it.hasNext()) {
             Recipe currentRecipe = it.next();
             if (bestRecipe == null) {
@@ -118,7 +118,7 @@ public class RecipeBook {
      * @param fd The FoodStorage containing the ingredients used in the recipe.
      * @return pr, The iterator containing the possible recipes.
      */
-    public Iterator getPossibleRecipes(FoodStorage fd) {
+    public Iterator<Recipe> getPossibleRecipes(FoodStorage fd) {
         Iterator<Recipe> it = this.recipeList.values().iterator();
         ArrayList<Recipe> possibleRecipes = new ArrayList<>();
         while (it.hasNext()) {
