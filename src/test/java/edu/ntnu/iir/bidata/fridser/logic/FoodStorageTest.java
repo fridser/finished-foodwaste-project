@@ -426,7 +426,7 @@ public class FoodStorageTest {
         rp.addIngredient(ingredient5);
         rp.addIngredient(ingredient6);
 
-        Iterator<Ingredient> it = rp.getIngredients().iterator();
+        Iterator<Ingredient> it = rp.getIngredientIterator();
 
         boolean success = fd.useRecipe(it);
 
