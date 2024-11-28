@@ -139,29 +139,6 @@ public class FoodStorageTest {
     }
 
     /**
-     * Adds three ingredients with different names to a food storage.
-     * Checks if the findIngredientByName method returns the correct
-     * ingredient
-     */
-    @Test
-    public void findIngredientByNameWithOnlyOneInstanceOfTheName() {
-        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
-                12.3,2024,12,12);
-        Ingredient ingredient2 = new Ingredient("Orange",5,"Stk",
-                15.2,2025,3,12);
-        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
-                25.9,2025,1,1);
-
-        FoodStorage fd = new FoodStorage();
-
-        fd.addIngredient(ingredient1);
-        fd.addIngredient(ingredient2);
-        fd.addIngredient(ingredient3);
-
-        assertEquals(ingredient3,fd.findIngredientByName("Milk"));
-    }
-
-    /**
      * Uses a specified amount of a specified ingredient name. This amount
      * is less than the amount of the first ingredient with the specified name.
      * Checks that the specified amount is subtracted from the amount of the first
@@ -669,32 +646,6 @@ public class FoodStorageTest {
 
 
     //----------------------NEGATIVE TESTS------------------------------------
-
-
-    /**
-     * Tries to find an ingredient with a blank name.
-     * Checks to see if an exception is caught
-     */
-    @Test
-    public void findIngredientWithInvalidName() {
-        try{
-            Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
-                    12.3,2024,12,12);
-            Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
-                    15.2,2025,3,12);
-
-            FoodStorage fd = new FoodStorage();
-
-            fd.addIngredient(ingredient1);
-            fd.addIngredient(ingredient2);
-
-            fd.findIngredientByName("");
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertTrue(true);
-
-        }
-    }
 
     /**
      * Tries to get an ingredient with an index greater than the list size.

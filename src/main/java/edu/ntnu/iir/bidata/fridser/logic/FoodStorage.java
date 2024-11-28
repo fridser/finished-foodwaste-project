@@ -2,9 +2,12 @@ package edu.ntnu.iir.bidata.fridser.logic;
 
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+
 
 /**
  * can add and remove ingredients in a list
@@ -88,36 +91,6 @@ public class FoodStorage {
         return this.ingredients.get(index);
     }
 
-    /**
-     * Returns ingredient with  specified name. Meant to be used in Recipe
-     *
-     * @param name The name of the ingredient
-     * @return foundIngredient The ingredient with the specified name
-     */
-    public Ingredient findIngredientByName(String name)
-    {
-        if ((name.isBlank()) || (name == null)) {
-            throw new IllegalArgumentException("Name cannot be empty");
-        }
-        Ingredient foundIngredient = null;
-
-        int index = 0;
-        boolean ingredientNotFound = true;
-
-        while ((index < this.ingredients.size()) && ingredientNotFound) {
-            Ingredient ingredient = this.ingredients.get(index);
-
-
-            if (ingredient.getIngredientName().equals(name)) {
-                ingredientNotFound = false;
-                foundIngredient = ingredient;
-            }
-            index++;
-        }
-
-
-        return foundIngredient;
-    }
 
     /**
      * Deletes all the ingredients with the given name.
@@ -127,6 +100,7 @@ public class FoodStorage {
     public void deleteAllIngredientsWithSameName(String name) {
         this.ingredients.removeIf(i -> i.getIngredientName().equals(name));
     }
+
 
     /**
      * Uses a specified amount of ingredient of a specified name.

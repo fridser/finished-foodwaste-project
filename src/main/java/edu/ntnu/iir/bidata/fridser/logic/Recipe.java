@@ -6,6 +6,7 @@ import edu.ntnu.iir.bidata.fridser.data.Ingredient;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 
@@ -13,7 +14,7 @@ public class Recipe {
     private String recipeName;
     private String instruction;
     private int portions;
-    private FoodStorage ingredientList;
+    private HashMap<String, Ingredient> ingredientList;
 
     /**
      * Creates a new instance if Recipe.
@@ -24,7 +25,7 @@ public class Recipe {
     public Recipe(String recipeName, String instruction) {
         setRecipeName(recipeName);
         setInstruction(instruction);
-        this.ingredientList = new FoodStorage();
+        this.ingredientList = new HashMap<>();
     }
 
     /**
@@ -33,7 +34,26 @@ public class Recipe {
      * @param ingredient The ingredient being added.
      */
     public void addIngredient(Ingredient ingredient) {
-        this.ingredientList.addIngredient(ingredient);
+        this.ingredientList.put(ingredient.getIngredientName(), ingredient);
+    }
+
+    /**
+     * Returns the ingredient with the stated name.
+     *
+     * @param ingredientName The name of the ingredient being
+     *                       returned.
+     * @return Ingredient, the ingredient corresponding to the stated
+     * name.
+     */
+    public Ingredient getIngredient(String ingredientName) {
+        if ((ingredientName.isBlank()) || (ingredientName == null)) {
+            throw new IllegalArgumentException("Cannot search for an" +
+                    "empty name");
+        }
+        if (!ingredientList.containsKey(ingredientName)) {
+            throw new IllegalArgumentException("Ingredient name does not exist.");
+        }
+        return this.ingredientList.get(ingredientName);
     }
 
     /**
@@ -89,7 +109,7 @@ public class Recipe {
      */
     public boolean canUseRecipe(FoodStorage foodStorage) {
         boolean enoughIngredients = true;
-        Iterator<Ingredient> it = ingredientList.getIngredientList();
+        Iterator<Ingredient> it = getIngredientIterator();
         while ((it.hasNext()) && (enoughIngredients)){
             Ingredient ingredient = it.next();
             if (ingredient.getAmount() >
@@ -108,8 +128,8 @@ public class Recipe {
      * @param fd The FoodStorage containing the ingredients
      * @return it, the iterator containing the lacking ingredients.
      */
-    public Iterator getLackingIngredients(FoodStorage fd) {
-        Iterator<Ingredient> it = ingredientList.getIngredientList();
+    public Iterator<Ingredient> getLackingIngredients(FoodStorage fd) {
+        Iterator<Ingredient> it = getIngredientIterator();
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         while (it.hasNext()) {
             Ingredient ingredient = it.next();
@@ -130,12 +150,8 @@ public class Recipe {
      * @return it, The iterator of the list of ingredients.
      */
     public Iterator<Ingredient> getIngredientIterator() {
-        Iterator<Ingredient> it = this.ingredientList.getIngredientList();
+        Iterator<Ingredient> it = this.ingredientList.values().iterator();
         return it;
-    }
-
-    public FoodStorage getIngredientList() {
-        return ingredientList;
     }
 
     /**
@@ -151,7 +167,7 @@ public class Recipe {
     public int getUrgentValue(LocalDate currentDate, FoodStorage fd) {
         int count = 0;
         fd.sortByDate();
-        Iterator<Ingredient> it = this.ingredientList.getIngredientList();
+        Iterator<Ingredient> it = getIngredientIterator();
         while (it.hasNext()) {
             Ingredient ingredient = it.next();
             if (fd.findIngredientByName(ingredient.getIngredientName()).isUrgent(currentDate)) {
@@ -174,7 +190,7 @@ public class Recipe {
     public int getDireValue(LocalDate currentDate, FoodStorage fd) {
         int count = 0;
         fd.sortByDate();
-        Iterator<Ingredient> it = this.ingredientList.getIngredientList();
+        Iterator<Ingredient> it = getIngredientIterator();
         while (it.hasNext()) {
             Ingredient ingredient = it.next();
             if (fd.findIngredientByName(ingredient.getIngredientName()).isDire(currentDate)) {

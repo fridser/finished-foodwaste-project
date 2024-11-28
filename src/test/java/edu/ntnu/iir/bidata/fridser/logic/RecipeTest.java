@@ -36,7 +36,7 @@ public class RecipeTest {
         Ingredient ingredient = new Ingredient("Apple", 2, "Stk");
         recipe.addIngredient(ingredient);
 
-        assertEquals(ingredient, recipe.getIngredientList().getIngredient(0));
+        assertEquals(ingredient, recipe.getIngredientIterator().next());
     }
 
     /**
@@ -54,8 +54,8 @@ public class RecipeTest {
         recipe.addIngredient(apple);
         recipe.addIngredient(orange);
 
-        assertEquals(apple, recipe.getIngredientList().getIngredient(0));
-        assertEquals(orange, recipe.getIngredientList().getIngredient(1));
+        assertEquals(apple, recipe.getIngredient("Apple"));
+        assertEquals(orange, recipe.getIngredient("Orange"));
     }
 
     /**
