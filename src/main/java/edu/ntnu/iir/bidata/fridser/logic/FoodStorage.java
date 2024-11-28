@@ -223,7 +223,7 @@ public class FoodStorage {
      * @param currentDate The current date that the ingredients are compared to.
      * @return ei, The iterator containing the expired ingredients.
      */
-    public Iterator getExpiredIngredients(LocalDate currentDate) {
+    public Iterator<Ingredient> getExpiredIngredients(LocalDate currentDate) {
         Iterator<Ingredient> it = this.ingredients.iterator();
         ArrayList<Ingredient> expiredIngredients = new ArrayList<>();
         while (it.hasNext()) {
@@ -296,6 +296,13 @@ public class FoodStorage {
         return success;
     }
 
+    /**
+     * Converts an iterator of ingredients into an arraylist. Necessary for
+     * the useRecipe method to work.
+     *
+     * @param it The iterator getting converted into an arraylist.
+     * @return ArrayList, The converted arraylist.
+     */
     public ArrayList<Ingredient> turnIteratorIntoArrayList(Iterator<Ingredient> it) {
         ArrayList<Ingredient> al = new ArrayList<>();
         while (it.hasNext()) {
