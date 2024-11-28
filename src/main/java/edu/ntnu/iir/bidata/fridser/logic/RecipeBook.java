@@ -61,6 +61,15 @@ public class RecipeBook {
     }
 
     /**
+     * Returns an iterator containing all the recipes in the recipeBook.
+     *
+     * @return Iterator, the iterator containing the recipes.
+     */
+    public Iterator<Recipe> getRecipeIterator() {
+        return this.recipeList.values().iterator();
+    }
+
+    /**
      * Returns true if the recipeList contains a recipe with the stated name.
      *
      * @param key The name of the recipe that is being checked.

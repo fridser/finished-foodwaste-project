@@ -3,6 +3,7 @@ package edu.ntnu.iir.bidata.fridser.ui;
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
 import edu.ntnu.iir.bidata.fridser.logic.FoodStorage;
 import edu.ntnu.iir.bidata.fridser.logic.Recipe;
+import edu.ntnu.iir.bidata.fridser.logic.RecipeBook;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.Scanner;
 public class UserInterface {
     private LocalDate currentDate;
     private FoodStorage fd;
+    private RecipeBook rp;
 
     private static final int INFO = 1;
     private static final int FOODSTORAGE = 2;
@@ -67,6 +69,7 @@ public class UserInterface {
     public void init() {
         currentDate = LocalDate.now();
         fd = new FoodStorage();
+        rp = new RecipeBook();
 
     }
 
@@ -406,6 +409,96 @@ public class UserInterface {
         }
     }
 
+    /**
+     * public void showRecipeBook() {
+     *         System.out.println("Welcome to the RecipeBook! \n" +
+     *                 "1. Print recipes \n" +
+     *                 "2. Add recipe \n" +
+     *                 "3. Edit recipe \n" +
+     *                 "4. Get possible recipes \n" +
+     *                 "5. Use recipe \n" +
+     *                 "6. Recommend recipe \n" +
+     *                 "7. Back \n" +
+     *                 ">");
+     *     }
+     */
+    public void recipeBook() {
+        boolean finished = false;
+
+        while (!finished) {
+            showRecipeBook();
+            int userinput = getInput();
+
+            switch (userinput) {
+
+                case PRINT:
+                    printRecipes(rp.getRecipeIterator());
+                    break;
+
+                case ADD:
+                    confirmAddRecipe();
+                    break;
+
+                case EDIT:
+                    editRecipe();
+                    break;
+
+                case 4:
+                    System.out.println("You are able to make these recipes with " +
+                            "the ingredients you have in storage:");
+                    printRecipes(rp.getPossibleRecipes(fd));
+                    break;
+
+                case 5:
+                    useRecipe();
+                    break;
+
+                case 6:
+                    System.out.println("Based on the expiration date of the ingredients" +
+                            "you have in storage we will recommend you make:");
+                    printRecipeDetails(rp.recommendRecipe(currentDate, fd));
+                    break;
+
+                case 7:
+                    finished = true;
+                    break;
+
+                default:
+                    System.out.println("Please enter a valid menu choice");
+
+            }
+        }
+    }
+
+    public void confirmAddRecipe() {
+        boolean finished = false;
+
+        while (!finished) {
+            System.out.println("WARNING: You cannot exit the process of adding" +
+                    "a recipe before you have finished all the steps. Are you" +
+                    "sure you want to proceed? \n" +
+                    "1. Yes, 2. No \n" +
+                    ">");;
+            int userinput = getInput();
+
+            switch (userinput) {
+
+                case 1:
+                    addRecipe();
+                    finished = true;
+                    break;
+
+                case 2:
+                    finished = true;
+                    break;
+
+                default:
+                    System.out.println("Please enter a valid menu choice");
+
+            }
+        }
+    }
+
 
     /**
      * Prints the information about the ingredient
@@ -481,6 +574,12 @@ public class UserInterface {
     public void printRecipes(Iterator<Recipe> it) {
         while (it.hasNext()) {
             printRecipeDetails(it.next());
+        }
+    }
+
+    public void printStrings(Iterator<String> it) {
+        while (it.hasNext()) {
+            System.out.println(it.next());
         }
     }
 
