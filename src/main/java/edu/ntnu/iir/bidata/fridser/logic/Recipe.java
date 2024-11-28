@@ -13,7 +13,6 @@ import java.util.Iterator;
 public class Recipe {
     private String recipeName;
     private String instruction;
-    private int portions;
     private HashMap<String, Ingredient> ingredientList;
 
     /**
@@ -155,23 +154,33 @@ public class Recipe {
     }
 
     /**
+     * Returns an iterator containing the keys in the ingredientList.
+     *
+     * @return Iterator, the iterator containing the keys.
+     */
+    public Iterator<String> getKeyIterator() {
+        Iterator<String> it = this.ingredientList.keySet().iterator();
+        return it;
+    }
+
+    /**
      * Counts how many different ingredients used in the recipe who will
      * expire within a week. Ingredients with the same name will only
      * be counted once.
      *
      * @param currentDate The date the ingredient is compared to
      * @param fd The FoodStorage the ingredients reside in
-     * @return count, how many different ingredients in the recipe who will
+     * @return int, how many different ingredients in the recipe who will
      * expire within a week.
      */
     public int getUrgentValue(LocalDate currentDate, FoodStorage fd) {
         int count = 0;
         fd.sortByDate();
-        Iterator<Ingredient> it = getIngredientIterator();
+        Iterator<String> it = getKeyIterator();
         while (it.hasNext()) {
-            Ingredient ingredient = it.next();
-            if (fd.findIngredientByName(ingredient.getIngredientName()).isUrgent(currentDate)) {
-                count += 1;
+            String name = it.next();
+            if (fd.findIngredientByName(name).isUrgent(currentDate)) {
+                count++;
             }
         }
         return count;
@@ -184,17 +193,17 @@ public class Recipe {
      *
      * @param currentDate The date the ingredient is compared to
      * @param fd The FoodStorage the ingredients reside in
-     * @return count, how many different ingredients in the recipe who will
+     * @return int, how many different ingredients in the recipe who will
      * expire within a day.
      */
     public int getDireValue(LocalDate currentDate, FoodStorage fd) {
         int count = 0;
         fd.sortByDate();
-        Iterator<Ingredient> it = getIngredientIterator();
+        Iterator<String> it = getKeyIterator();
         while (it.hasNext()) {
-            Ingredient ingredient = it.next();
-            if (fd.findIngredientByName(ingredient.getIngredientName()).isDire(currentDate)) {
-                count += 1;
+            String name = it.next();
+            if (fd.findIngredientByName(name).isDire(currentDate)) {
+                count++;
             }
         }
         return count;
