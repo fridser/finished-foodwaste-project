@@ -135,6 +135,7 @@ public class UserInterface {
             switch (userinput) {
 
                 case PRINT:
+                    fd.sortAlphabetically();
                     printAllIngredients(fd.getIngredientList());
                     break;
 
@@ -147,6 +148,7 @@ public class UserInterface {
                     break;
 
                 case 4:
+                    fd.sortAlphabetically();
                     printAllIngredients(fd.getExpiredIngredients(currentDate));
                     break;
 
@@ -170,6 +172,7 @@ public class UserInterface {
         int i = 0;
 
         while (!finished) {
+            fd.sortAlphabetically();
             showChooseIngredient();
             int userinput = getInput();
             if (userinput <= fd.getNumberOfIngredients()) {
@@ -183,6 +186,16 @@ public class UserInterface {
         return i;
     }
 
+    /**
+     * "How do you want to edit the ingredient?\n" +
+     *                 "1. Edit name \n" +
+     *                 "2. Edit amount \n" +
+     *                 "3. Edit unit \n" +
+     *                 "4. Edit price \n" +
+     *                 "5. Edit expiration date \n" +
+     *                 "6. Delete ingredient \n" +
+     *                 "7. DONE \n"
+     */
     public void editIngredient() {
         boolean finished = false;
 
@@ -219,7 +232,7 @@ public class UserInterface {
                     break;
 
                 case 5:
-                    editIngredientPrice(i);
+                    editIngredientExpirationDate(i);
                     break;
 
                 case 6:
@@ -239,6 +252,26 @@ public class UserInterface {
                     System.out.println("Please enter a valid menu choice");
 
             }
+        }
+    }
+
+    public void editIngredientExpirationDate(int i) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the new year the ingredient expires: \n" );
+        int year = input.nextInt();
+        input.nextLine();
+        System.out.println("Please enter the new month the ingredient expires as a whole " +
+                "number between 1 and 12: \n" );
+        int month = input.nextInt();
+        input.nextLine();
+        System.out.println("Please enter the new day of the month the ingredient expires" +
+                "as a whole number: \n" );
+        int day = input.nextInt();
+        try {
+            fd.getIngredient(i).setExpiryDate(year, month, day);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Please try again");
         }
     }
 
@@ -332,8 +365,8 @@ public class UserInterface {
                     year, month, day);
             fd.addIngredient(ingredient);
         } catch (IllegalArgumentException e) {
-            System.out.println("One of the options entered was invalid. Please try" +
-                    "again.");
+            System.out.println(e.getMessage());
+            System.out.println("Please try again");
         }
     }
 
