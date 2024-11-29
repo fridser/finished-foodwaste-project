@@ -374,7 +374,7 @@ public class UserInterface {
         System.out.println("Deleting expired ingredients ...");
         fd.removeExpiredIngredients(currentDate);
         System.out.println("Expired ingredients deleted! \n" +
-                "Money wasted: " + calculateCost(fd.getExpiredIngredients(currentDate)));
+                "Money wasted: " + fd.calculateCostOfExpiredIngredients(currentDate));
     }
 
     public void changeCurrentDate() {
@@ -846,20 +846,6 @@ public class UserInterface {
         }
     }
 
-
-    /**
-     * Returns the total cost of all the ingredients in the iterator.
-     *
-     * @param it The iterator containing the ingredients.
-     * @return cost, the total amount of money used to buy the ingredients.
-     */
-    public double calculateCost(Iterator<Ingredient> it) {
-        double cost = 0;
-        while (it.hasNext()) {
-            cost += it.next().getPrice()*it.next().getAmount();
-        }
-        return cost;
-    }
 
     public void showStartMenu() {
         System.out.println("Hello User!");

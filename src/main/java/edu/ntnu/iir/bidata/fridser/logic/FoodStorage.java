@@ -303,6 +303,15 @@ public class FoodStorage {
         return al;
     }
 
+    public double calculateCostOfExpiredIngredients(LocalDate currentDate) {
+        Iterator<Ingredient> it = getExpiredIngredients(currentDate);
+        double cost = 0;
+        while (it.hasNext()) {
+            cost += it.next().getPrice()*it.next().getAmount();
+        }
+        return cost;
+    }
+
 
 
 
