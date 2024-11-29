@@ -72,7 +72,7 @@ public class Ingredient {
      * @param newName New name of ingredient
      */
   public void setIngredientName(String newName) {
-    if ((newName.isBlank()) || (newName == null)) {
+    if ((newName.isBlank()) || (newName == null) || (newName.isEmpty())) {
         throw new IllegalArgumentException("Name cannot be empty");
     }
     this.ingredientName = newName;

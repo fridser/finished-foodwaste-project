@@ -99,7 +99,7 @@ public class FoodStorage {
      */
     public Ingredient findIngredientByName(String name)
     {
-        if ((name.isBlank()) || (name == null)) {
+        if ((name.isBlank()) || (name == null) || (name.isEmpty())) {
             throw new IllegalArgumentException("Name cannot be empty");
         }
         Ingredient foundIngredient = null;
@@ -120,15 +120,6 @@ public class FoodStorage {
 
 
         return foundIngredient;
-    }
-
-    /**
-     * Deletes all the ingredients with the given name.
-     *
-     * @param name The name of the ingredients to be deleted
-     */
-    public void deleteAllIngredientsWithSameName(String name) {
-        this.ingredients.removeIf(i -> i.getIngredientName().equals(name));
     }
 
     /**
@@ -178,7 +169,8 @@ public class FoodStorage {
      * @return amount The amount of the ingredient
      */
     public double getAmountOfIngredients(String ingredientName) {
-        if ((ingredientName.isBlank()) || (ingredientName == null)) {
+        if ((ingredientName.isBlank()) || (ingredientName == null) ||
+                (ingredientName.isEmpty())) {
             throw new IllegalArgumentException("Name cannot be empty");
         }
         double amount = 0;

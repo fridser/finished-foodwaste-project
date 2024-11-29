@@ -45,7 +45,8 @@ public class Recipe {
      * name.
      */
     public Ingredient getIngredient(String ingredientName) {
-        if ((ingredientName.isBlank()) || (ingredientName == null)) {
+        if ((ingredientName.isBlank()) || (ingredientName == null) ||
+                (ingredientName.isEmpty())) {
             throw new IllegalArgumentException("Cannot search for an" +
                     "empty name");
         }
@@ -61,7 +62,7 @@ public class Recipe {
      * @param newName The new name of the recipe
      */
     public void setRecipeName(String newName) {
-        if ((newName.isBlank()) || (newName == null)) {
+        if ((newName.isBlank()) || (newName == null) || (newName.isEmpty())) {
             throw new IllegalArgumentException("Recipe name cannot be empty");
         }
         this.recipeName = newName;
@@ -82,7 +83,8 @@ public class Recipe {
      * @param newDescription The new instruction of the recipe
      */
     public void setInstruction(String newDescription) {
-        if ((newDescription.isBlank()) || (newDescription == null)) {
+        if ((newDescription.isBlank()) || (newDescription == null) ||
+                (newDescription.isEmpty())) {
             throw new IllegalArgumentException("Description cannot be empty");
         }
         this.instruction = newDescription;

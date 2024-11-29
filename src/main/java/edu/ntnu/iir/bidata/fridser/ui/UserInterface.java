@@ -444,22 +444,24 @@ public class UserInterface {
                     break;
 
                 case 4:
-                    System.out.println("You are able to make these recipes with " +
-                            "the ingredients you have in storage:");
-                    printRecipes(rp.getPossibleRecipes(fd));
+                    evaluateRecipe();
                     break;
 
                 case 5:
-                    useRecipe();
+                    printUsableRecipes();
                     break;
 
                 case 6:
+                    useRecipe();
+                    break;
+
+                case 7:
                     System.out.println("Based on the expiration date of the ingredients" +
                             "you have in storage we will recommend you make:");
                     printRecipeDetails(rp.recommendRecipe(currentDate, fd));
                     break;
 
-                case 7:
+                case 8:
                     finished = true;
                     break;
 
@@ -467,6 +469,34 @@ public class UserInterface {
                     System.out.println("Please enter a valid menu choice");
 
             }
+        }
+    }
+
+    public void printUsableRecipes() {
+        System.out.println("You are able to make these recipes with " +
+                "the ingredients you have in storage:");
+        printRecipes(rp.getPossibleRecipes(fd));
+    }
+
+    public void useRecipe() {
+        Scanner input = new Scanner(System.in);
+        printUsableRecipes();
+        System.out.println("Please write the name of the recipe you " +
+                "want to use: \n" +
+                ">");
+        String name = input.nextLine();
+        try {
+            boolean success = fd.useRecipe(rp.getRecipe(name).getIngredientIterator());
+            if (success) {
+                System.out.println("Recipe was used successfully!");
+            } else {
+                System.out.println("You do not have enough ingredients in your" +
+                        "FoodStorage to make this recipe. \n" +
+                        "These are the ingredients you lack: ");
+                printAllIngredientsInRecipe(rp.getRecipe(name).getLackingIngredients(fd));
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Something went wrong. Please try again.");
         }
     }
 
@@ -496,6 +526,77 @@ public class UserInterface {
                     System.out.println("Please enter a valid menu choice");
 
             }
+        }
+    }
+
+    public void addRecipe() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the name of the recipe: \n" +
+                ">");
+        String name = input.nextLine();
+        System.out.println("Please enter the instruction on how to make" +
+                "the recipe: \n" +
+                ">");
+        String instruction = input.nextLine();
+
+
+        try {
+            Recipe recipe = new Recipe(name, instruction);
+            rp.addRecipe(recipe);
+        } catch (IllegalArgumentException e) {
+            System.out.println("One of the options entered was invalid. Please try" +
+                    "again.");
+        }
+        addIngredientsToRecipe(name);
+    }
+
+    public void addIngredientsToRecipe(String recipeName) {
+        boolean finished = false;
+
+        while (!finished) {
+            System.out.println("Current recipe details: ");
+            printRecipeDetails(rp.getRecipe(recipeName));
+            System.out.println("Do you want to add another ingredient to " +
+                    "the recipe? \n" +
+                    "1. Yes, 2. No \n" +
+                    ">");;
+            int userinput = getInput();
+
+            switch (userinput) {
+
+                case 1:
+                    addRecipeIngredient(recipeName);
+                    break;
+
+                case 2:
+                    finished = true;
+                    break;
+
+                default:
+                    System.out.println("Please enter a valid menu choice");
+
+            }
+        }
+    }
+
+    public void addRecipeIngredient(String recipeName) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the name of ingredient: \n" +
+                ">");
+        String name = input.nextLine();
+        System.out.println("Please enter the amount of the ingredient: \n" +
+                ">");
+        double amount = input.nextDouble();
+        input.nextLine();
+        String unit = chooseunit();
+
+
+        try {
+            Ingredient ingredient = new Ingredient(name, amount, unit);
+            rp.getRecipe(recipeName).addIngredient(ingredient);
+        } catch (IllegalArgumentException e) {
+            System.out.println("One of the options entered was invalid. Please try" +
+                    "again.");
         }
     }
 
@@ -577,14 +678,6 @@ public class UserInterface {
         }
     }
 
-    public void printStrings(Iterator<String> it) {
-        while (it.hasNext()) {
-            System.out.println(it.next());
-        }
-    }
-
-
-
 
     /**
      * Returns the total cost of all the ingredients in the iterator.
@@ -655,10 +748,11 @@ public class UserInterface {
                 "1. Print recipes \n" +
                 "2. Add recipe \n" +
                 "3. Edit recipe \n" +
-                "4. Get possible recipes \n" +
-                "5. Use recipe \n" +
-                "6. Recommend recipe \n" +
-                "7. Back \n" +
+                "4. Evaluate recipe \n" +
+                "5. Get possible recipes \n" +
+                "6. Use recipe \n" +
+                "7. Recommend recipe \n" +
+                "8. Back \n" +
                 ">");
     }
 

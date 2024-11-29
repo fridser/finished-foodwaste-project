@@ -474,32 +474,6 @@ public class FoodStorageTest {
     }
 
     /**
-     * Deletes all ingredients with the same name. Checks that the ingredients
-     * with the specified name are removed and the others remain.
-     * Written with copilot.
-     */
-    @Test
-    public void deleteAllIngredientsWithSameName() {
-        Ingredient ingredient1 = new Ingredient("Apple",3,"Stk",
-                12.3,2024,12,12);
-        Ingredient ingredient2 = new Ingredient("Apple",5,"Stk",
-                15.2,2025,3,12);
-        Ingredient ingredient3 = new Ingredient("Milk",0.5,"Litres",
-                25.9,2025,1,1);
-
-        FoodStorage fd = new FoodStorage();
-
-        fd.addIngredient(ingredient1);
-        fd.addIngredient(ingredient2);
-        fd.addIngredient(ingredient3);
-
-        fd.deleteAllIngredientsWithSameName("Apple");
-
-        assertEquals(1, fd.getNumberOfIngredients());
-        assertEquals(ingredient3, fd.getIngredient(0));
-    }
-
-    /**
      * Adds multiple ingredients and checks if the getIngredientList method
      * returns an iterator containing all the ingredients.
      * Written with copilot.
