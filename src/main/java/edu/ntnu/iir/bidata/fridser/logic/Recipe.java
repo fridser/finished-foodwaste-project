@@ -211,10 +211,20 @@ public class Recipe {
     return count;
   }
 
+  /**
+   * Checks if the recipe contains an ingredient with the stated name.
+   *
+   * @param key The name of the ingredient being checked.
+   * @return boolean, true is the recipe contains the stated ingredient.
+   */
   public boolean containsKey(String key) {
     return this.ingredientList.containsKey(key);
   }
 
+  /**
+   * Deletes the recipe with the stated
+   * @param ingredientName
+   */
   public void deleteIngredient(String ingredientName) {
     if (!containsKey(ingredientName)) {
       throw new IllegalArgumentException("Name entered doesn't correspond to" +

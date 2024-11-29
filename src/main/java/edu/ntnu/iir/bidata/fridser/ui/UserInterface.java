@@ -236,7 +236,7 @@ public class UserInterface {
           break;
 
         case 6:
-          boolean success = fd.deleteIngredient(ingredient);
+          boolean success = fd.deleteIngredientWithIndex(i);
           if (success) {
             System.out.println("Successfully deleted ingredient");
             finished = true;

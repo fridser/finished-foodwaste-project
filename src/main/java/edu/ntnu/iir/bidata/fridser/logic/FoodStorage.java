@@ -56,7 +56,7 @@ public class FoodStorage {
    *
    * @param ingredient Ingredient to be deleted
    */
-  public boolean deleteIngredient(Ingredient ingredient) {
+  public void deleteIngredient(Ingredient ingredient) {
     Iterator<Ingredient> it = this.ingredients.iterator();
     boolean deleted = false;
     while (it.hasNext() && !deleted) {
@@ -66,7 +66,22 @@ public class FoodStorage {
         deleted = true;
       }
     }
-    return deleted;
+  }
+
+  /**
+   * Deletes the ingredient at the stated index. Returns true if this
+   * was successful.
+   *
+   * @param i The index of the ingredient being removed.
+   * @return boolean, true if successfully removed the ingredient.
+   */
+  public boolean deleteIngredientWithIndex(int i) {
+    boolean success = false;
+    if (i < (getNumberOfIngredients())) {
+      this.ingredients.remove(i);
+      success = true;
+    }
+    return success;
   }
 
   /**
@@ -303,8 +318,9 @@ public class FoodStorage {
 
   /**
    * Returns the cost of all the expired ingredients in the foodstorage.
-   * @param currentDate
-   * @return
+   *
+   * @param currentDate The date the ingredients are compared to.
+   * @return cost, the cost of all the expired ingredients.
    */
   public double calculateCostOfExpiredIngredients(LocalDate currentDate) {
     Iterator<Ingredient> it = getExpiredIngredients(currentDate);
