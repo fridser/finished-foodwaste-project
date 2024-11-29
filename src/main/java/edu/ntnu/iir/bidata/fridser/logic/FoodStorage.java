@@ -70,16 +70,16 @@ public class FoodStorage {
   }
 
   /**
-   * Returns the size of the ingredients list
+   * Returns the size of the ingredients list.
    *
-   * @return numberOfIngredients The amount of ingredient in the FoodStorage
+   * @return numberOfIngredients The amount of ingredient in the FoodStorage.
    */
   public int getNumberOfIngredients() {
     return this.ingredients.size();
   }
 
   /**
-   * Returns the ingredient at a specified index
+   * Returns the ingredient at a specified index.
    *
    * @param index The index of the ingredient
    * @return Ingredient The ingredient at the index
@@ -162,7 +162,7 @@ public class FoodStorage {
 
   /**
    * Returns the amount of ingredients there are of one ingredient in FoodStorage,
-   * using the name of the ingredient
+   * using the name of the ingredient.
    *
    * @param ingredientName The name of the ingredient
    * @return amount The amount of the ingredient
@@ -184,7 +184,7 @@ public class FoodStorage {
   }
 
   /**
-   * Returns the list of ingredients as an Iterator
+   * Returns the list of ingredients as an Iterator.
    *
    * @return it, list of ingredient in FoodStorage
    */
@@ -201,7 +201,7 @@ public class FoodStorage {
   }
 
   /**
-   * Sorts the ingredients alphabetically
+   * Sorts the ingredients alphabetically.
    */
   public void sortAlphabetically() {
     Collections.sort(ingredients, Comparator.comparing(Ingredient::getIngredientName));
@@ -301,6 +301,11 @@ public class FoodStorage {
     return al;
   }
 
+  /**
+   * Returns the cost of all the expired ingredients in the foodstorage.
+   * @param currentDate
+   * @return
+   */
   public double calculateCostOfExpiredIngredients(LocalDate currentDate) {
     Iterator<Ingredient> it = getExpiredIngredients(currentDate);
     double cost = 0;

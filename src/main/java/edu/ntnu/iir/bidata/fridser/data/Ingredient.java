@@ -30,7 +30,8 @@ public class Ingredient {
    * @param unit         Grams, liters of stk
    * @param pricePerUnit Price of the object per unit
    */
-  public Ingredient(String name, double amount, String unit, double pricePerUnit, int expiryYear, int expiryMonth, int expiryDay) {
+  public Ingredient(String name, double amount, String unit, double pricePerUnit,
+                    int expiryYear, int expiryMonth, int expiryDay) {
     setIngredientName(name);
     setAmount(amount);
     setUnit(unit);
@@ -171,7 +172,8 @@ public class Ingredient {
       throw new IllegalArgumentException("Subtracted amount cannot be less than zero");
     }
     if ((subtractedAmount >= this.amount)) {
-      throw new IllegalArgumentException("Subtracted amount cannot be more than" + "or equal to amount");
+      throw new IllegalArgumentException("Subtracted amount cannot be more than" +
+              "or equal to amount");
     }
     if ((subtractedAmount == 0)) {
       throw new IllegalArgumentException("Subtracted amount cannot be zero");
@@ -243,11 +245,11 @@ public class Ingredient {
    * If they do it returns true.
    *
    * @param ingredient Ingredient to be compared to
-   * @return true If the ingredients have the same name and expiry date
-   * @return false If the ingredients do not have the same name and expiry date
+   * @return boolean, True if the ingredients have the same name and expiry date
    */
   public boolean isSame(Ingredient ingredient) {
-    if ((ingredient.getIngredientName().equals(this.ingredientName)) && (ingredient.getExpiryDate().equals(this.expiryDate)) && (ingredient.getUnit().equals(this.unit))) {
+    if ((ingredient.getIngredientName().equals(this.ingredientName)) &&
+            (ingredient.getExpiryDate().equals(this.expiryDate)) && (ingredient.getUnit().equals(this.unit))) {
       return true;
     } else {
       return false;

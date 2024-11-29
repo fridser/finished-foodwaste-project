@@ -236,12 +236,13 @@ public class UserInterface {
           break;
 
         case 6:
-          try {
-            fd.deleteIngredient(ingredient);
-          } catch (IllegalArgumentException e) {
-            System.out.println("An unexpected error has occurred.");
+          boolean success = fd.deleteIngredient(ingredient);
+          if (success) {
+            System.out.println("Successfully deleted ingredient");
+            finished = true;
+          } else {
+            System.out.println("Something went wrong. Please try again");
           }
-          finished = true;
           break;
 
         case 7:
@@ -407,9 +408,10 @@ public class UserInterface {
 
   public void deleteExpiredIngredients() {
     System.out.println("Deleting expired ingredients ...");
+    double cost = fd.calculateCostOfExpiredIngredients(currentDate);
     fd.removeExpiredIngredients(currentDate);
     System.out.println("Expired ingredients deleted! \n" +
-            "Money wasted: " + fd.calculateCostOfExpiredIngredients(currentDate));
+            "Money wasted: " + cost);
   }
 
   public void changeCurrentDate() {
