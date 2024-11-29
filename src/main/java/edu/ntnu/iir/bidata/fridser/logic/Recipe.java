@@ -211,6 +211,17 @@ public class Recipe {
         return count;
     }
 
+    public boolean containsKey(String key) {
+        return this.ingredientList.containsKey(key);
+    }
+
+    public void deleteIngredient(String ingredientName) {
+        if (!containsKey(ingredientName)) {
+            throw new IllegalArgumentException("Name entered doesn't correspond to" +
+                    "any ingredients in the recipe");
+        }
+        this.ingredientList.remove(ingredientName);
+    }
 
 
 }

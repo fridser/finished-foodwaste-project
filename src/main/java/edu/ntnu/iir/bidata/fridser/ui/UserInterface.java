@@ -226,7 +226,7 @@ public class UserInterface {
                     try {
                         fd.deleteIngredient(ingredient);
                     } catch (IllegalArgumentException e){
-                        System.out.println("An unexpected error has occured.");
+                        System.out.println("An unexpected error has occurred.");
                     }
                     finished = true;
                     break;
@@ -409,19 +409,7 @@ public class UserInterface {
         }
     }
 
-    /**
-     * public void showRecipeBook() {
-     *         System.out.println("Welcome to the RecipeBook! \n" +
-     *                 "1. Print recipes \n" +
-     *                 "2. Add recipe \n" +
-     *                 "3. Edit recipe \n" +
-     *                 "4. Get possible recipes \n" +
-     *                 "5. Use recipe \n" +
-     *                 "6. Recommend recipe \n" +
-     *                 "7. Back \n" +
-     *                 ">");
-     *     }
-     */
+
     public void recipeBook() {
         boolean finished = false;
 
@@ -444,24 +432,20 @@ public class UserInterface {
                     break;
 
                 case 4:
-                    evaluateRecipe();
-                    break;
-
-                case 5:
                     printUsableRecipes();
                     break;
 
-                case 6:
+                case 5:
                     useRecipe();
                     break;
 
-                case 7:
+                case 6:
                     System.out.println("Based on the expiration date of the ingredients" +
                             "you have in storage we will recommend you make:");
                     printRecipeDetails(rp.recommendRecipe(currentDate, fd));
                     break;
 
-                case 8:
+                case 7:
                     finished = true;
                     break;
 
@@ -469,6 +453,223 @@ public class UserInterface {
                     System.out.println("Please enter a valid menu choice");
 
             }
+        }
+    }
+
+    public String chooseRecipe() {
+        boolean finished = false;
+        String name = null;
+
+        while (!finished) {
+            Scanner input = new Scanner(System.in);
+            printRecipes(rp.getRecipeIterator());
+            System.out.println("Please write the name of the recipe you " +
+                    "want to use: \n" +
+                    ">");
+            String userinput = input.nextLine();
+            if (rp.containsKey(userinput)) {
+                name = userinput;
+                finished = true;
+            } else {
+                System.out.println("Please write one of the recipes " +
+                        "on the screen.");
+            }
+        }
+        return name;
+
+    }
+
+    public void editRecipe() {
+        boolean finished = false;
+
+        while (!finished) {
+            String name = chooseRecipe();
+            Recipe recipe = rp.getRecipe(name);
+            System.out.println("Chosen recipe details: ");
+            printRecipeDetails(recipe);
+            showEditRecipe();
+
+            int userinput = getInput();
+
+            switch (userinput) {
+
+                case 1:
+                    editRecipeName(name);
+                    break;
+
+                case 2:
+                    editRecipeInstruction(name);
+                    break;
+
+                case 3:
+                    addIngredientsToRecipe(name);
+                    break;
+
+                case 4:
+                    editIngredientInRecipe(name);
+                    break;
+
+                case 5:
+                    try {
+                        rp.deleteRecipe(name);
+                    } catch (IllegalArgumentException e){
+                        System.out.println("An unexpected error has occurred.");
+                    }
+                    finished = true;
+                    break;
+
+                case 6:
+                    finished = true;
+                    break;
+
+                default:
+                    System.out.println("Please enter a valid menu choice");
+
+            }
+        }
+    }
+
+    /**
+     * "How do you want to edit the ingredient? \n" +
+     *                 "1. Edit Name \n" +
+     *                 "2. Edit amount \n" +
+     *                 "3. Edit unit \n" +
+     *                 "4. Delete ingredient \n" +
+     *                 "5. DONE"
+     * @param recipeName
+     */
+    public void editIngredientInRecipe(String recipeName) {
+        boolean finished = false;
+
+        while (!finished) {
+            String name = chooseIngredientInRecipe(recipeName);
+            Ingredient ingredient = rp.getRecipe(recipeName).getIngredient(name);
+            System.out.println("Chosen ingredient details: ");
+            printIngredientInRecipeDetails(ingredient);
+            showEditIngredientInRecipe();
+
+            int userinput = getInput();
+
+            switch (userinput) {
+
+                case 1:
+                    editIngredientInRecipeName(recipeName, name);
+                    break;
+
+                case 2:
+                    editIngredientInRecipeAmount(recipeName, name);
+                    break;
+
+                case 3:
+                    editIngredientInRecipeUnit(recipeName, name);
+                    break;
+
+                case 4:
+                    try {
+                        rp.getRecipe(recipeName).deleteIngredient(name);
+                    } catch (IllegalArgumentException e){
+                        System.out.println("An unexpected error has occurred.");
+                    }
+                    finished = true;
+                    break;
+
+                case 5:
+                    finished = true;
+                    break;
+
+                default:
+                    System.out.println("Please enter a valid menu choice");
+
+            }
+        }
+    }
+
+    public void editIngredientInRecipeName(String recipeName, String ingredientName) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the new name of the ingredient: \n" +
+                ">");
+        String name = input.nextLine();
+
+        try {
+            rp.getRecipe(recipeName).getIngredient(ingredientName).setIngredientName(name);
+        } catch (IllegalArgumentException e) {
+            System.out.println("The name entered was invalid. Please try" +
+                    "again.");
+        }
+    }
+
+    public void editIngredientInRecipeAmount(String recipeName, String ingredientName) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the new amount of the ingredient: \n" +
+                ">");
+        double amount = input.nextDouble();
+
+        try {
+            rp.getRecipe(recipeName).getIngredient(ingredientName).setAmount(amount);
+        } catch (IllegalArgumentException e) {
+            System.out.println("The amount entered was invalid. Please try" +
+                    "again.");
+        }
+    }
+
+    public void editIngredientInRecipeUnit(String recipeName, String ingredientName) {
+        String unit = chooseunit();
+        try {
+            rp.getRecipe(recipeName).getIngredient(ingredientName).setUnit(unit);
+        } catch (IllegalArgumentException e) {
+            System.out.println("An unexpected error has occurred. Please try" +
+                    "again.");
+        }
+    }
+
+    public String chooseIngredientInRecipe(String recipeName) {
+        boolean finished = false;
+        String name = null;
+
+        while (!finished) {
+            Scanner input = new Scanner(System.in);
+            printAllIngredientsInRecipe(rp.getRecipe(recipeName).getIngredientIterator());
+            System.out.println("Please write the name of the ingredient you " +
+                    "want to edit: \n" +
+                    ">");
+            String userinput = input.nextLine();
+            if (rp.getRecipe(recipeName).containsKey(userinput)) {
+                name = userinput;
+                finished = true;
+            } else {
+                System.out.println("Please write one of the ingredients " +
+                        "on the screen.");
+            }
+        }
+        return name;
+    }
+
+    public void editRecipeName(String recipeName) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the new name of the recipe: \n" +
+                ">");
+        String name = input.nextLine();
+
+        try {
+            rp.getRecipe(recipeName).setRecipeName(name);
+        } catch (IllegalArgumentException e) {
+            System.out.println("An unexpected error has occurred. Please try" +
+                    "again.");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void editRecipeInstruction(String recipeName) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the new description of the recipe: \n" +
+                ">");
+        String description = input.nextLine();
+
+        try {
+            rp.getRecipe(recipeName).setInstruction(description);
+        } catch (IllegalArgumentException e) {
+            System.out.println("An unexpected error has occurred. Please try" +
+                    "again.");
         }
     }
 
@@ -748,11 +949,10 @@ public class UserInterface {
                 "1. Print recipes \n" +
                 "2. Add recipe \n" +
                 "3. Edit recipe \n" +
-                "4. Evaluate recipe \n" +
-                "5. Get possible recipes \n" +
-                "6. Use recipe \n" +
-                "7. Recommend recipe \n" +
-                "8. Back \n" +
+                "4. Get possible recipes \n" +
+                "5. Use recipe \n" +
+                "6. Recommend recipe \n" +
+                "7. Back \n" +
                 ">");
     }
 
@@ -772,6 +972,26 @@ public class UserInterface {
                 "6. Delete ingredient \n" +
                 "7. DONE \n" +
                 ">");
+    }
+
+    public void showEditRecipe() {
+        System.out.println("How do you want to edit the recipe? \n" +
+                "1. Edit name \n" +
+                "2. Edit instruction \n" +
+                "3. Add ingredient \n" +
+                "4. Edit ingredient \n" +
+                "5. Delete Recipe \n" +
+                "6. DONE \n" +
+                ">");
+    }
+
+    public void showEditIngredientInRecipe() {
+        System.out.println("How do you want to edit the ingredient? \n" +
+                "1. Edit Name \n" +
+                "2. Edit amount \n" +
+                "3. Edit unit \n" +
+                "4. Delete ingredient \n" +
+                "5. DONE");
     }
 
 
