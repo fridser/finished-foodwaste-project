@@ -283,8 +283,7 @@ public class UserInterface {
             System.out.println("WARNING: You cannot exit the process of adding" +
                     "an ingredient before you have finished all the steps. Are you" +
                     "sure you want to proceed? \n" +
-                    "1. Yes, 2. No \n" +
-                    ">");;
+                    "1. Yes, 2. No \n" );;
             int userinput = getInput();
 
             switch (userinput) {
@@ -307,30 +306,24 @@ public class UserInterface {
 
     public void addIngredient() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Please enter the name of ingredient: \n" +
-                ">");
+        System.out.println("Please enter the name of ingredient: \n" );
         String name = input.nextLine();
-        System.out.println("Please enter the amount of the ingredient: \n" +
-                ">");
+        System.out.println("Please enter the amount of the ingredient: \n" );
         double amount = input.nextDouble();
         input.nextLine();
         String unit = chooseunit();
-        System.out.println("Please enter the price of the ingredient per unit: \n" +
-                ">");
+        System.out.println("Please enter the price of the ingredient per unit: \n" );
         double price = input.nextDouble();
         input.nextLine();
-        System.out.println("Please enter the year the ingredient expires: \n" +
-                ">");
+        System.out.println("Please enter the year the ingredient expires: \n" );
         int year = input.nextInt();
         input.nextLine();
         System.out.println("Please enter the month the ingredient expires as a whole " +
-                "number between 1 and 12: \n" +
-                ">");
+                "number between 1 and 12: \n" );
         int month = input.nextInt();
         input.nextLine();
         System.out.println("Please enter the day of the month the ingredient expires" +
-                "as a whole number: \n" +
-                ">");
+                "as a whole number: \n" );
         int day = input.nextInt();
         input.nextLine();
 
@@ -350,8 +343,7 @@ public class UserInterface {
 
         while (!finished) {
             System.out.println("Please choose a unit: \n" +
-                    "1. Grams, 2. Litres, 3. Stk \n" +
-                    ">");;
+                    "1. Grams, 2. Litres, 3. Stk \n" );;
             int userinput = getInput();
 
             switch (userinput) {
@@ -387,18 +379,15 @@ public class UserInterface {
 
     public void changeCurrentDate() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Please enter the year you want: \n" +
-                ">");
+        System.out.println("Please enter the year you want: \n" );
         int year = input.nextInt();
         input.nextLine();
         System.out.println("Please enter the month you want as a number" +
-                "between 1 and 12: \n" +
-                ">");
+                "between 1 and 12: \n" );
         int month = input.nextInt();
         input.nextLine();
         System.out.println("Please enter the day of the month you want" +
-                "a a whole number: \n" +
-                ">");
+                "a a whole number: \n" );
         int day = input.nextInt();
 
         try {
@@ -464,8 +453,7 @@ public class UserInterface {
             Scanner input = new Scanner(System.in);
             printRecipes(rp.getRecipeIterator());
             System.out.println("Please write the name of the recipe you " +
-                    "want to use: \n" +
-                    ">");
+                    "want to use: \n" );
             String userinput = input.nextLine();
             if (rp.containsKey(userinput)) {
                 name = userinput;
@@ -529,15 +517,6 @@ public class UserInterface {
         }
     }
 
-    /**
-     * "How do you want to edit the ingredient? \n" +
-     *                 "1. Edit Name \n" +
-     *                 "2. Edit amount \n" +
-     *                 "3. Edit unit \n" +
-     *                 "4. Delete ingredient \n" +
-     *                 "5. DONE"
-     * @param recipeName
-     */
     public void editIngredientInRecipe(String recipeName) {
         boolean finished = false;
 
@@ -586,8 +565,7 @@ public class UserInterface {
 
     public void editIngredientInRecipeName(String recipeName, String ingredientName) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Please enter the new name of the ingredient: \n" +
-                ">");
+        System.out.println("Please enter the new name of the ingredient: \n" );
         String name = input.nextLine();
 
         try {
@@ -600,8 +578,7 @@ public class UserInterface {
 
     public void editIngredientInRecipeAmount(String recipeName, String ingredientName) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Please enter the new amount of the ingredient: \n" +
-                ">");
+        System.out.println("Please enter the new amount of the ingredient: \n" );
         double amount = input.nextDouble();
 
         try {
@@ -630,8 +607,7 @@ public class UserInterface {
             Scanner input = new Scanner(System.in);
             printAllIngredientsInRecipe(rp.getRecipe(recipeName).getIngredientIterator());
             System.out.println("Please write the name of the ingredient you " +
-                    "want to edit: \n" +
-                    ">");
+                    "want to edit: \n" );
             String userinput = input.nextLine();
             if (rp.getRecipe(recipeName).containsKey(userinput)) {
                 name = userinput;
@@ -646,8 +622,7 @@ public class UserInterface {
 
     public void editRecipeName(String recipeName) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Please enter the new name of the recipe: \n" +
-                ">");
+        System.out.println("Please enter the new name of the recipe: \n" );
         String name = input.nextLine();
 
         try {
@@ -661,8 +636,7 @@ public class UserInterface {
 
     public void editRecipeInstruction(String recipeName) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Please enter the new description of the recipe: \n" +
-                ">");
+        System.out.println("Please enter the new description of the recipe: \n" );
         String description = input.nextLine();
 
         try {
@@ -683,8 +657,7 @@ public class UserInterface {
         Scanner input = new Scanner(System.in);
         printUsableRecipes();
         System.out.println("Please write the name of the recipe you " +
-                "want to use: \n" +
-                ">");
+                "want to use: \n" );
         String name = input.nextLine();
         try {
             boolean success = fd.useRecipe(rp.getRecipe(name).getIngredientIterator());
@@ -708,8 +681,7 @@ public class UserInterface {
             System.out.println("WARNING: You cannot exit the process of adding" +
                     "a recipe before you have finished all the steps. Are you" +
                     "sure you want to proceed? \n" +
-                    "1. Yes, 2. No \n" +
-                    ">");;
+                    "1. Yes, 2. No \n" );;
             int userinput = getInput();
 
             switch (userinput) {
@@ -732,12 +704,10 @@ public class UserInterface {
 
     public void addRecipe() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Please enter the name of the recipe: \n" +
-                ">");
+        System.out.println("Please enter the name of the recipe: \n" );
         String name = input.nextLine();
         System.out.println("Please enter the instruction on how to make" +
-                "the recipe: \n" +
-                ">");
+                "the recipe: \n" );
         String instruction = input.nextLine();
 
 
@@ -759,8 +729,7 @@ public class UserInterface {
             printRecipeDetails(rp.getRecipe(recipeName));
             System.out.println("Do you want to add another ingredient to " +
                     "the recipe? \n" +
-                    "1. Yes, 2. No \n" +
-                    ">");;
+                    "1. Yes, 2. No \n" );;
             int userinput = getInput();
 
             switch (userinput) {
@@ -782,11 +751,9 @@ public class UserInterface {
 
     public void addRecipeIngredient(String recipeName) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Please enter the name of ingredient: \n" +
-                ">");
+        System.out.println("Please enter the name of ingredient: \n" );
         String name = input.nextLine();
-        System.out.println("Please enter the amount of the ingredient: \n" +
-                ">");
+        System.out.println("Please enter the amount of the ingredient: \n" );
         double amount = input.nextDouble();
         input.nextLine();
         String unit = chooseunit();
@@ -898,8 +865,7 @@ public class UserInterface {
         System.out.println("Hello User!");
         System.out.println("Welcome to the MealPlanner app.");
         System.out.println("1. Info, 2. Go to FoodStorage, 3. Go to RecipeBook" +
-                " 4. Settings, 5. Quit \n" +
-                ">");
+                " 4. Settings, 5. Quit \n" );
     }
 
     public void showInfo() {
@@ -916,15 +882,13 @@ public class UserInterface {
                 "This feature will tell which recipes you can make based on \n" +
                 "what groceries you have, and can even recommend to you a \n" +
                 "recipe based on which groceries are about to expire. ");
-        System.out.println("1. Back \n" +
-                ">");
+        System.out.println("1. Back \n");
 
     }
 
     public void showSettings() {
         System.out.println("The current date is:" + currentDate);
-        System.out.println("1. Change date, 2. Back\n" +
-                ">");
+        System.out.println("1. Change date, 2. Back\n" );
     }
 
     public void quitProgram() {
@@ -939,8 +903,7 @@ public class UserInterface {
                 "3. Edit ingredient \n" +
                 "4. Get expired ingredients \n" +
                 "5. Delete expired ingredients \n" +
-                "6. Back\n" +
-                ">");
+                "6. Back\n");
     }
 
 
@@ -952,14 +915,12 @@ public class UserInterface {
                 "4. Get possible recipes \n" +
                 "5. Use recipe \n" +
                 "6. Recommend recipe \n" +
-                "7. Back \n" +
-                ">");
+                "7. Back \n");
     }
 
     public void showChooseIngredient() {
         System.out.println("Please choose the ingredient you want to edit:");
         printIngredientsForEdit(fd.getIngredientList());
-        System.out.println(">");
     }
 
     public void showEditIngredient() {
@@ -970,8 +931,7 @@ public class UserInterface {
                 "4. Edit price \n" +
                 "5. Edit expiration date \n" +
                 "6. Delete ingredient \n" +
-                "7. DONE \n" +
-                ">");
+                "7. DONE \n" );
     }
 
     public void showEditRecipe() {
@@ -981,8 +941,7 @@ public class UserInterface {
                 "3. Add ingredient \n" +
                 "4. Edit ingredient \n" +
                 "5. Delete Recipe \n" +
-                "6. DONE \n" +
-                ">");
+                "6. DONE \n");
     }
 
     public void showEditIngredientInRecipe() {
