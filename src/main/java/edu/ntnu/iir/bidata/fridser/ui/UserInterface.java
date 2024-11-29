@@ -46,7 +46,7 @@ public class UserInterface {
                     break;
 
                 case RECIPEBOOK:
-                    System.out.println("In development");
+                    recipeBook();
                     break;
 
                 case SETTINGS:
