@@ -227,16 +227,6 @@ public class UserInterface {
     return i;
   }
 
-  /**
-   * "How do you want to edit the ingredient?\n" +
-   * "1. Edit name \n" +
-   * "2. Edit amount \n" +
-   * "3. Edit unit \n" +
-   * "4. Edit price \n" +
-   * "5. Edit expiration date \n" +
-   * "6. Delete ingredient \n" +
-   * "7. DONE \n"
-   */
   public void editIngredient() {
     boolean finished = false;
 
@@ -375,13 +365,37 @@ public class UserInterface {
   }
 
   public void addIngredient() {
-    System.out.println("Please enter the name of ingredient: \n");
-    String name = getStringInput();
-    System.out.println("Please enter the amount of the ingredient: \n");
-    double amount = getIntInput();
+    String name = null;
+    double amount = 0;
+    double price = -1;
+    while (true) {
+      System.out.println("Please enter the name of ingredient: \n");
+      name = getStringInput();
+      if ((name.isBlank()) || (name.isEmpty())) {
+        System.out.println("Please try again.");
+      } else {
+        break;
+      }
+    }
+    while (true) {
+      System.out.println("Please enter the amount of the ingredient: \n");
+      amount = getDoubleInput();
+      if (amount <= 0) {
+        System.out.println("Amount cannot be less than or equal to zero.");
+      } else {
+        break;
+      }
+    }
     String unit = chooseunit();
-    System.out.println("Please enter the price of the ingredient per unit: \n");
-    double price = getIntInput();
+    while (true) {
+      System.out.println("Please enter the price of the ingredient per unit: \n");
+      price = getDoubleInput();
+      if (price < 0) {
+        System.out.println("Please suck a lemon.");
+      } else {
+        break;
+      }
+    }
     System.out.println("Please enter the year the ingredient expires: \n");
     int year = getIntInput();
     System.out.println("Please enter the month the ingredient expires as a whole " +
@@ -397,7 +411,7 @@ public class UserInterface {
       fd.addIngredient(ingredient);
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
-      System.out.println("Please try again");
+      System.out.println("Go suck a lemon.");
     }
   }
 
@@ -811,10 +825,26 @@ public class UserInterface {
   }
 
   public void addRecipeIngredient(String recipeName) {
-    System.out.println("Please enter the name of ingredient: \n");
-    String name = getStringInput();
-    System.out.println("Please enter the amount of the ingredient: \n");
-    double amount = getIntInput();
+    String name;
+    double amount;
+    while (true) {
+      System.out.println("Please enter the name of ingredient: \n");
+      name = getStringInput();
+      if (name.isBlank() || name.isEmpty()) {
+        System.out.println("Please try again");
+      } else {
+        break;
+      }
+    }
+    while (true) {
+      System.out.println("Please enter the amount of the ingredient: \n");
+      amount = getDoubleInput();
+      if (amount <= 0) {
+        System.out.println("The amount cannot be less than or equal to zero.");
+      } else {
+        break;
+      }
+    }
     String unit = chooseunit();
 
 
@@ -822,8 +852,6 @@ public class UserInterface {
       Ingredient ingredient = new Ingredient(name, amount, unit);
       rp.getRecipe(recipeName).addIngredient(ingredient);
     } catch (IllegalArgumentException e) {
-      System.out.println("One of the options entered was invalid. Please try" +
-              "again.");
       System.out.println(e.getMessage());
     }
   }
