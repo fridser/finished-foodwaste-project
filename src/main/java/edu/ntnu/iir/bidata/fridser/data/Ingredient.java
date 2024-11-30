@@ -153,11 +153,11 @@ public class Ingredient {
   /**
    * Changes the price of the object.
    *
-   * @param newPrice
+   * @param newPrice The new price of the ingredient.
    */
   public void setPrice(double newPrice) {
-    if ((newPrice < 0) || (newPrice == 0)) {
-      throw new IllegalArgumentException("Illegal newPrice");
+    if ((newPrice < 0) ) {
+      throw new IllegalArgumentException("Price cannot be less than zero");
     }
     this.price = newPrice;
   }

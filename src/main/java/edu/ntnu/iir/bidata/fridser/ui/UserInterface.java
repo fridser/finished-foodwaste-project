@@ -90,6 +90,22 @@ public class UserInterface {
     return choice;
   }
 
+  private double getDoubleInput() {
+    Scanner input = new Scanner(System.in);
+    double choice = -1;
+    boolean finished = false;
+    while (!finished) {
+      if (input.hasNextDouble()){
+        choice = input.nextDouble();
+        finished = true;
+      } else {
+        System.out.println("Please enter a number");
+      }
+      input.nextLine();
+    }
+    return choice;
+  }
+
   private String getStringInput() {
     Scanner input = new Scanner(System.in);
     String choice = null;
@@ -310,7 +326,7 @@ public class UserInterface {
 
   public void editIngredientAmount(int i) {
     System.out.println("Please enter the new amount of the ingredient");
-    double amount = getIntInput();
+    double amount = getDoubleInput();
     try {
       fd.getIngredient(i).setAmount(amount);
     } catch (IllegalArgumentException e) {
@@ -320,7 +336,7 @@ public class UserInterface {
 
   public void editIngredientPrice(int i) {
     System.out.println("Please enter the new price of the ingredient");
-    double price = getIntInput();
+    double price = getDoubleInput();
     try {
       fd.getIngredient(i).setPrice(price);
     } catch (IllegalArgumentException e) {
@@ -568,10 +584,10 @@ public class UserInterface {
 
   public void editIngredientInRecipe(String recipeName) {
     boolean finished = false;
+    String name = chooseIngredientInRecipe(recipeName);
+    Ingredient ingredient = rp.getRecipe(recipeName).getIngredient(name);
 
     while (!finished) {
-      String name = chooseIngredientInRecipe(recipeName);
-      Ingredient ingredient = rp.getRecipe(recipeName).getIngredient(name);
       System.out.println("Chosen ingredient details: ");
       printIngredientInRecipeDetails(ingredient);
       showEditIngredientInRecipe();
@@ -626,7 +642,7 @@ public class UserInterface {
 
   public void editIngredientInRecipeAmount(String recipeName, String ingredientName) {
     System.out.println("Please enter the new amount of the ingredient: \n");
-    double amount = getIntInput();
+    double amount = getDoubleInput();
 
     try {
       rp.getRecipe(recipeName).getIngredient(ingredientName).setAmount(amount);

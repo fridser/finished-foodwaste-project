@@ -33,7 +33,7 @@ public class Recipe {
    * @param ingredient The ingredient being added.
    */
   public void addIngredient(Ingredient ingredient) {
-    this.ingredientList.put(ingredient.getIngredientName(), ingredient);
+    this.ingredientList.put(ingredient.getIngredientName().toLowerCase(), ingredient);
   }
 
   /**
@@ -50,10 +50,10 @@ public class Recipe {
       throw new IllegalArgumentException("Cannot search for an" +
               "empty name");
     }
-    if (!ingredientList.containsKey(ingredientName)) {
+    if (!ingredientList.containsKey(ingredientName.toLowerCase())) {
       throw new IllegalArgumentException("Ingredient name does not exist.");
     }
-    return this.ingredientList.get(ingredientName);
+    return this.ingredientList.get(ingredientName.toLowerCase());
   }
 
   /**
@@ -218,11 +218,11 @@ public class Recipe {
    * @return boolean, true is the recipe contains the stated ingredient.
    */
   public boolean containsKey(String key) {
-    return this.ingredientList.containsKey(key);
+    return this.ingredientList.containsKey(key.toLowerCase());
   }
 
   /**
-   * Deletes the recipe with the stated
+   * Deletes the recipe with the stated name
    * @param ingredientName
    */
   public void deleteIngredient(String ingredientName) {
@@ -230,7 +230,7 @@ public class Recipe {
       throw new IllegalArgumentException("Name entered doesn't correspond to" +
               "any ingredients in the recipe");
     }
-    this.ingredientList.remove(ingredientName);
+    this.ingredientList.remove(ingredientName.toLowerCase());
   }
 
 
