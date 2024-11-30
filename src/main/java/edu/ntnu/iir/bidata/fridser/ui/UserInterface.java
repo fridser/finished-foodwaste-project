@@ -62,6 +62,7 @@ public class UserInterface {
     rp.addRecipe(fruitSalad);
 
     boolean finished = false;
+    int i = 0;
 
     while (!finished) {
       showStartMenu();
@@ -91,11 +92,15 @@ public class UserInterface {
           break;
 
         default:
-          System.out.println("Please enter a valid menu choice");
-
+          if (i < 3) {
+            System.out.println("Please enter a valid menu choice \n" +
+                    " ");
+          } else {
+            System.out.println("Please be better. \n" +
+                    " ");
+          }
+          i++;
       }
-
-
     }
   }
 
@@ -115,7 +120,8 @@ public class UserInterface {
         choice = input.nextInt();
         finished = true;
       } else {
-        System.out.println("Please enter a number");
+        System.out.println("Please enter a positive whole number. \n" +
+                "idiot");
       }
       input.nextLine();
     }
@@ -131,7 +137,7 @@ public class UserInterface {
         choice = input.nextDouble();
         finished = true;
       } else {
-        System.out.println("Please enter a number");
+        System.out.println("Please enter a number. ");
       }
       input.nextLine();
     }
@@ -143,11 +149,12 @@ public class UserInterface {
     String choice = null;
     boolean finished = false;
     while (!finished) {
-      if (!input.hasNextInt()){
+      if (input.hasNextLine()){
         choice = input.nextLine();
         finished = true;
       } else {
-        System.out.println("Please enter words");
+        System.out.println("An unexpected error has occurred. Please be" +
+                " better.");
       }
     }
     return choice;
@@ -155,6 +162,7 @@ public class UserInterface {
 
   public void info() {
     boolean finished = false;
+    int i = 0;
 
     while (!finished) {
       showInfo();
@@ -167,7 +175,14 @@ public class UserInterface {
           break;
 
         default:
-          System.out.println("Please enter a valid menu choice");
+          if (i < 3) {
+            System.out.println("Please enter a valid menu choice \n" +
+                    " ");
+          } else {
+            System.out.println("Please be better. \n" +
+                    " ");
+          }
+          i++;
 
       }
     }
@@ -175,6 +190,7 @@ public class UserInterface {
 
   public void settings() {
     boolean finished = false;
+    int i = 0;
 
     while (!finished) {
       showSettings();
@@ -191,8 +207,14 @@ public class UserInterface {
           break;
 
         default:
-          System.out.println("Please enter a valid menu choice");
-
+          if (i < 3) {
+            System.out.println("Please enter a valid menu choice \n" +
+                    " ");
+          } else {
+            System.out.println("Please stop being an idiot. \n" +
+                    " ");
+          }
+          i++;
       }
     }
   }
@@ -200,6 +222,7 @@ public class UserInterface {
 
   public void foodStorage() {
     boolean finished = false;
+    int i = 0;
 
     while (!finished) {
       showFoodStorage();
@@ -212,7 +235,9 @@ public class UserInterface {
             fd.sortAlphabetically();
             printAllIngredients(fd.getIngredientList());
           } else {
-            System.out.println("You do not have any ingredients yet.");
+            System.out.println("You do not have any ingredients yet. \n" +
+                    "Get a job. \n" +
+                    " ");
           }
           break;
 
@@ -224,7 +249,9 @@ public class UserInterface {
           if (fd.getNumberOfIngredients() > 0) {
             editIngredient();
           } else {
-            System.out.println("You do not have any ingredients yet.");
+            System.out.println("You do not have any ingredients yet. \n" +
+                    "Get a job. \n" +
+                    " ");
           }
           break;
 
@@ -233,7 +260,9 @@ public class UserInterface {
             fd.sortAlphabetically();
             printAllIngredients(fd.getExpiredIngredients(currentDate));
           } else {
-            System.out.println("You do not have any ingredients yet.");
+            System.out.println("You do not have any ingredients yet. \n" +
+                    " Get a job. \n" +
+                    " ");
           }
           break;
 
@@ -246,8 +275,14 @@ public class UserInterface {
           break;
 
         default:
-          System.out.println("Please enter a valid menu choice");
-
+          if (i < 3) {
+            System.out.println("Please enter a valid menu choice \n" +
+                    " ");
+          } else {
+            System.out.println("Please be better. \n" +
+                    " ");
+          }
+          i++;
       }
     }
   }
@@ -264,7 +299,8 @@ public class UserInterface {
         finished = true;
       } else {
         System.out.println("Please enter one of the options " +
-                "on the screen.");
+                "on the screen. \n" +
+                " ");
       }
     }
     return i;
@@ -273,6 +309,7 @@ public class UserInterface {
 
   public void editIngredient() {
     boolean finished = false;
+    int index = 0;
     int i = chooseIngredient() - 1;
     Ingredient ingredient = fd.getIngredient(i);
 
@@ -298,7 +335,8 @@ public class UserInterface {
           try {
             fd.getIngredient(i).setUnit(unit);
           } catch (IllegalArgumentException e) {
-            System.out.println("Invalid unit. Please try again.");
+            System.out.println("Invalid unit. Please try again. \n" +
+                    " ");
           }
           break;
 
@@ -316,7 +354,8 @@ public class UserInterface {
             System.out.println("Successfully deleted ingredient");
             finished = true;
           } else {
-            System.out.println("Something went wrong. Please try again");
+            System.out.println("Something went wrong. Please be better \n" +
+                    " ");
           }
           break;
 
@@ -325,7 +364,14 @@ public class UserInterface {
           break;
 
         default:
-          System.out.println("Please enter a valid menu choice");
+          if (index < 3) {
+            System.out.println("Please enter a valid menu choice \n" +
+                    " ");
+          } else {
+            System.out.println("Please be better. \n" +
+                    " ");
+          }
+          index++;
 
       }
     }
@@ -336,7 +382,7 @@ public class UserInterface {
     int year = getIntInput();
     if ((year < 99) && (year > 69)) {
       year += 1900;
-    } else if ((year > 0) && (year < 70)) {
+    } else if ((year >= 0) && (year < 70)) {
       year += 2000;
     }
     System.out.println("Please enter the new month the ingredient expires as a whole " +
