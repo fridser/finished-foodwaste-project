@@ -133,7 +133,8 @@ public class Recipe {
     Iterator<Ingredient> it = getIngredientIterator();
     ArrayList<Ingredient> ingredients = new ArrayList<>();
     while (it.hasNext()) {
-      Ingredient ingredient = it.next();
+      Ingredient ingredient = new Ingredient(it.next().getIngredientName(), it.next().getAmount(),
+              it.next().getUnit());
       if (ingredient.getAmount() >
               fd.getAmountOfIngredients(ingredient.getIngredientName())) {
         ingredients.add(ingredient);

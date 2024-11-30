@@ -58,6 +58,9 @@ public class UserInterface {
     fruitSalad.addIngredient(orange);
     fruitSalad.addIngredient(apple);
 
+    rp.addRecipe(tinePancake);
+    rp.addRecipe(fruitSalad);
+
     boolean finished = false;
 
     while (!finished) {
@@ -256,9 +259,8 @@ public class UserInterface {
     while (!finished) {
       fd.sortAlphabetically();
       showChooseIngredient();
-      int userinput = getIntInput();
-      if (userinput <= fd.getNumberOfIngredients()) {
-        i = userinput;
+      i = getIntInput();
+      if ((i <= fd.getNumberOfIngredients()) && (i != 0)) {
         finished = true;
       } else {
         System.out.println("Please enter one of the options " +
@@ -268,12 +270,13 @@ public class UserInterface {
     return i;
   }
 
+
   public void editIngredient() {
     boolean finished = false;
+    int i = chooseIngredient() - 1;
+    Ingredient ingredient = fd.getIngredient(i);
 
     while (!finished) {
-      int i = chooseIngredient();
-      Ingredient ingredient = fd.getIngredient(i);
       System.out.println("Chosen ingredient details: ");
       printIngredientDetails(ingredient);
       showEditIngredient();
@@ -1014,20 +1017,20 @@ public class UserInterface {
 
 
   public void showStartMenu() {
-    System.out.println("-------------START MENU----------" +
-            "Hello User!");
-    System.out.println("Welcome to the MealPlanner app.");
+    System.out.println("-------------START MENU----------\n" +
+            "Hello User!\n");
+    System.out.println("Welcome to the MealPlanner app.\n");
     System.out.println("1. Info, 2. Go to FoodStorage, 3. Go to RecipeBook" +
             " 4. Settings, 5. Quit \n" +
             "------------------------------");
   }
 
   public void showInfo() {
-    System.out.println("We are an app designed to help you manage\n " +
+    System.out.println("We are an app designed to help you manage \n " +
             "your groceries. There are many functions for you to explore.\n " +
             "Our goal with this app is to reduce food waste.");
     System.out.println("FoodStorage");
-    System.out.println("Add your groceries to keep track of them.\n " +
+    System.out.println("Add your groceries to keep track of them. \n " +
             "Check if a grocery is about to go out of date, or if it’s \n" +
             "already expired. ");
     System.out.println("RecipeBook");
@@ -1051,8 +1054,8 @@ public class UserInterface {
 
 
   public void showFoodStorage() {
-    System.out.println("--------FOODSTORAGE MENU---------" +
-            "Welcome to the FoodStorage!");
+    System.out.println("--------FOODSTORAGE MENU---------\n" +
+            "Welcome to the FoodStorage!\n");
     System.out.println("1. Print ingredients \n" +
             "2. Add ingredient \n" +
             "3. Edit ingredient \n" +
@@ -1074,7 +1077,7 @@ public class UserInterface {
             "5. Use recipe \n" +
             "6. Recommend recipe \n" +
             "7. Back \n" +
-            " --------------------\n" +
+            " ------------------------\n" +
             " ");
   }
 

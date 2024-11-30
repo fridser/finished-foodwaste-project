@@ -291,7 +291,6 @@ public class FoodStorage {
   public boolean useRecipe(Iterator<Ingredient> it) {
     boolean success = false;
     ArrayList<Ingredient> ar = turnIteratorIntoArrayList(it);
-
     if (canUseRecipe(ar)) {
       for (Ingredient i : ar) {
         useIngredient(i);
