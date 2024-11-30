@@ -143,4 +143,8 @@ public class RecipeBook {
     Iterator<Recipe> pr = possibleRecipes.iterator();
     return pr;
   }
+
+  public int getAmountOfRecipes() {
+    return this.recipeList.size();
+  }
 }

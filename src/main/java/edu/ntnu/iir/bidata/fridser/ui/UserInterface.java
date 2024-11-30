@@ -176,8 +176,12 @@ public class UserInterface {
       switch (userinput) {
 
         case PRINT:
-          fd.sortAlphabetically();
-          printAllIngredients(fd.getIngredientList());
+          if (fd.getNumberOfIngredients() > 0) {
+            fd.sortAlphabetically();
+            printAllIngredients(fd.getIngredientList());
+          } else {
+            System.out.println("You do not have any ingredients yet.");
+          }
           break;
 
         case ADD:
@@ -185,12 +189,20 @@ public class UserInterface {
           break;
 
         case EDIT:
-          editIngredient();
+          if (fd.getNumberOfIngredients() > 0) {
+            editIngredient();
+          } else {
+            System.out.println("You do not have any ingredients yet.");
+          }
           break;
 
         case 4:
-          fd.sortAlphabetically();
-          printAllIngredients(fd.getExpiredIngredients(currentDate));
+          if (fd.getNumberOfIngredients() > 0) {
+            fd.sortAlphabetically();
+            printAllIngredients(fd.getExpiredIngredients(currentDate));
+          } else {
+            System.out.println("You do not have any ingredients yet.");
+          }
           break;
 
         case 5:
@@ -487,7 +499,12 @@ public class UserInterface {
       switch (userinput) {
 
         case PRINT:
-          printRecipes(rp.getRecipeIterator());
+          if (rp.getAmountOfRecipes() > 0) {
+            printRecipes(rp.getRecipeIterator());
+          } else {
+            System.out.println("You do not have any recipes yet. \n" +
+                    " ");
+          }
           break;
 
         case ADD:
@@ -495,7 +512,12 @@ public class UserInterface {
           break;
 
         case EDIT:
-          editRecipe();
+          if (rp.getAmountOfRecipes() > 0) {
+            editRecipe();
+          } else {
+            System.out.println("You do not have any recipes yet. \n" +
+                    " ");
+          }
           break;
 
         case 4:
@@ -548,10 +570,10 @@ public class UserInterface {
 
   public void editRecipe() {
     boolean finished = false;
+    String name = chooseRecipe();
+    Recipe recipe = rp.getRecipe(name);
 
     while (!finished) {
-      String name = chooseRecipe();
-      Recipe recipe = rp.getRecipe(name);
       System.out.println("Chosen recipe details: ");
       printRecipeDetails(recipe);
       showEditRecipe();
