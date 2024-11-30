@@ -29,6 +29,35 @@ public class UserInterface {
   }
 
   public void start() {
+
+    Recipe tinePancake = new Recipe("Tine Pancake", "Melt butter. " +
+            "Mix flour and salt, then add half of the milk and stir until all the clumps " +
+            "have disappeared. Add the melted butter, then add the rest of the milk and the eggs. " +
+            "Let rest for 20 minutes, then fry them in a frying pan.");
+    Ingredient butter = new Ingredient("Butter", 9, "ts");
+    Ingredient flour = new Ingredient("Flour", 0.3, "Litres");
+    Ingredient salt = new Ingredient("Salt", 0.5, "ts");
+    Ingredient milk = new Ingredient("Milk", 0.6, "Litres");
+    Ingredient eggs = new Ingredient("Egg", 3, "Stk");
+    tinePancake.addIngredient(butter);
+    tinePancake.addIngredient(flour);
+    tinePancake.addIngredient(salt);
+    tinePancake.addIngredient(milk);
+    tinePancake.addIngredient(eggs);
+
+    Recipe fruitSalad =new Recipe("Fruit Salad", "Cut all the fruits " +
+            "up and add them to a bowl");
+    Ingredient banana = new Ingredient("Banana", 2, "Stk");
+    Ingredient grapes = new Ingredient("Grapes", 500, "Grams");
+    Ingredient raspBerry = new Ingredient("Raspberry", 200, "Grams");
+    Ingredient orange = new Ingredient("Orange", 1, "Stk");
+    Ingredient apple = new Ingredient("Apple", 2, "Stk");
+    fruitSalad.addIngredient(banana);
+    fruitSalad.addIngredient(grapes);
+    fruitSalad.addIngredient(raspBerry);
+    fruitSalad.addIngredient(orange);
+    fruitSalad.addIngredient(apple);
+
     boolean finished = false;
 
     while (!finished) {
@@ -302,6 +331,11 @@ public class UserInterface {
   public void editIngredientExpirationDate(int i) {
     System.out.println("Please enter the new year the ingredient expires: \n");
     int year = getIntInput();
+    if ((year < 99) && (year > 69)) {
+      year += 1900;
+    } else if ((year > 0) && (year < 70)) {
+      year += 2000;
+    }
     System.out.println("Please enter the new month the ingredient expires as a whole " +
             "number between 1 and 12: \n");
     int month = getIntInput();
@@ -410,6 +444,11 @@ public class UserInterface {
     }
     System.out.println("Please enter the year the ingredient expires: \n");
     int year = getIntInput();
+    if ((year < 99) && (year > 69)) {
+      year += 1900;
+    } else if ((year > 0) && (year < 70)) {
+      year += 2000;
+    }
     System.out.println("Please enter the month the ingredient expires as a whole " +
             "number between 1 and 12: \n");
     int month = getIntInput();
@@ -433,7 +472,7 @@ public class UserInterface {
 
     while (!finished) {
       System.out.println("Please choose a unit: \n" +
-              "1. Grams, 2. Litres, 3. Stk \n");
+              "1. Grams, 2. Litres, 3. Stk, 4. ts \n");
       ;
       int userinput = getIntInput();
 
@@ -451,6 +490,11 @@ public class UserInterface {
 
         case 3:
           unit = "Stk";
+          finished = true;
+          break;
+
+        case 4:
+          unit = "ts";
           finished = true;
           break;
 
@@ -473,6 +517,11 @@ public class UserInterface {
   public void changeCurrentDate() {
     System.out.println("Please enter the year you want: \n");
     int year = getIntInput();
+    if ((year < 99) && (year > 69)) {
+      year += 1900;
+    } else if ((year > 0) && (year < 70)) {
+      year += 2000;
+    }
     System.out.println("Please enter the month you want as a number" +
             "between 1 and 12: \n");
     int month = getIntInput();

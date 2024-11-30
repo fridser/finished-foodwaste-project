@@ -134,10 +134,11 @@ public class Ingredient {
    * @param newUnit Grams, Litres or Stk
    */
   public void setUnit(String newUnit) {
-    if ((newUnit == "Grams") || (newUnit == "Stk") || (newUnit == "Litres")) {
+    if ((newUnit == "Grams") || (newUnit == "Stk") || (newUnit == "Litres")
+            || (newUnit == "ts")) {
       this.unit = newUnit;
     } else {
-      throw new IllegalArgumentException("Unit must be either Grams, Stk or Litres");
+      throw new IllegalArgumentException("Unit must be either Grams, Stk, Litres or ts");
     }
   }
 
