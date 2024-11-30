@@ -34,7 +34,7 @@ public class RecipeBook {
       throw new IllegalArgumentException("Cannot put two recipes with same" +
               "name in the list.");
     }
-    this.recipeList.put(recipe.getRecipeName(), recipe);
+    this.recipeList.put(recipe.getRecipeName().toLowerCase(), recipe);
   }
 
   /**
@@ -48,7 +48,11 @@ public class RecipeBook {
       throw new IllegalArgumentException("The name of the recipe " +
               "cannot be empty");
     }
-    return this.recipeList.get(recipeName);
+    if (!containsKey(recipeName.toLowerCase())) {
+      throw new IllegalArgumentException("This recipe does not exist. Make sure" +
+              " you have entered the name of the recipe correctly");
+    }
+    return this.recipeList.get(recipeName.toLowerCase());
   }
 
   /**
@@ -57,7 +61,7 @@ public class RecipeBook {
    * @param name The name of the recipe being removed.
    */
   public void deleteRecipe(String name) {
-    this.recipeList.remove(name);
+    this.recipeList.remove(name.toLowerCase());
   }
 
   /**
@@ -76,7 +80,7 @@ public class RecipeBook {
    * @return boolean, true if the key exists in the recipeList already.
    */
   public boolean containsKey(String key) {
-    return this.recipeList.containsKey(key);
+    return this.recipeList.containsKey(key.toLowerCase());
   }
 
   /**

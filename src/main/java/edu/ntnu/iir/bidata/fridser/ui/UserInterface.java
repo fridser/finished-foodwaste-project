@@ -818,7 +818,8 @@ public class UserInterface {
         printAllIngredientsInRecipe(rp.getRecipe(name).getLackingIngredients(fd));
       }
     } catch (IllegalArgumentException e) {
-      System.out.println("Something went wrong. Please try again.");
+      System.out.println(e.getMessage());
+      System.out.println("Suck a lemon.");
     }
   }
 
