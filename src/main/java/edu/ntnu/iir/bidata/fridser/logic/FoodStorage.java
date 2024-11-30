@@ -125,7 +125,7 @@ public class FoodStorage {
       Ingredient ingredient = this.ingredients.get(index);
 
 
-      if (ingredient.getIngredientName().equals(name)) {
+      if (ingredient.getIngredientName().equalsIgnoreCase(name)) {
         ingredientNotFound = false;
         foundIngredient = ingredient;
       }
@@ -158,7 +158,7 @@ public class FoodStorage {
       Iterator<Ingredient> it = this.ingredients.iterator();
       while ((it.hasNext()) && (amount > 0)) {
         Ingredient ingredient1 = it.next();
-        if (ingredient1.getIngredientName().equals(ingredient.getIngredientName())) {
+        if (ingredient1.getIngredientName().equalsIgnoreCase(ingredient.getIngredientName())) {
           if (ingredient1.getAmount() <= amount) {
             amount -= ingredient1.getAmount();
             it.remove();
@@ -190,7 +190,7 @@ public class FoodStorage {
     Iterator<Ingredient> it = ingredients.iterator();
     while (it.hasNext()) {
       Ingredient ingredient = it.next();
-      if (ingredient.getIngredientName().equals(ingredientName)) {
+      if (ingredient.getIngredientName().equalsIgnoreCase(ingredientName)) {
         amount += ingredient.getAmount();
       }
     }

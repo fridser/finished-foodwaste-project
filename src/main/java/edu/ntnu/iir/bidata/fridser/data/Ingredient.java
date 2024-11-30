@@ -248,7 +248,7 @@ public class Ingredient {
    * @return boolean, True if the ingredients have the same name and expiry date
    */
   public boolean isSame(Ingredient ingredient) {
-    if ((ingredient.getIngredientName().equals(this.ingredientName)) &&
+    if ((ingredient.getIngredientName().equalsIgnoreCase(this.ingredientName)) &&
             (ingredient.getExpiryDate().equals(this.expiryDate)) && (ingredient.getUnit().equals(this.unit))) {
       return true;
     } else {

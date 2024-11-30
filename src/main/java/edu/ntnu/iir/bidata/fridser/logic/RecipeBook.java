@@ -101,21 +101,25 @@ public class RecipeBook {
   public Recipe recommendRecipe(LocalDate currentDate, FoodStorage fd) {
     Recipe bestRecipe = null;
     Iterator<Recipe> it = getPossibleRecipes(fd);
-    while (it.hasNext()) {
-      Recipe currentRecipe = it.next();
-      if (bestRecipe == null) {
-        bestRecipe = currentRecipe;
-      }
-      if (currentRecipe.getDireValue(currentDate, fd) >
-              bestRecipe.getDireValue(currentDate, fd)) {
-        bestRecipe = currentRecipe;
-      } else if (currentRecipe.getDireValue(currentDate, fd) ==
-              bestRecipe.getDireValue(currentDate, fd)) {
-        if (currentRecipe.getUrgentValue(currentDate, fd) >
-                bestRecipe.getUrgentValue(currentDate, fd)) {
+    if(it.hasNext()) {
+      while (it.hasNext()) {
+        Recipe currentRecipe = it.next();
+        if (bestRecipe == null) {
           bestRecipe = currentRecipe;
         }
+        if (currentRecipe.getDireValue(currentDate, fd) >
+                bestRecipe.getDireValue(currentDate, fd)) {
+          bestRecipe = currentRecipe;
+        } else if (currentRecipe.getDireValue(currentDate, fd) ==
+                bestRecipe.getDireValue(currentDate, fd)) {
+          if (currentRecipe.getUrgentValue(currentDate, fd) >
+                  bestRecipe.getUrgentValue(currentDate, fd)) {
+            bestRecipe = currentRecipe;
+          }
+        }
       }
+    } else {
+      throw new IllegalArgumentException("There are no possible recipes to make");
     }
     return bestRecipe;
   }

@@ -80,14 +80,14 @@ public class Recipe {
   /**
    * Changes the instruction to the new instruction
    *
-   * @param newDescription The new instruction of the recipe
+   * @param newInstruction The new instruction of the recipe
    */
-  public void setInstruction(String newDescription) {
-    if ((newDescription.isBlank()) || (newDescription == null) ||
-            (newDescription.isEmpty())) {
-      throw new IllegalArgumentException("Description cannot be empty");
+  public void setInstruction(String newInstruction) {
+    if ((newInstruction.isBlank()) || (newInstruction == null) ||
+            (newInstruction.isEmpty())) {
+      throw new IllegalArgumentException("Instruction cannot be empty");
     }
-    this.instruction = newDescription;
+    this.instruction = newInstruction;
   }
 
   /**
