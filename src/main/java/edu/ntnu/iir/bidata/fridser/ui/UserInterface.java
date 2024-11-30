@@ -938,6 +938,7 @@ public class UserInterface {
     System.out.println(" Amount: " + ingredient.getAmount() + " " + ingredient.getUnit());
     System.out.println(" Price: " + ingredient.getPrice() + " per " + ingredient.getUnit());
     System.out.println(" Expiration date: " + ingredient.getExpiryDate().toString());
+    System.out.println(" ");
   }
 
   /**
@@ -949,7 +950,6 @@ public class UserInterface {
   public void printIngredientInRecipeDetails(Ingredient ingredient) {
     System.out.println("Name: " + ingredient.getIngredientName() +
             " Amount: " + ingredient.getAmount() + " " + ingredient.getUnit());
-    System.out.println(" ");
   }
 
   /**
@@ -961,6 +961,7 @@ public class UserInterface {
     while (it.hasNext()) {
       printIngredientDetails(it.next());
     }
+    System.out.println(" ");
   }
 
   public void printIngredientsForEdit(Iterator<Ingredient> it) {
@@ -972,6 +973,7 @@ public class UserInterface {
               " per " + i.getUnit() + " " + i.getExpiryDate().toString());
       index ++;
     }
+    System.out.println(" ");
   }
 
   /**
@@ -983,6 +985,7 @@ public class UserInterface {
     while (it.hasNext()) {
       printIngredientInRecipeDetails(it.next());
     }
+    System.out.println(" ");
   }
 
   /**
@@ -994,6 +997,7 @@ public class UserInterface {
     System.out.println(recipe.getRecipeName());
     System.out.println(recipe.getInstruction());
     printAllIngredientsInRecipe(recipe.getIngredientIterator());
+    System.out.println(" ");
   }
 
   /**
@@ -1005,14 +1009,17 @@ public class UserInterface {
     while (it.hasNext()) {
       printRecipeDetails(it.next());
     }
+    System.out.println(" ");
   }
 
 
   public void showStartMenu() {
-    System.out.println("Hello User!");
+    System.out.println("-------------START MENU----------" +
+            "Hello User!");
     System.out.println("Welcome to the MealPlanner app.");
     System.out.println("1. Info, 2. Go to FoodStorage, 3. Go to RecipeBook" +
-            " 4. Settings, 5. Quit \n");
+            " 4. Settings, 5. Quit \n" +
+            "------------------------------");
   }
 
   public void showInfo() {
@@ -1044,20 +1051,21 @@ public class UserInterface {
 
 
   public void showFoodStorage() {
-    System.out.println("Welcome to the FoodStorage!");
+    System.out.println("--------FOODSTORAGE MENU---------" +
+            "Welcome to the FoodStorage!");
     System.out.println("1. Print ingredients \n" +
             "2. Add ingredient \n" +
             "3. Edit ingredient \n" +
             "4. Get expired ingredients \n" +
             "5. Delete expired ingredients \n" +
             "6. Back\n" +
-            " \n" +
+            "------------------------------ \n" +
             " ");
   }
 
 
   public void showRecipeBook() {
-    System.out.println("-------MENU----------\n" +
+    System.out.println("-------RECIPEBOOK MENU----------\n" +
             "Welcome to the RecipeBook! \n" +
             "1. Print recipes \n" +
             "2. Add recipe \n" +
