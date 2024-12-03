@@ -737,9 +737,9 @@ public class UserInterface {
     }
   }
 
-  public String chooseRecipe() {
+  public Recipe chooseRecipe() {
     boolean finished = false;
-    String name = null;
+    Recipe recipe = null;
 
     while (!finished) {
       printRecipes(rp.getRecipeIterator());
@@ -747,21 +747,21 @@ public class UserInterface {
               "want to use: \n");
       String userinput = getStringInput();
       if (rp.containsKey(userinput)) {
-        name = userinput;
+        recipe = rp.getRecipe(userinput);
         finished = true;
       } else {
         System.out.println("Please write one of the recipes " +
                 "on the screen.");
       }
     }
-    return name;
+    return recipe;
 
   }
 
   public void editRecipe() {
     boolean finished = false;
-    String name = chooseRecipe();
-    Recipe recipe = rp.getRecipe(name);
+    Recipe recipe = chooseRecipe();
+    String name = recipe.getRecipeName();
 
     while (!finished) {
       System.out.println("Chosen recipe details: ");
@@ -773,19 +773,19 @@ public class UserInterface {
       switch (userinput) {
 
         case NAME:
-          editRecipeName(name);
+          editRecipeName(recipe);
           break;
 
         case 2:
-          editRecipeInstruction(name);
+          editRecipeInstruction(recipe);
           break;
 
         case 3:
-          addIngredientsToRecipe(name);
+          addIngredientsToRecipe(recipe);
           break;
 
         case 4:
-          editIngredientInRecipe(name);
+          editIngredientInRecipe(recipe);
           break;
 
         case 5:
@@ -808,10 +808,9 @@ public class UserInterface {
     }
   }
 
-  public void editIngredientInRecipe(String recipeName) {
+  public void editIngredientInRecipe(Recipe recipe) {
     boolean finished = false;
-    String name = chooseIngredientInRecipe(recipeName);
-    Ingredient ingredient = rp.getRecipe(recipeName).getIngredient(name);
+    Ingredient ingredient = chooseIngredientInRecipe(recipe);
 
     while (!finished) {
       System.out.println("Chosen ingredient details: ");
@@ -823,20 +822,20 @@ public class UserInterface {
       switch (userinput) {
 
         case NAME:
-          editIngredientInRecipeName(recipeName, name);
+          editIngredientInRecipeName(ingredient);
           break;
 
         case AMOUNT:
-          editIngredientInRecipeAmount(recipeName, name);
+          editIngredientInRecipeAmount(ingredient);
           break;
 
         case UNIT:
-          editIngredientInRecipeUnit(recipeName, name);
+          editIngredientInRecipeUnit(ingredient);
           break;
 
         case 4:
           try {
-            rp.getRecipe(recipeName).deleteIngredient(name);
+            recipe.deleteIngredient(ingredient.getIngredientName());
           } catch (IllegalArgumentException e) {
             System.out.println("An unexpected error has occurred.");
           }
@@ -854,66 +853,66 @@ public class UserInterface {
     }
   }
 
-  public void editIngredientInRecipeName(String recipeName, String ingredientName) {
+  public void editIngredientInRecipeName(Ingredient ingredient) {
     System.out.println("Please enter the new name of the ingredient: \n");
     String name = getStringInput();
 
     try {
-      rp.getRecipe(recipeName).getIngredient(ingredientName).setIngredientName(name);
+      ingredient.setIngredientName(name);
     } catch (IllegalArgumentException e) {
       System.out.println("The name entered was invalid. Please try" +
               " again.");
     }
   }
 
-  public void editIngredientInRecipeAmount(String recipeName, String ingredientName) {
+  public void editIngredientInRecipeAmount(Ingredient ingredient) {
     System.out.println("Please enter the new amount of the ingredient: \n");
     double amount = getDoubleInput();
 
     try {
-      rp.getRecipe(recipeName).getIngredient(ingredientName).setAmount(amount);
+      ingredient.setAmount(amount);
     } catch (IllegalArgumentException e) {
       System.out.println("The amount entered was invalid. Please try" +
               " again.");
     }
   }
 
-  public void editIngredientInRecipeUnit(String recipeName, String ingredientName) {
+  public void editIngredientInRecipeUnit(Ingredient ingredient) {
     String unit = chooseunit();
     try {
-      rp.getRecipe(recipeName).getIngredient(ingredientName).setUnit(unit);
+      ingredient.setUnit(unit);
     } catch (IllegalArgumentException e) {
       System.out.println("An unexpected error has occurred. Please try" +
               "again.");
     }
   }
 
-  public String chooseIngredientInRecipe(String recipeName) {
+  public Ingredient chooseIngredientInRecipe(Recipe recipe) {
     boolean finished = false;
-    String name = null;
+    Ingredient ingredient= null;
 
     while (!finished) {
-      printAllIngredientsInRecipe(rp.getRecipe(recipeName).getIngredientIterator());
+      printAllIngredientsInRecipe(recipe.getIngredientIterator());
       System.out.println("Please write the name of the ingredient you " +
               "want to edit: \n");
       String userinput = getStringInput();
-      if (rp.getRecipe(recipeName).containsKey(userinput)) {
-        name = userinput;
+      if (recipe.containsKey(userinput)) {
+        ingredient = recipe.getIngredient(userinput);
         finished = true;
       } else {
         System.out.println("Please write one of the ingredients " +
                 "on the screen.");
       }
     }
-    return name;
+    return ingredient;
   }
 
-  public void editRecipeName(String recipeName) {
+  public void editRecipeName(Recipe recipe) {
     System.out.println("Please enter the new name of the recipe: \n");
     String name = getStringInput();
 
     try {
-      rp.getRecipe(recipeName).setRecipeName(name);
+      recipe.setRecipeName(name);
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
       System.out.println("Please try" +
@@ -921,12 +920,12 @@ public class UserInterface {
     }
   }
 
-  public void editRecipeInstruction(String recipeName) {
+  public void editRecipeInstruction(Recipe recipe) {
     System.out.println("Please enter the new description of the recipe: \n");
     String description = getStringInput();
 
     try {
-      rp.getRecipe(recipeName).setInstruction(description);
+      recipe.setInstruction(description);
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
       System.out.println("Please try" +
@@ -991,6 +990,7 @@ public class UserInterface {
   }
 
   public void addRecipe() {
+    Recipe recipe = null;
     System.out.println("Please enter the name of the recipe: \n");
     String name = getStringInput();
     System.out.println("Please enter the instruction on how to make" +
@@ -999,21 +999,21 @@ public class UserInterface {
 
 
     try {
-      Recipe recipe = new Recipe(name, instruction);
+      recipe = new Recipe(name, instruction);
       rp.addRecipe(recipe);
     } catch (IllegalArgumentException e) {
       System.out.println("One of the options entered was invalid. Please try" +
               " again.");
     }
-    addIngredientsToRecipe(name);
+    addIngredientsToRecipe(recipe);
   }
 
-  public void addIngredientsToRecipe(String recipeName) {
+  public void addIngredientsToRecipe(Recipe recipe) {
     boolean finished = false;
 
     while (!finished) {
       System.out.println("Current recipe details: ");
-      printRecipeDetails(rp.getRecipe(recipeName));
+      printRecipeDetails(recipe);
       System.out.println("Do you want to add another ingredient to " +
               "the recipe? \n" +
               "1. Yes, 2. No \n");
@@ -1023,7 +1023,7 @@ public class UserInterface {
       switch (userinput) {
 
         case 1:
-          addRecipeIngredient(recipeName);
+          addRecipeIngredient(recipe);
           break;
 
         case 2:
@@ -1037,7 +1037,7 @@ public class UserInterface {
     }
   }
 
-  public void addRecipeIngredient(String recipeName) {
+  public void addRecipeIngredient(Recipe recipe) {
     String name;
     double amount;
     while (true) {
@@ -1063,7 +1063,7 @@ public class UserInterface {
 
     try {
       Ingredient ingredient = new Ingredient(name, amount, unit);
-      rp.getRecipe(recipeName).addIngredient(ingredient);
+      recipe.addIngredient(ingredient);
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
     }
