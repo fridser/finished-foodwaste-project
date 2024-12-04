@@ -10,10 +10,20 @@ import java.util.Iterator;
 
 
 /**
- * can add and remove ingredients in a list
- * keeps track of how many different and the amount of food
- * v.14.10.2024
- * Eriksen F. E.
+ * Represents a storage of food items like a fridge.
+ *
+ * <ul>
+ *   <li>contains a collection of objects of the Ingredient class</li>
+ *   <li>can add and remove ingredients in the collection</li>
+ *   <li>can find out how much amount there is of a specific ingredient</li>
+ *   <li> can sort the ingredients alphabetically</li>
+ *   <li>can sort the ingredients chronologically </li>
+ *   <li>can use a specified amount of an ingredient</li>
+ *   <li>can use a list of ingredients with specified amounts.</li>
+ *   <li>can return an iterator of expired ingredients.</li>
+ *   <li>can calculate the cost of the expired ingredients</li>
+ *   <li>can delete the expired ingredients.</li>
+ * </ul>
  */
 
 

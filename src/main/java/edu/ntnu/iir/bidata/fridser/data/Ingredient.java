@@ -5,12 +5,21 @@ import java.time.LocalDate;
 
 
 /**
- * Keeps information of the name, amount, price and expiry date of different ingredients.
- * Is able to check each of these fields.
- * Is able to change these fields.
- * Is able to increase or reduce the amount field.
- * v.09.10.2024
- * Eriksen F. S.
+ * Represents a food item.
+ *
+ * <ul>
+ *   <li>Keeps information of the name,
+ *   amount, unit, price and expiry date of different ingredients.</li>
+ *   <li>Is able to check each of these fields.</li>
+ *   <li>Is able to change these fields.</li>
+ *   <li> Is able to increase or reduce the amount field.</li>
+ *   <li>is able to compare the expiration date of the object to another date </li>
+ *   <li>and see if the object is expired, expires within two days or expires within
+ *   a week.</li>
+ *   <li>can compare the object to another object, is considered the same if the name,
+ *   unit and expiration date are the same.</li>
+ * </ul>
+ *
  */
 
 

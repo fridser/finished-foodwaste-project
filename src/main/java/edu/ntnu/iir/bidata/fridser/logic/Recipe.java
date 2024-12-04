@@ -1,7 +1,5 @@
 package edu.ntnu.iir.bidata.fridser.logic;
 
-//TODO: method to use the ingredients to make a new recipe.
-
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
 
 import java.time.LocalDate;
@@ -9,14 +7,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-
+/**
+ * Represents a recipe.
+ *
+ * contains information about the name of the recipe and the instruction on how
+ * to make the recipe.
+ * contains a collection of ingredients used to make the recipe.
+ *
+ */
 public class Recipe {
   private String recipeName;
   private String instruction;
   private HashMap<String, Ingredient> ingredientList;
 
   /**
-   * Creates a new instance if Recipe.
+   * Creates a new instance of the Recipe class.
    *
    * @param recipeName  The name of the recipe.
    * @param instruction The instruction detailing how to cook the recipe.

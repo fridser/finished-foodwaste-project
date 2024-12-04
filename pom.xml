@@ -5,8 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.ntnu.iir.bidata</groupId>
-    <!-- TODO: Change the artifact ID to fit with your project -->
-    <artifactId>IDATA1003-Mappe-Template</artifactId>
+    <artifactId>MealPlanner-project</artifactId>
     <version>3.2</version>
 
     <properties>
