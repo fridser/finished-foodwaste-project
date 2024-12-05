@@ -10,10 +10,17 @@ import java.util.Iterator;
 /**
  * Represents a recipe.
  *
- * contains information about the name of the recipe and the instruction on how
- * to make the recipe.
- * contains a collection of ingredients used to make the recipe.
- *
+ * <ul>
+ *   <li>contains information about the name of the recipe and the instruction on how
+ *   to make the recipe.</li>
+ *   <li>contains a collection of ingredients used to make the recipe.</li>
+ *   <li>can add or remove an ingredient within the collection</li>
+ *   <li>checks if the recipe can be used with the ingredients in a given FoodStorage. </li>
+ *   <li> returns a list of the ingredients and how much of them is lacking to be able
+ *   to make the recipe</li>
+ *   <li>returns a value of how many ingredients in a FoodStorage used to make the recipe
+ *   is urgent or dire.</li>
+ * </ul>
  */
 public class Recipe {
   private String recipeName;
@@ -110,7 +117,7 @@ public class Recipe {
    *
    * @param foodStorage The foodstorage containing the ingredients
    *                    to use the recipe
-   * @return enoughIngredients Boolean true if there is enough ingredients
+   * @return enoughIngredients, Boolean true if there is enough ingredients
    * to make the recipe, false if there isn't.
    */
   public boolean canUseRecipe(FoodStorage foodStorage) {
@@ -229,7 +236,7 @@ public class Recipe {
 
   /**
    * Deletes the recipe with the stated name
-   * @param ingredientName
+   * @param ingredientName The name of the ingredient being deleted.
    */
   public void deleteIngredient(String ingredientName) {
     if (!containsKey(ingredientName)) {

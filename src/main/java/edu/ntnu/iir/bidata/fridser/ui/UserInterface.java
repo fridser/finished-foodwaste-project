@@ -16,14 +16,6 @@ import java.util.Scanner;
  *    <li>Prints out what the user sees as String</li>
  *    <li>takes input from the user</li>
  *    <li>does actions based on the input</li>
- *    <li> </li>
- *    <li> </li>
- *    <li></li>
- *    <li></li>
- *    <li></li>
- *    <li></li>
- *    <li></li>
- *    <li></li>
  *  </ul>
  */
 public class UserInterface {

@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Actor User
+participant UserInterface
+participant RecipeBook
+participant FoodStorage
+participant Recipe
+participant Ingredient
+
+UserInterface -> User : Menu
+User -> UserInterface : add Ingredient (Ingredient information)
+UserInterface -> Ingredient : Create ingredient (Ingredient information)
+Ingredient -> UserInterface : created ingredient
+UserInterface -> FoodStorage : add Ingredient (Ingredient)
+FoodStorage -> UserInterface : confirmation
+
+User -> UserInterface : get all ingredients
+UserInterface -> FoodStorage : get all ingredients
+FoodStorage -> UserInterface : list of all ingredients
+UserInterface -> User : list of all ingredients
+
+User -> UserInterface : use recipe
+UserInterface -> RecipeBook : get recipe
+RecipeBook -> UserInterface : recipe
+UserInterface -> FoodStorage : use Recipe
+FoodStorage -> Recipe : get ingredients
+Recipe -> FoodStorage : list of ingredients
+FoodStorage -> UserInterface : confirmation
+UserInterface -> User : confirmation
+
+
+
+@enduml

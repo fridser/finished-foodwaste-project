@@ -8,8 +8,13 @@ import java.util.Iterator;
 /**
  * Keeps track of all the different recipes.
  * <ul>
- *     <li>able to add and remove recipe</li>
+ *     <li>able to add and remove recipes</li>
  *     <li>able to find a recipe based on the recipe name</li>
+ *     <li>able to return an iterator of all the recipes contained</li>
+ *     <li>able to return an iterator of all the recipes that can be used given
+ *     a FoodStorage</li>
+ *     <li>able to recommend a recipe based on the urgent and dire values of the
+ *     recipes contained</li>
  * </ul>
  */
 

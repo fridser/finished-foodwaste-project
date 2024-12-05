@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+left to right direction
+skinparam packageStyle rectangle
+actor User
+rectangle App-System {
+    User --> (Info)
+
+    User --> (FoodStorage)
+    (FoodStorage) --> (add Ingredient)
+    (FoodStorage) --> (edit ingredient)
+    (FoodStorage) --> (use ingredient)
+    (FoodStorage) --> (print all ingredients)
+    (FoodStorage) --> (print all expired ingredients)
+    (FoodStorage) --> (delete all expired ingredients)
+
+    User -->  (RecipeBook)
+    (RecipeBook) --> (add Recipe)
+    (RecipeBook) --> (edit recipe)
+    (RecipeBook) --> (show all recipes)
+    (RecipeBook) --> (show all makeable recipes)
+    (RecipeBook) --> (use recipe)
+    (RecipeBook) --> (recommend recipe)
+
+    User --> (Settings)
+    (Settings) --> (Change current date)
+
+
+
+}
+}
+
+@enduml

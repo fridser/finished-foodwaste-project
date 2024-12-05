@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+logic.FoodStorage <|-- entity.Ingredient
+logic.RecipeBook <|-- logic.Recipe
+logic.Recipe <|-- entity.Ingredient
+ui.UserInterface <|-- logic.FoodStorage
+ui.UserInterface <|-- logic.RecipeBook
+ui.Main <|-- ui.UserInterface
+
+class ui.UserInterface {
+}
+
+class ui.Main {
+}
+
+
+class logic.FoodStorage {
+ArrayList<Ingredient>
+}
+
+class logic.RecipeBook {
+HashMap<String, Recipe>
+}
+
+class logic.Recipe {
+name: String
+Instruction: String
+HashMap<String, Ingredient>
+}
+
+class entity.Ingredient {
+name: String
+amount: double
+unit: String
+price: double
+expiration date: LocalDate
+}
+
+
+
+
+@enduml
