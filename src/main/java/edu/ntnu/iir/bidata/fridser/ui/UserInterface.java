@@ -34,6 +34,7 @@ public class UserInterface {
   private static final int NAME = 1;
   private static final int AMOUNT = 2;
   private static final int UNIT = 3;
+  private static final int USE = 4;
 
   /**
    * Creates an instance if the UserInterface.
@@ -320,7 +321,10 @@ public class UserInterface {
           }
           break;
 
-        case 4:
+        case USE:
+          useIngredient();
+
+        case 5:
           if (fd.getNumberOfIngredients() > 0) {
             fd.sortAlphabetically();
             printAllIngredients(fd.getExpiredIngredients(currentDate));
@@ -331,11 +335,11 @@ public class UserInterface {
           }
           break;
 
-        case 5:
+        case 6:
           deleteExpiredIngredients();
           break;
 
-        case 6:
+        case 7:
           finished = true;
           break;
 
@@ -376,6 +380,22 @@ public class UserInterface {
       }
     }
     return i - 1;
+  }
+
+  public void useIngredient() {
+    System.out.println("Type in the name of the ingredient you want to use:");
+    String name = getStringInput();
+    String unit = fd.findIngredientByName(name).getUnit();
+    System.out.println("How much of the " + name +
+            " do you want to use?");
+    int amount = getIntInput();
+    try {
+      Ingredient ingredientUsed = new Ingredient(name,
+              amount, unit);
+      fd.useIngredient(ingredientUsed);
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
+    }
   }
 
 
@@ -702,11 +722,11 @@ public class UserInterface {
           }
           break;
 
-        case 4:
+        case 5:
           printUsableRecipes();
           break;
 
-        case 5:
+        case USE:
           useRecipe();
           break;
 
@@ -1211,9 +1231,10 @@ public class UserInterface {
     System.out.println("1. Print ingredients \n" +
             "2. Add ingredient \n" +
             "3. Edit ingredient \n" +
-            "4. Get expired ingredients \n" +
-            "5. Delete expired ingredients \n" +
-            "6. Back\n" +
+            "4. Use ingredient \n" +
+            "5. Get expired ingredients \n" +
+            "6. Delete expired ingredients \n" +
+            "7. Back\n" +
             "------------------------------ \n" +
             " ");
   }
@@ -1228,8 +1249,8 @@ public class UserInterface {
             "1. Print recipes \n" +
             "2. Add recipe \n" +
             "3. Edit recipe \n" +
-            "4. Get possible recipes \n" +
-            "5. Use recipe \n" +
+            "4. Use recipe \n" +
+            "5. Get possible recipes \n" +
             "6. Recommend recipe \n" +
             "7. Back \n" +
             " ------------------------\n" +
