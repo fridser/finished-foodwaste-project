@@ -8,13 +8,11 @@ import edu.ntnu.iir.bidata.fridser.logic.RecipeBook;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Iterator;
-import java.util.Scanner;
 
 /**
- * Handles everything connected to the display the user interacts with.
+ * Handles the display that the user interacts with.
  * <ul>
  *    <li>Prints out what the user sees as String</li>
- *    <li>takes input from the user</li>
  *    <li>does actions based on the input</li>
  *  </ul>
  */
@@ -22,6 +20,7 @@ public class UserInterface {
   private LocalDate currentDate; //The date that the expiry dates in the ingredients are compared to
   private FoodStorage fd;
   private RecipeBook rp;
+  private InputParser ip;
 
   private static final int INFO = 1;
   private static final int FOODSTORAGE = 2;
@@ -57,7 +56,7 @@ public class UserInterface {
 
     while (!finished) {
       showStartMenu();
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -138,77 +137,11 @@ public class UserInterface {
     currentDate = LocalDate.now();
     fd = new FoodStorage();
     rp = new RecipeBook();
+    ip = new InputParser();
 
   }
 
-  /**
-   * Scans inputs that is supposed to be an integer.
-   * Returns an integer if the input is an integer, else prints
-   * out a message and gives the user another chance to input correctly.
-   *
-   * @return int, the user input.
-   */
-  private int getIntInput() {
-    Scanner input = new Scanner(System.in);
-    int choice = -1;
-    boolean finished = false;
-    while (!finished) {
-      if (input.hasNextInt()){
-        choice = input.nextInt();
-        finished = true;
-      } else {
-        System.out.println("Please enter a positive whole number. \n" +
-                "idiot");
-      }
-      input.nextLine();
-    }
-    return choice;
-  }
 
-  /**
-   * Scans inputs that is supposed to be a double.
-   * Returns a double if the input is a double, else prints
-   * out a message and gives the user another chance to input correctly.
-   *
-   * @return double, the user input.
-   */
-  private double getDoubleInput() {
-    Scanner input = new Scanner(System.in);
-    double choice = -1;
-    boolean finished = false;
-    while (!finished) {
-      if (input.hasNextDouble()){
-        choice = input.nextDouble();
-        finished = true;
-      } else {
-        System.out.println("Please enter a number. ");
-      }
-      input.nextLine();
-    }
-    return choice;
-  }
-
-  /**
-   * Scans inputs that is supposed to be a string.
-   * Returns the user input as a String.
-   *
-   * @return String, the user input.
-   */
-  private String getStringInput() {
-    Scanner input = new Scanner(System.in);
-    String choice = null;
-    boolean finished = false;
-    while (!finished) {
-      if (input.hasNextLine()){
-        choice = input.nextLine();
-        finished = true;
-      } else {
-        System.out.println("An unexpected error has occurred. Please be" +
-                " better.");
-      }
-    }
-    return choice;
-  }
 
   /**
    * Shows the relevant information about the info menu, and processes
@@ -220,7 +153,7 @@ public class UserInterface {
 
     while (!finished) {
       showInfo();
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -253,7 +186,7 @@ public class UserInterface {
 
     while (!finished) {
       showSettings();
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -292,7 +225,7 @@ public class UserInterface {
 
     while (!finished) {
       showFoodStorage();
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -370,7 +303,7 @@ public class UserInterface {
     while (!finished) {
       fd.sortAlphabetically();
       showChooseIngredient();
-      i = getIntInput();
+      i = ip.getIntInput();
       if ((i <= fd.getNumberOfIngredients()) && (i != 0)) {
         finished = true;
       } else {
@@ -384,11 +317,11 @@ public class UserInterface {
 
   public void useIngredient() {
     System.out.println("Type in the name of the ingredient you want to use:");
-    String name = getStringInput();
+    String name = ip.getStringInput();
     String unit = fd.findIngredientByName(name).getUnit();
     System.out.println("How much of the " + name +
             " do you want to use?");
-    int amount = getIntInput();
+    int amount = ip.getIntInput();
     try {
       Ingredient ingredientUsed = new Ingredient(name,
               amount, unit);
@@ -422,7 +355,7 @@ public class UserInterface {
       printIngredientDetails(ingredient);
       showEditIngredient();
 
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -483,7 +416,7 @@ public class UserInterface {
 
   public void editIngredientExpirationDate(Ingredient ingredient) {
     System.out.println("Please enter the new year the ingredient expires: \n");
-    int year = getIntInput();
+    int year = ip.getIntInput();
     if ((year < 99) && (year > 69)) {
       year += 1900;
     } else if ((year >= 0) && (year < 70)) {
@@ -491,10 +424,10 @@ public class UserInterface {
     }
     System.out.println("Please enter the new month the ingredient expires as a whole " +
             "number between 1 and 12: \n");
-    int month = getIntInput();
+    int month = ip.getIntInput();
     System.out.println("Please enter the new day of the month the ingredient expires" +
             "as a whole number: \n");
-    int day = getIntInput();
+    int day = ip.getIntInput();
     try {
       ingredient.setExpiryDate(year, month, day);
     } catch (IllegalArgumentException e) {
@@ -505,7 +438,7 @@ public class UserInterface {
 
   public void editIngredientName(Ingredient ingredient) {
     System.out.println("Please enter the new name of the ingredient");
-    String name = getStringInput();
+    String name = ip.getStringInput();
     try {
       ingredient.setIngredientName(name);
     } catch (IllegalArgumentException e) {
@@ -515,7 +448,7 @@ public class UserInterface {
 
   public void editIngredientAmount(Ingredient ingredient) {
     System.out.println("Please enter the new amount of the ingredient");
-    double amount = getDoubleInput();
+    double amount = ip.getDoubleInput();
     try {
       ingredient.setAmount(amount);
     } catch (IllegalArgumentException e) {
@@ -525,7 +458,7 @@ public class UserInterface {
 
   public void editIngredientPrice(Ingredient ingredient) {
     System.out.println("Please enter the new price of the ingredient");
-    double price = getDoubleInput();
+    double price = ip.getDoubleInput();
     try {
       ingredient.setPrice(price);
     } catch (IllegalArgumentException e) {
@@ -543,7 +476,7 @@ public class UserInterface {
               "sure you want to proceed? \n" +
               "1. Yes, 2. No \n");
       ;
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -569,7 +502,7 @@ public class UserInterface {
     double price;
     while (true) {
       System.out.println("Please enter the name of ingredient: \n");
-      name = getStringInput();
+      name = ip.getStringInput();
       if ((name.isBlank()) || (name.isEmpty())) {
         System.out.println("Please try again.");
       } else {
@@ -578,7 +511,7 @@ public class UserInterface {
     }
     while (true) {
       System.out.println("Please enter the amount of the ingredient: \n");
-      amount = getDoubleInput();
+      amount = ip.getDoubleInput();
       if (amount <= 0) {
         System.out.println("Amount cannot be less than or equal to zero.");
       } else {
@@ -588,7 +521,7 @@ public class UserInterface {
     String unit = chooseunit();
     while (true) {
       System.out.println("Please enter the price of the ingredient per unit: \n");
-      price = getDoubleInput();
+      price = ip.getDoubleInput();
       if (price < 0) {
         System.out.println("Please suck a lemon.");
       } else {
@@ -596,7 +529,7 @@ public class UserInterface {
       }
     }
     System.out.println("Please enter the year the ingredient expires: \n");
-    int year = getIntInput();
+    int year = ip.getIntInput();
     if ((year < 99) && (year > 69)) {
       year += 1900;
     } else if ((year > 0) && (year < 70)) {
@@ -604,10 +537,10 @@ public class UserInterface {
     }
     System.out.println("Please enter the month the ingredient expires as a whole " +
             "number between 1 and 12: \n");
-    int month = getIntInput();
+    int month = ip.getIntInput();
     System.out.println("Please enter the day of the month the ingredient expires" +
             "as a whole number: \n");
-    int day = getIntInput();
+    int day = ip.getIntInput();
 
     try {
       Ingredient ingredient = new Ingredient(name, amount, unit, price,
@@ -627,7 +560,7 @@ public class UserInterface {
       System.out.println("Please choose a unit: \n" +
               "1. Grams, 2. Litres, 3. Stk, 4. ts \n");
       ;
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -669,7 +602,7 @@ public class UserInterface {
 
   public void changeCurrentDate() {
     System.out.println("Please enter the year you want: \n");
-    int year = getIntInput();
+    int year = ip.getIntInput();
     if ((year < 99) && (year > 69)) {
       year += 1900;
     } else if ((year > 0) && (year < 70)) {
@@ -677,10 +610,10 @@ public class UserInterface {
     }
     System.out.println("Please enter the month you want as a number" +
             "between 1 and 12: \n");
-    int month = getIntInput();
+    int month = ip.getIntInput();
     System.out.println("Please enter the day of the month you want" +
             "a a whole number: \n");
-    int day = getIntInput();
+    int day = ip.getIntInput();
 
     try {
       currentDate = LocalDate.of(year, month, day);
@@ -696,7 +629,7 @@ public class UserInterface {
 
     while (!finished) {
       showRecipeBook();
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -757,7 +690,7 @@ public class UserInterface {
       printRecipes(rp.getRecipeIterator());
       System.out.println("Please write the name of the recipe you " +
               "want to use: \n");
-      String userinput = getStringInput();
+      String userinput = ip.getStringInput();
       if (rp.containsKey(userinput)) {
         recipe = rp.getRecipe(userinput);
         finished = true;
@@ -780,7 +713,7 @@ public class UserInterface {
       printRecipeDetails(recipe);
       showEditRecipe();
 
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -829,7 +762,7 @@ public class UserInterface {
       printIngredientInRecipeDetails(ingredient);
       showEditIngredientInRecipe();
 
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -867,7 +800,7 @@ public class UserInterface {
 
   public void editIngredientInRecipeName(Ingredient ingredient) {
     System.out.println("Please enter the new name of the ingredient: \n");
-    String name = getStringInput();
+    String name = ip.getStringInput();
 
     try {
       ingredient.setIngredientName(name);
@@ -879,7 +812,7 @@ public class UserInterface {
 
   public void editIngredientInRecipeAmount(Ingredient ingredient) {
     System.out.println("Please enter the new amount of the ingredient: \n");
-    double amount = getDoubleInput();
+    double amount = ip.getDoubleInput();
 
     try {
       ingredient.setAmount(amount);
@@ -907,7 +840,7 @@ public class UserInterface {
       printAllIngredientsInRecipe(recipe.getIngredientIterator());
       System.out.println("Please write the name of the ingredient you " +
               "want to edit: \n");
-      String userinput = getStringInput();
+      String userinput = ip.getStringInput();
       if (recipe.containsKey(userinput)) {
         ingredient = recipe.getIngredient(userinput);
         finished = true;
@@ -921,7 +854,7 @@ public class UserInterface {
 
   public void editRecipeName(Recipe recipe) {
     System.out.println("Please enter the new name of the recipe: \n");
-    String name = getStringInput();
+    String name = ip.getStringInput();
 
     try {
       recipe.setRecipeName(name);
@@ -934,7 +867,7 @@ public class UserInterface {
 
   public void editRecipeInstruction(Recipe recipe) {
     System.out.println("Please enter the new description of the recipe: \n");
-    String description = getStringInput();
+    String description = ip.getStringInput();
 
     try {
       recipe.setInstruction(description);
@@ -955,7 +888,7 @@ public class UserInterface {
     printUsableRecipes();
     System.out.println("Please write the name of the recipe you " +
             "want to use: \n");
-    String name = getStringInput();
+    String name = ip.getStringInput();
     try {
       boolean success = fd.useRecipe(rp.getRecipe(name).getIngredientIterator());
       if (success) {
@@ -981,7 +914,7 @@ public class UserInterface {
               " sure you want to proceed? \n" +
               "1. Yes, 2. No \n");
       ;
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -1004,10 +937,10 @@ public class UserInterface {
   public void addRecipe() {
     Recipe recipe = null;
     System.out.println("Please enter the name of the recipe: \n");
-    String name = getStringInput();
+    String name = ip.getStringInput();
     System.out.println("Please enter the instruction on how to make" +
             " the recipe: \n");
-    String instruction = getStringInput();
+    String instruction = ip.getStringInput();
 
 
     try {
@@ -1030,7 +963,7 @@ public class UserInterface {
               "the recipe? \n" +
               "1. Yes, 2. No \n");
       ;
-      int userinput = getIntInput();
+      int userinput = ip.getIntInput();
 
       switch (userinput) {
 
@@ -1054,7 +987,7 @@ public class UserInterface {
     double amount;
     while (true) {
       System.out.println("Please enter the name of ingredient: \n");
-      name = getStringInput();
+      name = ip.getStringInput();
       if (name.isBlank() || name.isEmpty()) {
         System.out.println("Please try again");
       } else {
@@ -1063,7 +996,7 @@ public class UserInterface {
     }
     while (true) {
       System.out.println("Please enter the amount of the ingredient: \n");
-      amount = getDoubleInput();
+      amount = ip.getDoubleInput();
       if (amount <= 0) {
         System.out.println("The amount cannot be less than or equal to zero.");
       } else {

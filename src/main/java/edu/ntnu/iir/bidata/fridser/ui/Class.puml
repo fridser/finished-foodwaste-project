@@ -7,13 +7,20 @@ logic.Recipe <|-- entity.Ingredient
 ui.UserInterface <|-- logic.FoodStorage
 ui.UserInterface <|-- logic.RecipeBook
 ui.Main <|-- ui.UserInterface
+ui.InputParser --|> ui.UserInterface
 
 class ui.UserInterface {
 init()
 start()
-Interprets input from the user
 Displays information to the user
+Executes input from InputParser
+}
 
+class ui.InputParser {
+Interprets input from the user
+getIntInput()
+getStringInput()
+getDoubleInput()
 }
 
 class ui.Main {
