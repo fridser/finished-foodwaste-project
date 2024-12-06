@@ -9,32 +9,47 @@ ui.UserInterface <|-- logic.RecipeBook
 ui.Main <|-- ui.UserInterface
 
 class ui.UserInterface {
+init()
+start()
+Interprets input from the user
+Displays information to the user
+
 }
 
 class ui.Main {
+main(String[] args)
+Runs the program
 }
 
 
 class logic.FoodStorage {
-ArrayList<Ingredient>
+ArrayList<Ingredient>()
+Keeps track of and does operations
+with the ingredients
 }
 
 class logic.RecipeBook {
-HashMap<String, Recipe>
+HashMap<String, Recipe>()
+Keeps track of and does operations
+with the recipes.
 }
 
 class logic.Recipe {
-name: String
-Instruction: String
-HashMap<String, Ingredient>
+Holds the information of the recipe
+and does operations with the ingredients
+in the recipe
++name: String
++Instruction: String
+HashMap<String, Ingredient>()
 }
 
 class entity.Ingredient {
-name: String
-amount: double
-unit: String
-price: double
-expiration date: LocalDate
+Holds information about an ingredient
++name: String
++amount: double
++unit: String
++price: double
++expiration date: LocalDate
 }
 
 
