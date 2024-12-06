@@ -414,6 +414,12 @@ public class UserInterface {
     }
   }
 
+  /**
+   * creates a new expiration date of the given ingredient based on the input
+   * from the reader.
+   *
+   * @param ingredient The ingredient whose expiration date is being edited.
+   */
   public void editIngredientExpirationDate(Ingredient ingredient) {
     System.out.println("Please enter the new year the ingredient expires: \n");
     int year = ip.getIntInput();
@@ -436,6 +442,12 @@ public class UserInterface {
     }
   }
 
+  /**
+   * creates a new name of the given ingredient based on the input
+   * from the reader.
+   *
+   * @param ingredient The ingredient whose name is being edited.
+   */
   public void editIngredientName(Ingredient ingredient) {
     System.out.println("Please enter the new name of the ingredient");
     String name = ip.getStringInput();
@@ -446,6 +458,12 @@ public class UserInterface {
     }
   }
 
+  /**
+   * creates a new amount of the given ingredient based on the input
+   * from the reader.
+   *
+   * @param ingredient The ingredient whose amount is being edited.
+   */
   public void editIngredientAmount(Ingredient ingredient) {
     System.out.println("Please enter the new amount of the ingredient");
     double amount = ip.getDoubleInput();
@@ -456,8 +474,14 @@ public class UserInterface {
     }
   }
 
+  /**
+   * creates a new price of the given ingredient based on the input
+   * from the reader.
+   *
+   * @param ingredient The ingredient whose price is being edited.
+   */
   public void editIngredientPrice(Ingredient ingredient) {
-    System.out.println("Please enter the new price of the ingredient");
+    System.out.println("Please enter the new price per unit of the ingredient");
     double price = ip.getDoubleInput();
     try {
       ingredient.setPrice(price);
@@ -466,7 +490,12 @@ public class UserInterface {
     }
   }
 
-
+  /**
+   * Asks the user whether they really want to add another ingredient to
+   * the foodstorage.
+   * Either executes the method to add another ingredient or finishes without
+   * doing anything.
+   */
   public void getConfirmation() {
     boolean finished = false;
 
@@ -496,6 +525,10 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Creates a new Ingredient based on the input from the user and adds
+   * it to the foodstorage.
+   */
   public void addIngredient() {
     String name;
     double amount;
@@ -552,6 +585,12 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Displays a menu for the user to choose.
+   * Returns the unit chosen by the user as a String.
+   *
+   * @return String, the unit chosen by the user.
+   */
   public String chooseunit() {
     boolean finished = false;
     String unit = "";
@@ -592,6 +631,9 @@ public class UserInterface {
     return unit;
   }
 
+  /**
+   * Deletes all the expired ingredients from the foodstorage.
+   */
   public void deleteExpiredIngredients() {
     System.out.println("Deleting expired ingredients ...");
     double cost = fd.calculateCostOfExpiredIngredients(currentDate);
@@ -600,6 +642,9 @@ public class UserInterface {
             "Money wasted: " + cost);
   }
 
+  /**
+   * Changes the current date to a new date given by the user.
+   */
   public void changeCurrentDate() {
     System.out.println("Please enter the year you want: \n");
     int year = ip.getIntInput();
@@ -623,7 +668,12 @@ public class UserInterface {
     }
   }
 
-
+  /**
+   * Displays the recipebook menu for the user to choose from.
+   * Either prints all the recipes in the recipebook, add a new recipe,
+   * edits an existing recipe, prints all the usable recipes, uses a recipe,
+   * recommends a recipe or finishes without doing anything.
+   */
   public void recipeBook() {
     boolean finished = false;
 
@@ -682,6 +732,13 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Displays all the recipes the user can choose.
+   * Returns the chosen recipe based on which recipe name the
+   * user has entered.
+   *
+   * @return Recipe, the recipe the user has chosen.
+   */
   public Recipe chooseRecipe() {
     boolean finished = false;
     Recipe recipe = null;
@@ -703,6 +760,14 @@ public class UserInterface {
 
   }
 
+  /**
+   * Displays all the possible ways a user can edit a chosen recipe, and
+   * calls the method that executes the user choice.
+   * Either edits the name, edits the instruction, adds an ingredient to the
+   * recipe, edits an ingredient in the recipe,
+   * deletes an ingredient to the recipe, deletes the whole recipe or does
+   * nothing.
+   */
   public void editRecipe() {
     boolean finished = false;
     Recipe recipe = chooseRecipe();
@@ -753,6 +818,14 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Displays the menu of the ways a user can edit an ingredient
+   * in a recipe, and calls the method executing the user choice.
+   * Either edits the name, amount or unit, deletes the ingredient
+   * or does nothing.
+   *
+   * @param recipe The recipe containing the ingredient being edited.
+   */
   public void editIngredientInRecipe(Recipe recipe) {
     boolean finished = false;
     Ingredient ingredient = chooseIngredientInRecipe(recipe);
@@ -798,6 +871,11 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Edits the name of the given ingredient.
+   *
+   * @param ingredient The ingredient whose name is being edited.
+   */
   public void editIngredientInRecipeName(Ingredient ingredient) {
     System.out.println("Please enter the new name of the ingredient: \n");
     String name = ip.getStringInput();
@@ -810,6 +888,11 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Edits the amount of the given ingredient.
+   *
+   * @param ingredient The ingredient whose amount is being edited.
+   */
   public void editIngredientInRecipeAmount(Ingredient ingredient) {
     System.out.println("Please enter the new amount of the ingredient: \n");
     double amount = ip.getDoubleInput();
@@ -822,6 +905,11 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Edits the unit of the given ingredient.
+   *
+   * @param ingredient The ingredient whose unit is being edited.
+   */
   public void editIngredientInRecipeUnit(Ingredient ingredient) {
     String unit = chooseunit();
     try {
@@ -832,6 +920,15 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Displays all the ingredients in the stated recipe to the user
+   * and chooses the ingredient based on the name the user inputs.
+   * Returns the chosen ingredient.
+   *
+   * @param recipe The recipe containing the ingredients that the user
+   *               chooses from
+   * @return ingredient, the ingredient the user has chosen.
+   */
   public Ingredient chooseIngredientInRecipe(Recipe recipe) {
     boolean finished = false;
     Ingredient ingredient= null;
@@ -852,6 +949,11 @@ public class UserInterface {
     return ingredient;
   }
 
+  /**
+   * Edits the name of the given recipe.
+   *
+   * @param recipe The recipe whose name is being edited.
+   */
   public void editRecipeName(Recipe recipe) {
     System.out.println("Please enter the new name of the recipe: \n");
     String name = ip.getStringInput();
@@ -865,6 +967,11 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Edits the instruction of the given recipe.
+   *
+   * @param recipe The recipe whose instruction is being edited.
+   */
   public void editRecipeInstruction(Recipe recipe) {
     System.out.println("Please enter the new description of the recipe: \n");
     String description = ip.getStringInput();
@@ -878,12 +985,22 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Prints out all the recipes that can be used with the ingredients in the
+   * foodstorage.
+   */
   public void printUsableRecipes() {
     System.out.println("You are able to make these recipes with " +
             "the ingredients you have in storage:");
     printRecipes(rp.getPossibleRecipes(fd));
   }
 
+  /**
+   * Uses a recipe that the user chooses by writing the name
+   * of the recipe they want to use.
+   * If there is not enough ingredients in the foodstorage a
+   * message is printed to the user.
+   */
   public void useRecipe() {
     printUsableRecipes();
     System.out.println("Please write the name of the recipe you " +
@@ -905,6 +1022,10 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Gives the user the choice to either go through with adding a recipe
+   * to the recipebook or going back to the recipebook menu.
+   */
   public void confirmAddRecipe() {
     boolean finished = false;
 
@@ -934,6 +1055,10 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Creates a recipe based on the information given by the user and
+   * adds the recipe to the recipebook.
+   */
   public void addRecipe() {
     Recipe recipe = null;
     System.out.println("Please enter the name of the recipe: \n");
@@ -953,6 +1078,13 @@ public class UserInterface {
     addIngredientsToRecipe(recipe);
   }
 
+  /**
+   * A menu where the user chooses whether they want to add another
+   * ingredient to the stated recipe.
+   *
+   * @param recipe The recipe the user chooses whether to add another
+   *               ingredient to.
+   */
   public void addIngredientsToRecipe(Recipe recipe) {
     boolean finished = false;
 
@@ -982,6 +1114,12 @@ public class UserInterface {
     }
   }
 
+  /**
+   * Creates an ingredient based on the information given by the user and
+   * adds it to the stated recipe.
+   *
+   * @param recipe The recipe the ingredient is being added to.
+   */
   public void addRecipeIngredient(Recipe recipe) {
     String name;
     double amount;
