@@ -452,7 +452,7 @@ public class UserInterface {
     System.out.println("Please enter the new name of the ingredient");
     String name = ip.getStringInput();
     try {
-      ingredient.setIngredientName(name);
+      ingredient.setName(name);
     } catch (IllegalArgumentException e) {
       System.out.println("Name was invalid. Please try again");
     }
@@ -853,7 +853,7 @@ public class UserInterface {
 
         case 4:
           try {
-            recipe.deleteIngredient(ingredient.getIngredientName());
+            recipe.deleteIngredient(ingredient.getName());
           } catch (IllegalArgumentException e) {
             System.out.println("An unexpected error has occurred.");
           }
@@ -881,7 +881,7 @@ public class UserInterface {
     String name = ip.getStringInput();
 
     try {
-      ingredient.setIngredientName(name);
+      ingredient.setName(name);
     } catch (IllegalArgumentException e) {
       System.out.println("The name entered was invalid. Please try" +
               " again.");
@@ -1159,7 +1159,7 @@ public class UserInterface {
    * @param ingredient The ingredient for whom the details get printed
    */
   public void printIngredientDetails(Ingredient ingredient) {
-    System.out.println("Name: " + ingredient.getIngredientName());
+    System.out.println("Name: " + ingredient.getName());
     System.out.println(" Amount: " + ingredient.getAmount() + " " + ingredient.getUnit());
     System.out.println(" Price: " + ingredient.getPrice() + " per " + ingredient.getUnit());
     System.out.println(" Expiration date: " + ingredient.getExpiryDate().toString());
@@ -1173,7 +1173,7 @@ public class UserInterface {
    *                   whose details are being printed
    */
   public void printIngredientInRecipeDetails(Ingredient ingredient) {
-    System.out.println("Name: " + ingredient.getIngredientName() +
+    System.out.println("Name: " + ingredient.getName() +
             " Amount: " + ingredient.getAmount() + " " + ingredient.getUnit());
   }
 
@@ -1199,7 +1199,7 @@ public class UserInterface {
     int index = 1;
     while (it.hasNext()) {
       Ingredient i = it.next();
-      System.out.println(index + ". " + i.getIngredientName() + " " +
+      System.out.println(index + ". " + i.getName() + " " +
               i.getAmount() + " " + i.getUnit() + " " + i.getPrice() +
               " per " + i.getUnit() + " " + i.getExpiryDate().toString());
       index ++;

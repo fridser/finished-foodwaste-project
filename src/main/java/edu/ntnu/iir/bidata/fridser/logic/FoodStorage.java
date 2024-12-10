@@ -3,10 +3,7 @@ package edu.ntnu.iir.bidata.fridser.logic;
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
+import java.util.*;
 
 
 /**
@@ -29,13 +26,14 @@ import java.util.Iterator;
 
 public class FoodStorage {
   private ArrayList<Ingredient> ingredients;
-
+  private IteratorConverter iteratorConverter;
 
   /**
    * Creates an instance of edu.ntnu.iir.bidata.fridser.logic.FoodStorage object.
    */
   public FoodStorage() {
-    ingredients = new ArrayList<>();
+    this.ingredients = new ArrayList<>();
+    this.iteratorConverter = new IteratorConverter();
   }
 
   /**
@@ -60,6 +58,7 @@ public class FoodStorage {
       ingredients.add(ingredient);
     }
   }
+
 
   /**
    * Deletes the specified Ingredient from the list.
@@ -116,6 +115,7 @@ public class FoodStorage {
     return this.ingredients.get(index);
   }
 
+
   /**
    * Returns the first ingredient with  specified name. Meant to be used in Recipe
    *
@@ -135,7 +135,7 @@ public class FoodStorage {
       Ingredient ingredient = this.ingredients.get(index);
 
 
-      if (ingredient.getIngredientName().equalsIgnoreCase(name)) {
+      if (ingredient.getName().equalsIgnoreCase(name)) {
         ingredientNotFound = false;
         foundIngredient = ingredient;
       }
@@ -168,7 +168,7 @@ public class FoodStorage {
       Iterator<Ingredient> it = this.ingredients.iterator();
       while ((it.hasNext()) && (amount > 0)) {
         Ingredient ingredient1 = it.next();
-        if (ingredient1.getIngredientName().equalsIgnoreCase(ingredient.getIngredientName())) {
+        if (ingredient1.getName().equalsIgnoreCase(ingredient.getName())) {
           if (ingredient1.getAmount() <= amount) {
             amount -= ingredient1.getAmount();
             it.remove();
@@ -185,6 +185,8 @@ public class FoodStorage {
 
   }
 
+
+
   /**
    * Returns the amount of ingredients there are of one ingredient in FoodStorage,
    * using the name of the ingredient.
@@ -193,20 +195,22 @@ public class FoodStorage {
    * @return amount The amount of the ingredient
    */
   public double getAmountOfIngredients(String ingredientName) {
-    if ((ingredientName.isBlank()) || (ingredientName == null) || (ingredientName.isEmpty())) {
+    if ((ingredientName.isBlank()) || (ingredientName == null) ||
+            (ingredientName.isEmpty())) {
       throw new IllegalArgumentException("Name cannot be empty");
     }
     double amount = 0;
     Iterator<Ingredient> it = ingredients.iterator();
     while (it.hasNext()) {
       Ingredient ingredient = it.next();
-      if (ingredient.getIngredientName().equalsIgnoreCase(ingredientName)) {
+      if (ingredient.getName().equalsIgnoreCase(ingredientName)) {
         amount += ingredient.getAmount();
       }
     }
     return amount;
 
   }
+
 
   /**
    * Returns the list of ingredients as an Iterator.
@@ -229,7 +233,7 @@ public class FoodStorage {
    * Sorts the ingredients alphabetically.
    */
   public void sortAlphabetically() {
-    Collections.sort(ingredients, Comparator.comparing(Ingredient::getIngredientName));
+    Collections.sort(ingredients, Comparator.comparing(Ingredient::getName));
   }
 
   /**
@@ -270,11 +274,12 @@ public class FoodStorage {
   public boolean canUseIngredient(Ingredient ingredient) {
     boolean canUse = false;
     double amount = ingredient.getAmount();
-    if (getAmountOfIngredients(ingredient.getIngredientName()) >= amount) {
+    if (getAmountOfIngredients(ingredient.getName()) >= amount) {
       canUse = true;
     }
     return canUse;
   }
+
 
   /**
    * Checks if we have enough ingredients to make a recipe.
@@ -300,7 +305,7 @@ public class FoodStorage {
    */
   public boolean useRecipe(Iterator<Ingredient> it) {
     boolean success = false;
-    ArrayList<Ingredient> ar = turnIteratorIntoArrayList(it);
+    ArrayList<Ingredient> ar = iteratorConverter.turnIteratorIntoArrayList(it);
     if (canUseRecipe(ar)) {
       for (Ingredient i : ar) {
         useIngredient(i);
@@ -310,20 +315,6 @@ public class FoodStorage {
     return success;
   }
 
-  /**
-   * Converts an iterator of ingredients into an arraylist. Necessary for
-   * the useRecipe method to work.
-   *
-   * @param it The iterator getting converted into an arraylist.
-   * @return ArrayList, The converted arraylist.
-   */
-  public ArrayList<Ingredient> turnIteratorIntoArrayList(Iterator<Ingredient> it) {
-    ArrayList<Ingredient> al = new ArrayList<>();
-    while (it.hasNext()) {
-      al.add(it.next());
-    }
-    return al;
-  }
 
   /**
    * Returns the cost of all the expired ingredients in the foodstorage.
@@ -339,7 +330,6 @@ public class FoodStorage {
     }
     return cost;
   }
-
-
+  
 }
 

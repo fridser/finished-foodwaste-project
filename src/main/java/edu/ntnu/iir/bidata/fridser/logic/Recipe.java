@@ -26,6 +26,7 @@ public class Recipe {
   private String recipeName;
   private String instruction;
   private HashMap<String, Ingredient> ingredientList;
+  private IteratorConverter iteratorConverter;
 
   /**
    * Creates a new instance of the Recipe class.
@@ -37,6 +38,7 @@ public class Recipe {
     setRecipeName(recipeName);
     setInstruction(instruction);
     this.ingredientList = new HashMap<>();
+    this.iteratorConverter = new IteratorConverter();
   }
 
   /**
@@ -45,7 +47,7 @@ public class Recipe {
    * @param ingredient The ingredient being added.
    */
   public void addIngredient(Ingredient ingredient) {
-    this.ingredientList.put(ingredient.getIngredientName().toLowerCase(), ingredient);
+    this.ingredientList.put(ingredient.getName().toLowerCase(), ingredient);
   }
 
   /**
@@ -121,16 +123,9 @@ public class Recipe {
    * to make the recipe, false if there isn't.
    */
   public boolean canUseRecipe(FoodStorage foodStorage) {
-    boolean enoughIngredients = true;
-    Iterator<Ingredient> it = getIngredientIterator();
-    while ((it.hasNext()) && (enoughIngredients)) {
-      Ingredient ingredient = it.next();
-      if (ingredient.getAmount() >
-              foodStorage.getAmountOfIngredients(ingredient.getIngredientName())) {
-        enoughIngredients = false;
-      }
-    }
-    return enoughIngredients;
+    ArrayList<Ingredient> arr = iteratorConverter.turnIteratorIntoArrayList(getIngredientIterator());
+    foodStorage.canUseRecipe(arr);
+    return foodStorage.canUseRecipe(arr);
 
   }
 
@@ -145,13 +140,13 @@ public class Recipe {
     Iterator<Ingredient> it = getIngredientIterator();
     ArrayList<Ingredient> ingredients = new ArrayList<>();
     while (it.hasNext()) {
-      Ingredient ingredient = new Ingredient(it.next().getIngredientName(), it.next().getAmount(),
+      Ingredient ingredient = new Ingredient(it.next().getName(), it.next().getAmount(),
               it.next().getUnit());
       if (ingredient.getAmount() >
-              fd.getAmountOfIngredients(ingredient.getIngredientName())) {
+              fd.getAmountOfIngredients(ingredient.getName())) {
         ingredients.add(ingredient);
         ingredient.setAmount(ingredient.getAmount() -
-                fd.getAmountOfIngredients(ingredient.getIngredientName()));
+                fd.getAmountOfIngredients(ingredient.getName()));
       }
     }
     return ingredients.iterator();

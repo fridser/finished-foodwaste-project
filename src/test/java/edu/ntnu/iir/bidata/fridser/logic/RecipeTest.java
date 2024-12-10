@@ -345,7 +345,7 @@ public class RecipeTest {
 
   /**
    * Tries to set the recipe instruction to an empty string.
-   * Checks if an exception is caught..
+   * Checks if an exception is caught.
    * Written with copilot.
    */
   @Test

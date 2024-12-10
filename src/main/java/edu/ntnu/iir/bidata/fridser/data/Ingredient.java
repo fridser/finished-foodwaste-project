@@ -41,7 +41,7 @@ public class Ingredient {
    */
   public Ingredient(String name, double amount, String unit, double pricePerUnit,
                     int expiryYear, int expiryMonth, int expiryDay) {
-    setIngredientName(name);
+    setName(name);
     setAmount(amount);
     setUnit(unit);
     setPrice(pricePerUnit);
@@ -57,7 +57,7 @@ public class Ingredient {
    * @param unit   Either Grams, Liters or Stk
    */
   public Ingredient(String name, double amount, String unit) {
-    setIngredientName(name);
+    setName(name);
     setAmount(amount);
     setUnit(unit);
     setPrice(1);
@@ -69,7 +69,7 @@ public class Ingredient {
    *
    * @return name of the ingredient
    */
-  public String getIngredientName() {
+  public String getName() {
     return this.ingredientName;
   }
 
@@ -78,7 +78,7 @@ public class Ingredient {
    *
    * @param newName New name of ingredient
    */
-  public void setIngredientName(String newName) {
+  public void setName(String newName) {
     if ((newName.isBlank()) || (newName == null) || (newName.isEmpty())) {
       throw new IllegalArgumentException("Name cannot be empty");
     }
@@ -258,7 +258,7 @@ public class Ingredient {
    * @return boolean, True if the ingredients have the same name and expiry date
    */
   public boolean isSame(Ingredient ingredient) {
-    if ((ingredient.getIngredientName().equalsIgnoreCase(this.ingredientName)) &&
+    if ((ingredient.getName().equalsIgnoreCase(this.ingredientName)) &&
             (ingredient.getExpiryDate().equals(this.expiryDate)) && (ingredient.getUnit().equals(this.unit))) {
       return true;
     } else {

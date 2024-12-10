@@ -56,7 +56,7 @@ public class IngredientTest {
     Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
             12.9, 2000, 1, 1);
 
-    assertEquals("Apple", ingredient.getIngredientName());
+    assertEquals("Apple", ingredient.getName());
   }
 
 
@@ -105,7 +105,7 @@ public class IngredientTest {
   public void createInstanceWithValidParametersUsingRecipeConstructor() {
     Ingredient ingredient = new Ingredient("Apple", 2, "Stk");
 
-    assertEquals("Apple", ingredient.getIngredientName());
+    assertEquals("Apple", ingredient.getName());
     assertEquals(2, ingredient.getAmount());
     assertEquals("Stk", ingredient.getUnit());
   }
@@ -395,7 +395,7 @@ public class IngredientTest {
     try {
       Ingredient ingredient = new Ingredient("Apple", 2, "Stk",
               12.9, 2000, 1, 1);
-      ingredient.setIngredientName("");
+      ingredient.setName("");
       fail();
     } catch (IllegalArgumentException e) {
       assertTrue(true);
