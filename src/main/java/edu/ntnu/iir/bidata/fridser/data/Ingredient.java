@@ -115,6 +115,13 @@ public class Ingredient {
     this.amount = newAmount;
   }
 
+  /**
+   * Changes the expiration date of the object.
+   *
+   * @param expiryYear The year the object expires.
+   * @param expiryMonth The month the object expires.
+   * @param expiryDay The day the object expires.
+   */
   public void setExpiryDate(int expiryYear, int expiryMonth, int expiryDay) {
     if (expiryYear < 0) {
       throw new IllegalArgumentException("Year cannot be negative");
@@ -166,7 +173,7 @@ public class Ingredient {
    * @param newPrice The new price of the ingredient.
    */
   public void setPrice(double newPrice) {
-    if ((newPrice < 0) ) {
+    if (newPrice < 0) {
       throw new IllegalArgumentException("Price cannot be less than zero");
     }
     this.price = newPrice;
@@ -175,15 +182,15 @@ public class Ingredient {
   /**
    * Subtracts a specified amount from the amount.
    *
-   * @param subtractedAmount
+   * @param subtractedAmount The amount being subtracted.
    */
   public void reduceAmount(double subtractedAmount) {
     if ((subtractedAmount < 0)) {
       throw new IllegalArgumentException("Subtracted amount cannot be less than zero");
     }
     if ((subtractedAmount >= this.amount)) {
-      throw new IllegalArgumentException("Subtracted amount cannot be more than" +
-              "or equal to amount");
+      throw new IllegalArgumentException("Subtracted amount cannot be more than"
+              + "or equal to amount");
     }
     if ((subtractedAmount == 0)) {
       throw new IllegalArgumentException("Subtracted amount cannot be zero");
@@ -258,8 +265,9 @@ public class Ingredient {
    * @return boolean, True if the ingredients have the same name and expiry date
    */
   public boolean isSame(Ingredient ingredient) {
-    if ((ingredient.getName().equalsIgnoreCase(this.ingredientName)) &&
-            (ingredient.getExpiryDate().equals(this.expiryDate)) && (ingredient.getUnit().equals(this.unit))) {
+    if ((ingredient.getName().equalsIgnoreCase(this.ingredientName))
+            && (ingredient.getExpiryDate().equals(this.expiryDate))
+            && (ingredient.getUnit().equals(this.unit))) {
       return true;
     } else {
       return false;

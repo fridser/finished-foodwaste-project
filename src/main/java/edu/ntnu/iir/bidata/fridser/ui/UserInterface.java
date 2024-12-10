@@ -83,11 +83,11 @@ public class UserInterface {
 
         default:
           if (i < 3) {
-            System.out.println("Please enter a valid menu choice \n" +
-                    " ");
+            System.out.println("Please enter a valid menu choice \n"
+                    + " ");
           } else {
-            System.out.println("Please be better. \n" +
-                    " ");
+            System.out.println("Please be better. \n"
+                    + " ");
           }
           i++;
       }
@@ -98,10 +98,10 @@ public class UserInterface {
    * Adds two recipes with ingredients to the RecipeBook.
    */
   public void addExampleRecipes() {
-    Recipe tinePancake = new Recipe("Tine Pancake", "Melt butter. " +
-            "Mix flour and salt, then add half of the milk and stir until all the clumps " +
-            "have disappeared. Add the melted butter, then add the rest of the milk and the eggs. " +
-            "Let rest for 20 minutes, then fry them in a frying pan.");
+    Recipe tinePancake = new Recipe("Tine Pancake", "Melt butter. "
+            + "Mix flour and salt, then add half of the milk and stir until all the clumps "
+            + "have disappeared. Add the melted butter, then add the rest of the milk and "
+            + "the eggs. Let rest for 20 minutes, then fry them in a frying pan.");
     Ingredient butter = new Ingredient("Butter", 9, "ts");
     Ingredient flour = new Ingredient("Flour", 0.3, "Litres");
     Ingredient salt = new Ingredient("Salt", 0.5, "ts");
@@ -113,8 +113,8 @@ public class UserInterface {
     tinePancake.addIngredient(milk);
     tinePancake.addIngredient(eggs);
 
-    Recipe fruitSalad =new Recipe("Fruit Salad", "Cut all the fruits " +
-            "up and add them to a bowl");
+    Recipe fruitSalad = new Recipe("Fruit Salad", "Cut all the fruits "
+            + "up and add them to a bowl");
     Ingredient banana = new Ingredient("Banana", 2, "Stk");
     Ingredient grapes = new Ingredient("Grapes", 500, "Grams");
     Ingredient raspBerry = new Ingredient("Raspberry", 200, "Grams");
@@ -163,11 +163,11 @@ public class UserInterface {
 
         default:
           if (i < 3) {
-            System.out.println("Please enter a valid menu choice \n" +
-                    " ");
+            System.out.println("Please enter a valid menu choice \n"
+                    + " ");
           } else {
-            System.out.println("Please be better. \n" +
-                    " ");
+            System.out.println("Please be better. \n"
+                    + " ");
           }
           i++;
 
@@ -200,11 +200,11 @@ public class UserInterface {
 
         default:
           if (i < 3) {
-            System.out.println("Please enter a valid menu choice \n" +
-                    " ");
+            System.out.println("Please enter a valid menu choice \n"
+                    + " ");
           } else {
-            System.out.println("Please stop being an idiot. \n" +
-                    " ");
+            System.out.println("Please stop being an idiot. \n"
+                    + " ");
           }
           i++;
       }
@@ -234,9 +234,9 @@ public class UserInterface {
             fd.sortAlphabetically();
             printAllIngredients(fd.getIngredientList());
           } else {
-            System.out.println("You do not have any ingredients yet. \n" +
-                    "Get a job. \n" +
-                    " ");
+            System.out.println("You do not have any ingredients yet. \n"
+                    + "Get a job. \n"
+                    + " ");
           }
           break;
 
@@ -248,9 +248,9 @@ public class UserInterface {
           if (fd.getNumberOfIngredients() > 0) {
             editIngredient();
           } else {
-            System.out.println("You do not have any ingredients yet. \n" +
-                    "Get a job. \n" +
-                    " ");
+            System.out.println("You do not have any ingredients yet. \n"
+                    + "Get a job. \n"
+                    + " ");
           }
           break;
 
@@ -262,9 +262,9 @@ public class UserInterface {
             fd.sortAlphabetically();
             printAllIngredients(fd.getExpiredIngredients(currentDate));
           } else {
-            System.out.println("You do not have any ingredients yet. \n" +
-                    " Get a job. \n" +
-                    " ");
+            System.out.println("You do not have any ingredients yet. \n"
+                    + " Get a job. \n"
+                    + " ");
           }
           break;
 
@@ -278,11 +278,11 @@ public class UserInterface {
 
         default:
           if (i < 3) {
-            System.out.println("Please enter a valid menu choice \n" +
-                    " ");
+            System.out.println("Please enter a valid menu choice \n"
+                    + " ");
           } else {
-            System.out.println("Please be better. \n" +
-                    " ");
+            System.out.println("Please be better. \n"
+                    + " ");
           }
           i++;
       }
@@ -307,20 +307,24 @@ public class UserInterface {
       if ((i <= fd.getNumberOfIngredients()) && (i != 0)) {
         finished = true;
       } else {
-        System.out.println("Please enter one of the options " +
-                "on the screen. \n" +
-                " ");
+        System.out.println("Please enter one of the options "
+                + "on the screen. \n"
+                + " ");
       }
     }
     return i - 1;
   }
 
+  /**
+   * Executes the useIngredient function in the FoodStorage with the parametres
+   * the user has input.
+   */
   public void useIngredient() {
     System.out.println("Type in the name of the ingredient you want to use:");
     String name = ip.getStringInput();
     String unit = fd.findIngredientByName(name).getUnit();
-    System.out.println("How much of the " + name +
-            " do you want to use?");
+    System.out.println("How much of the " + name
+            + " do you want to use?");
     int amount = ip.getIntInput();
     try {
       Ingredient ingredientUsed = new Ingredient(name,
@@ -372,8 +376,8 @@ public class UserInterface {
           try {
             ingredient.setUnit(unit);
           } catch (IllegalArgumentException e) {
-            System.out.println("Invalid unit. Please try again. \n" +
-                    " ");
+            System.out.println("Invalid unit. Please try again. \n"
+                    + " ");
           }
           break;
 
@@ -391,8 +395,8 @@ public class UserInterface {
             System.out.println("Successfully deleted ingredient");
             finished = true;
           } else {
-            System.out.println("Something went wrong. Please be better \n" +
-                    " ");
+            System.out.println("Something went wrong. Please be better \n"
+                    + " ");
           }
           break;
 
@@ -402,11 +406,11 @@ public class UserInterface {
 
         default:
           if (index < 3) {
-            System.out.println("Please enter a valid menu choice \n" +
-                    " ");
+            System.out.println("Please enter a valid menu choice \n"
+                    + " ");
           } else {
-            System.out.println("Please be better. \n" +
-                    " ");
+            System.out.println("Please be better. \n"
+                    + " ");
           }
           index++;
 
@@ -428,11 +432,11 @@ public class UserInterface {
     } else if ((year >= 0) && (year < 70)) {
       year += 2000;
     }
-    System.out.println("Please enter the new month the ingredient expires as a whole " +
-            "number between 1 and 12: \n");
+    System.out.println("Please enter the new month the ingredient expires as a whole "
+            + "number between 1 and 12: \n");
     int month = ip.getIntInput();
-    System.out.println("Please enter the new day of the month the ingredient expires" +
-            "as a whole number: \n");
+    System.out.println("Please enter the new day of the month the ingredient expires"
+            + "as a whole number: \n");
     int day = ip.getIntInput();
     try {
       ingredient.setExpiryDate(year, month, day);
@@ -500,10 +504,10 @@ public class UserInterface {
     boolean finished = false;
 
     while (!finished) {
-      System.out.println("WARNING: You cannot exit the process of adding" +
-              "an ingredient before you have finished all the steps. Are you" +
-              "sure you want to proceed? \n" +
-              "1. Yes, 2. No \n");
+      System.out.println("WARNING: You cannot exit the process of adding"
+              + "an ingredient before you have finished all the steps. Are you"
+              + "sure you want to proceed? \n"
+              + "1. Yes, 2. No \n");
       ;
       int userinput = ip.getIntInput();
 
@@ -553,7 +557,8 @@ public class UserInterface {
     }
     String unit = chooseunit();
     while (true) {
-      System.out.println("Please enter the price of the ingredient per unit: \n");
+      System.out.println("Please enter the price of the ingredient per unit "
+              + "in NOK: \n");
       price = ip.getDoubleInput();
       if (price < 0) {
         System.out.println("Please suck a lemon.");
@@ -568,11 +573,11 @@ public class UserInterface {
     } else if ((year > 0) && (year < 70)) {
       year += 2000;
     }
-    System.out.println("Please enter the month the ingredient expires as a whole " +
-            "number between 1 and 12: \n");
+    System.out.println("Please enter the month the ingredient expires as a whole "
+            + "number between 1 and 12: \n");
     int month = ip.getIntInput();
-    System.out.println("Please enter the day of the month the ingredient expires" +
-            "as a whole number: \n");
+    System.out.println("Please enter the day of the month the ingredient expires"
+            + "as a whole number: \n");
     int day = ip.getIntInput();
 
     try {
@@ -596,8 +601,8 @@ public class UserInterface {
     String unit = "";
 
     while (!finished) {
-      System.out.println("Please choose a unit: \n" +
-              "1. Grams, 2. Litres, 3. Stk, 4. ts \n");
+      System.out.println("Please choose a unit: \n"
+              + "1. Grams, 2. Litres, 3. Stk, 4. ts \n");
       ;
       int userinput = ip.getIntInput();
 
@@ -636,10 +641,10 @@ public class UserInterface {
    */
   public void deleteExpiredIngredients() {
     System.out.println("Deleting expired ingredients ...");
-    double cost = fd.calculateCostOfExpiredIngredients(currentDate);
+    double cost = fd.calculateCost(fd.getExpiredIngredients(currentDate));
     fd.removeExpiredIngredients(currentDate);
-    System.out.println("Expired ingredients deleted! \n" +
-            "Money wasted: " + cost);
+    System.out.println("Expired ingredients deleted! \n"
+            + "Money wasted: " + cost + "NOK");
   }
 
   /**
@@ -653,18 +658,18 @@ public class UserInterface {
     } else if ((year > 0) && (year < 70)) {
       year += 2000;
     }
-    System.out.println("Please enter the month you want as a number" +
-            "between 1 and 12: \n");
+    System.out.println("Please enter the month you want as a number"
+            + "between 1 and 12: \n");
     int month = ip.getIntInput();
-    System.out.println("Please enter the day of the month you want" +
-            "a a whole number: \n");
+    System.out.println("Please enter the day of the month you want"
+            + "a a whole number: \n");
     int day = ip.getIntInput();
 
     try {
       currentDate = LocalDate.of(year, month, day);
     } catch (DateTimeException e) {
-      System.out.println("Date entered is not valid. Press 1 to try" +
-              "again.");
+      System.out.println("Date entered is not valid. Press 1 to try"
+              + "again.");
     }
   }
 
@@ -687,8 +692,8 @@ public class UserInterface {
           if (rp.getAmountOfRecipes() > 0) {
             printRecipes(rp.getRecipeIterator());
           } else {
-            System.out.println("You do not have any recipes yet. \n" +
-                    " ");
+            System.out.println("You do not have any recipes yet. \n"
+                    + " ");
           }
           break;
 
@@ -700,8 +705,8 @@ public class UserInterface {
           if (rp.getAmountOfRecipes() > 0) {
             editRecipe();
           } else {
-            System.out.println("You do not have any recipes yet. \n" +
-                    " ");
+            System.out.println("You do not have any recipes yet. \n"
+                    + " ");
           }
           break;
 
@@ -715,8 +720,8 @@ public class UserInterface {
 
         case 6:
           if (fd.getNumberOfIngredients() > 0) {
-            System.out.println("Based on the expiration date of the ingredients" +
-                    "you have in storage we will recommend you make:");
+            System.out.println("Based on the expiration date of the ingredients"
+                    + "you have in storage we will recommend you make:");
             printRecipeDetails(rp.recommendRecipe(currentDate, fd));
           }
           break;
@@ -745,15 +750,15 @@ public class UserInterface {
 
     while (!finished) {
       printRecipes(rp.getRecipeIterator());
-      System.out.println("Please write the name of the recipe you " +
-              "want to use: \n");
+      System.out.println("Please write the name of the recipe you "
+              + "want to use: \n");
       String userinput = ip.getStringInput();
       if (rp.containsKey(userinput)) {
         recipe = rp.getRecipe(userinput);
         finished = true;
       } else {
-        System.out.println("Please write one of the recipes " +
-                "on the screen.");
+        System.out.println("Please write one of the recipes "
+                + "on the screen.");
       }
     }
     return recipe;
@@ -883,8 +888,8 @@ public class UserInterface {
     try {
       ingredient.setName(name);
     } catch (IllegalArgumentException e) {
-      System.out.println("The name entered was invalid. Please try" +
-              " again.");
+      System.out.println("The name entered was invalid. Please try"
+              + " again.");
     }
   }
 
@@ -900,8 +905,8 @@ public class UserInterface {
     try {
       ingredient.setAmount(amount);
     } catch (IllegalArgumentException e) {
-      System.out.println("The amount entered was invalid. Please try" +
-              " again.");
+      System.out.println("The amount entered was invalid. Please try"
+              + " again.");
     }
   }
 
@@ -915,8 +920,8 @@ public class UserInterface {
     try {
       ingredient.setUnit(unit);
     } catch (IllegalArgumentException e) {
-      System.out.println("An unexpected error has occurred. Please try" +
-              "again.");
+      System.out.println("An unexpected error has occurred. Please try"
+              + "again.");
     }
   }
 
@@ -931,19 +936,19 @@ public class UserInterface {
    */
   public Ingredient chooseIngredientInRecipe(Recipe recipe) {
     boolean finished = false;
-    Ingredient ingredient= null;
+    Ingredient ingredient = null;
 
     while (!finished) {
       printAllIngredientsInRecipe(recipe.getIngredientIterator());
-      System.out.println("Please write the name of the ingredient you " +
-              "want to edit: \n");
+      System.out.println("Please write the name of the ingredient you "
+              + "want to edit: \n");
       String userinput = ip.getStringInput();
       if (recipe.containsKey(userinput)) {
         ingredient = recipe.getIngredient(userinput);
         finished = true;
       } else {
-        System.out.println("Please write one of the ingredients " +
-                "on the screen.");
+        System.out.println("Please write one of the ingredients "
+                + "on the screen.");
       }
     }
     return ingredient;
@@ -962,8 +967,8 @@ public class UserInterface {
       recipe.setRecipeName(name);
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
-      System.out.println("Please try" +
-              " again.");
+      System.out.println("Please try"
+              + " again.");
     }
   }
 
@@ -980,8 +985,8 @@ public class UserInterface {
       recipe.setInstruction(description);
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
-      System.out.println("Please try" +
-              " again.");
+      System.out.println("Please try"
+              + " again.");
     }
   }
 
@@ -990,8 +995,8 @@ public class UserInterface {
    * foodstorage.
    */
   public void printUsableRecipes() {
-    System.out.println("You are able to make these recipes with " +
-            "the ingredients you have in storage:");
+    System.out.println("You are able to make these recipes with "
+            + "the ingredients you have in storage:");
     printRecipes(rp.getPossibleRecipes(fd));
   }
 
@@ -1003,17 +1008,17 @@ public class UserInterface {
    */
   public void useRecipe() {
     printUsableRecipes();
-    System.out.println("Please write the name of the recipe you " +
-            "want to use: \n");
+    System.out.println("Please write the name of the recipe you "
+            + "want to use: \n");
     String name = ip.getStringInput();
     try {
       boolean success = fd.useRecipe(rp.getRecipe(name).getIngredientIterator());
       if (success) {
         System.out.println("Recipe was used successfully!");
       } else {
-        System.out.println("You do not have enough ingredients in your" +
-                " FoodStorage to make this recipe. \n" +
-                " These are the ingredients you lack: ");
+        System.out.println("You do not have enough ingredients in your"
+                + " FoodStorage to make this recipe. \n"
+                + " These are the ingredients you lack: ");
         printAllIngredientsInRecipe(rp.getRecipe(name).getLackingIngredients(fd));
       }
     } catch (IllegalArgumentException e) {
@@ -1030,10 +1035,10 @@ public class UserInterface {
     boolean finished = false;
 
     while (!finished) {
-      System.out.println("WARNING: You cannot exit the process of adding" +
-              " a recipe before you have finished all the steps. Are you" +
-              " sure you want to proceed? \n" +
-              "1. Yes, 2. No \n");
+      System.out.println("WARNING: You cannot exit the process of adding"
+              + " a recipe before you have finished all the steps. Are you"
+              + " sure you want to proceed? \n"
+              + "1. Yes, 2. No \n");
       ;
       int userinput = ip.getIntInput();
 
@@ -1063,8 +1068,8 @@ public class UserInterface {
     Recipe recipe = null;
     System.out.println("Please enter the name of the recipe: \n");
     String name = ip.getStringInput();
-    System.out.println("Please enter the instruction on how to make" +
-            " the recipe: \n");
+    System.out.println("Please enter the instruction on how to make"
+            + " the recipe: \n");
     String instruction = ip.getStringInput();
 
 
@@ -1072,8 +1077,8 @@ public class UserInterface {
       recipe = new Recipe(name, instruction);
       rp.addRecipe(recipe);
     } catch (IllegalArgumentException e) {
-      System.out.println("One of the options entered was invalid. Please try" +
-              " again.");
+      System.out.println("One of the options entered was invalid. Please try"
+              + " again.");
     }
     addIngredientsToRecipe(recipe);
   }
@@ -1091,9 +1096,9 @@ public class UserInterface {
     while (!finished) {
       System.out.println("Current recipe details: ");
       printRecipeDetails(recipe);
-      System.out.println("Do you want to add another ingredient to " +
-              "the recipe? \n" +
-              "1. Yes, 2. No \n");
+      System.out.println("Do you want to add another ingredient to "
+              + "the recipe? \n"
+              + "1. Yes, 2. No \n");
       ;
       int userinput = ip.getIntInput();
 
@@ -1154,7 +1159,7 @@ public class UserInterface {
 
 
   /**
-   * Prints the information about the ingredient
+   * Prints the information about the ingredient.
    *
    * @param ingredient The ingredient for whom the details get printed
    */
@@ -1173,8 +1178,8 @@ public class UserInterface {
    *                   whose details are being printed
    */
   public void printIngredientInRecipeDetails(Ingredient ingredient) {
-    System.out.println("Name: " + ingredient.getName() +
-            " Amount: " + ingredient.getAmount() + " " + ingredient.getUnit());
+    System.out.println("Name: " + ingredient.getName()
+            + " Amount: " + ingredient.getAmount() + " " + ingredient.getUnit());
   }
 
   /**
@@ -1186,6 +1191,8 @@ public class UserInterface {
     while (it.hasNext()) {
       printIngredientDetails(it.next());
     }
+    System.out.println("Total value of ingredients: "
+            + fd.calculateCost(fd.getIngredientList()) + "NOK");
     System.out.println(" ");
   }
 
@@ -1199,10 +1206,10 @@ public class UserInterface {
     int index = 1;
     while (it.hasNext()) {
       Ingredient i = it.next();
-      System.out.println(index + ". " + i.getName() + " " +
-              i.getAmount() + " " + i.getUnit() + " " + i.getPrice() +
-              " per " + i.getUnit() + " " + i.getExpiryDate().toString());
-      index ++;
+      System.out.println(index + ". " + i.getName() + " "
+              + i.getAmount() + " " + i.getUnit() + " " + i.getPrice()
+              + " per " + i.getUnit() + " " + i.getExpiryDate().toString());
+      index++;
     }
     System.out.println(" ");
   }
@@ -1248,31 +1255,31 @@ public class UserInterface {
    * Prints out the start menu.
    */
   public void showStartMenu() {
-    System.out.println("-------------START MENU----------\n" +
-            "Hello User!\n");
+    System.out.println("-------------START MENU----------\n"
+            + "Hello User!\n");
     System.out.println("Welcome to the MealPlanner app.\n");
-    System.out.println("1. Info, 2. Go to FoodStorage, 3. Go to RecipeBook" +
-            " 4. Settings, 5. Quit \n" +
-            "------------------------------");
+    System.out.println("1. Info, 2. Go to FoodStorage, 3. Go to RecipeBook"
+            + " 4. Settings, 5. Quit \n"
+            + "------------------------------");
   }
 
   /**
    * Prints out information to the user about the program.
    */
   public void showInfo() {
-    System.out.println("We are an app designed to help you manage \n " +
-            "your groceries. There are many functions for you to explore.\n " +
-            "Our goal with this app is to reduce food waste.");
+    System.out.println("We are an app designed to help you manage \n "
+            + "your groceries. There are many functions for you to explore.\n "
+            + "Our goal with this app is to reduce food waste.");
     System.out.println("FoodStorage");
-    System.out.println("Add your groceries to keep track of them. \n " +
-            "Check if a grocery is about to go out of date, or if it’s \n" +
-            "already expired. ");
+    System.out.println("Add your groceries to keep track of them. \n "
+            + "Check if a grocery is about to go out of date, or if it’s \n"
+            + "already expired. ");
     System.out.println("RecipeBook");
-    System.out.println("In addition to the recipes already pre-installed \n" +
-            "you can add your favourite recipes to the RecipeBook. \n" +
-            "This feature will tell which recipes you can make based on \n" +
-            "what groceries you have, and can even recommend to you a \n" +
-            "recipe based on which groceries are about to expire. ");
+    System.out.println("In addition to the recipes already pre-installed \n"
+            + "you can add your favourite recipes to the RecipeBook. \n"
+            + "This feature will tell which recipes you can make based on \n"
+            + "what groceries you have, and can even recommend to you a \n"
+            + "recipe based on which groceries are about to expire. ");
     System.out.println("1. Back \n");
 
   }
@@ -1297,17 +1304,17 @@ public class UserInterface {
    * Prints out the FoodStorgage menu.
    */
   public void showFoodStorage() {
-    System.out.println("--------FOODSTORAGE MENU---------\n" +
-            "Welcome to the FoodStorage!\n");
-    System.out.println("1. Print ingredients \n" +
-            "2. Add ingredient \n" +
-            "3. Edit ingredient \n" +
-            "4. Use ingredient \n" +
-            "5. Get expired ingredients \n" +
-            "6. Delete expired ingredients \n" +
-            "7. Back\n" +
-            "------------------------------ \n" +
-            " ");
+    System.out.println("--------FOODSTORAGE MENU---------\n"
+            + "Welcome to the FoodStorage!\n");
+    System.out.println("1. Print ingredients \n"
+            + "2. Add ingredient \n"
+            + "3. Edit ingredient \n"
+            + "4. Use ingredient \n"
+            + "5. Get expired ingredients \n"
+            + "6. Delete expired ingredients \n"
+            + "7. Back\n"
+            + "------------------------------ \n"
+            + " ");
   }
 
 
@@ -1315,17 +1322,17 @@ public class UserInterface {
    * Prints out the RecipeBook menu.
    */
   public void showRecipeBook() {
-    System.out.println("-------RECIPEBOOK MENU----------\n" +
-            "Welcome to the RecipeBook! \n" +
-            "1. Print recipes \n" +
-            "2. Add recipe \n" +
-            "3. Edit recipe \n" +
-            "4. Use recipe \n" +
-            "5. Get possible recipes \n" +
-            "6. Recommend recipe \n" +
-            "7. Back \n" +
-            " ------------------------\n" +
-            " ");
+    System.out.println("-------RECIPEBOOK MENU----------\n"
+            + "Welcome to the RecipeBook! \n"
+            + "1. Print recipes \n"
+            + "2. Add recipe \n"
+            + "3. Edit recipe \n"
+            + "4. Use recipe \n"
+            + "5. Get possible recipes \n"
+            + "6. Recommend recipe \n"
+            + "7. Back \n"
+            + " ------------------------\n"
+            + " ");
   }
 
   /**
@@ -1335,55 +1342,55 @@ public class UserInterface {
   public void showChooseIngredient() {
     System.out.println("Please choose the ingredient you want to edit:");
     printIngredientsForEdit(fd.getIngredientList());
-    System.out.println(" \n" +
-            " ");
+    System.out.println(" \n"
+            + " ");
   }
 
   /**
    * Prints out information for editing an ingredient in the foodstorage.
    */
   public void showEditIngredient() {
-    System.out.println("How do you want to edit the ingredient?\n" +
-            "1. Edit name \n" +
-            "2. Edit amount \n" +
-            "3. Edit unit \n" +
-            "4. Edit price \n" +
-            "5. Edit expiration date \n" +
-            "6. Delete ingredient \n" +
-            "7. DONE \n" +
-            " \n" +
-            "");
+    System.out.println("How do you want to edit the ingredient?\n"
+            + "1. Edit name \n"
+            + "2. Edit amount \n"
+            + "3. Edit unit \n"
+            + "4. Edit price \n"
+            + "5. Edit expiration date \n"
+            + "6. Delete ingredient \n"
+            + "7. DONE \n"
+            + " \n"
+            + "");
   }
 
   /**
    * Prints out information bout editing a recipe.
    */
   public void showEditRecipe() {
-    System.out.println("How do you want to edit the recipe? \n" +
-            "1. Edit name \n" +
-            "2. Edit instruction \n" +
-            "3. Add ingredient \n" +
-            "4. Edit ingredient \n" +
-            "5. Delete Recipe \n" +
-            "6. DONE \n" +
-            " \n" +
-            " \n" +
-            "");
+    System.out.println("How do you want to edit the recipe? \n"
+            + "1. Edit name \n"
+            + "2. Edit instruction \n"
+            + "3. Add ingredient \n"
+            + "4. Edit ingredient \n"
+            + "5. Delete Recipe \n"
+            + "6. DONE \n"
+            + " \n"
+            + " \n"
+            + "");
   }
 
   /**
    * Prints out the menu for editing ingredients in a recipe.
    */
   public void showEditIngredientInRecipe() {
-    System.out.println("How do you want to edit the ingredient? \n" +
-            "1. Edit Name \n" +
-            "2. Edit amount \n" +
-            "3. Edit unit \n" +
-            "4. Delete ingredient \n" +
-            "5. DONE \n" +
-            "  \n" +
-            " \n" +
-            "");
+    System.out.println("How do you want to edit the ingredient? \n"
+            + "1. Edit Name \n"
+            + "2. Edit amount \n"
+            + "3. Edit unit \n"
+            + "4. Delete ingredient \n"
+            + "5. DONE \n"
+            + "  \n"
+            + " \n"
+            + "");
   }
 
 

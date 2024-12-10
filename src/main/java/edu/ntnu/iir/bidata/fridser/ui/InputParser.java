@@ -28,12 +28,12 @@ public class InputParser {
     int choice = -1;
     boolean finished = false;
     while (!finished) {
-      if (input.hasNextInt()){
+      if (input.hasNextInt()) {
         choice = input.nextInt();
         finished = true;
       } else {
-        System.out.println("Please enter a positive whole number. \n" +
-                "idiot");
+        System.out.println("Please enter a positive whole number. \n"
+                + "idiot");
       }
       input.nextLine();
     }
@@ -51,7 +51,7 @@ public class InputParser {
     double choice = -1;
     boolean finished = false;
     while (!finished) {
-      if (input.hasNextDouble()){
+      if (input.hasNextDouble()) {
         choice = input.nextDouble();
         finished = true;
       } else {
@@ -72,12 +72,12 @@ public class InputParser {
     String choice = null;
     boolean finished = false;
     while (!finished) {
-      if (input.hasNextLine()){
+      if (input.hasNextLine()) {
         choice = input.nextLine();
         finished = true;
       } else {
-        System.out.println("An unexpected error has occurred. Please be" +
-                " better.");
+        System.out.println("An unexpected error has occurred. Please be"
+                + " better.");
       }
     }
     return choice;

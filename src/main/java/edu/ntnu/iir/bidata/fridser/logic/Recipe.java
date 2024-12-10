@@ -59,10 +59,10 @@ public class Recipe {
    * name.
    */
   public Ingredient getIngredient(String ingredientName) {
-    if ((ingredientName.isBlank()) || (ingredientName == null) ||
-            (ingredientName.isEmpty())) {
-      throw new IllegalArgumentException("Cannot search for an" +
-              "empty name");
+    if ((ingredientName.isBlank()) || (ingredientName == null)
+            || (ingredientName.isEmpty())) {
+      throw new IllegalArgumentException("Cannot search for an"
+              + "empty name");
     }
     if (!ingredientList.containsKey(ingredientName.toLowerCase())) {
       throw new IllegalArgumentException("Ingredient name does not exist.");
@@ -92,13 +92,13 @@ public class Recipe {
   }
 
   /**
-   * Changes the instruction to the new instruction
+   * Changes the instruction to the new instruction.
    *
-   * @param newInstruction The new instruction of the recipe
+   * @param newInstruction The new instruction of the recipe.
    */
   public void setInstruction(String newInstruction) {
-    if ((newInstruction.isBlank()) || (newInstruction == null) ||
-            (newInstruction.isEmpty())) {
+    if ((newInstruction.isBlank()) || (newInstruction == null)
+            || (newInstruction.isEmpty())) {
       throw new IllegalArgumentException("Instruction cannot be empty");
     }
     this.instruction = newInstruction;
@@ -123,7 +123,8 @@ public class Recipe {
    * to make the recipe, false if there isn't.
    */
   public boolean canUseRecipe(FoodStorage foodStorage) {
-    ArrayList<Ingredient> arr = iteratorConverter.turnIteratorIntoArrayList(getIngredientIterator());
+    ArrayList<Ingredient> arr = iteratorConverter
+            .turnIteratorIntoArrayList(getIngredientIterator());
     foodStorage.canUseRecipe(arr);
     return foodStorage.canUseRecipe(arr);
 
@@ -142,11 +143,11 @@ public class Recipe {
     while (it.hasNext()) {
       Ingredient ingredient = new Ingredient(it.next().getName(), it.next().getAmount(),
               it.next().getUnit());
-      if (ingredient.getAmount() >
-              fd.getAmountOfIngredients(ingredient.getName())) {
+      if (ingredient.getAmount()
+              > fd.getAmountOfIngredients(ingredient.getName())) {
         ingredients.add(ingredient);
-        ingredient.setAmount(ingredient.getAmount() -
-                fd.getAmountOfIngredients(ingredient.getName()));
+        ingredient.setAmount(ingredient.getAmount()
+                - fd.getAmountOfIngredients(ingredient.getName()));
       }
     }
     return ingredients.iterator();
@@ -154,7 +155,7 @@ public class Recipe {
 
   /**
    * Returns the list of ingredients needed to make the recipe as
-   * an iterator
+   * an iterator.
    *
    * @return it, The iterator of the list of ingredients.
    */
@@ -230,13 +231,14 @@ public class Recipe {
   }
 
   /**
-   * Deletes the recipe with the stated name
+   * Deletes the recipe with the stated name.
+   *
    * @param ingredientName The name of the ingredient being deleted.
    */
   public void deleteIngredient(String ingredientName) {
     if (!containsKey(ingredientName)) {
-      throw new IllegalArgumentException("Name entered doesn't correspond to" +
-              "any ingredients in the recipe");
+      throw new IllegalArgumentException("Name entered doesn't correspond to"
+              + "any ingredients in the recipe");
     }
     this.ingredientList.remove(ingredientName.toLowerCase());
   }

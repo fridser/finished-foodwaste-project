@@ -356,7 +356,9 @@ public class FoodStorageTest {
     rp.addIngredient(ingredient5);
     rp.addIngredient(ingredient6);
 
-    assertTrue(fd.canUseRecipe(fd.turnIteratorIntoArrayList(rp.getIngredientIterator())));
+    IteratorConverter ic = new IteratorConverter();
+
+    assertTrue(fd.canUseRecipe(ic.turnIteratorIntoArrayList(rp.getIngredientIterator())));
 
   }
 
@@ -391,7 +393,9 @@ public class FoodStorageTest {
     rp.addIngredient(ingredient5);
     rp.addIngredient(ingredient6);
 
-    assertFalse(fd.canUseRecipe(fd.turnIteratorIntoArrayList(rp.getIngredientIterator())));
+    IteratorConverter ic = new IteratorConverter();
+
+    assertFalse(fd.canUseRecipe(ic.turnIteratorIntoArrayList(rp.getIngredientIterator())));
   }
 
   /**

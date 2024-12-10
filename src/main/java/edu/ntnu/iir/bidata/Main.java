@@ -8,13 +8,17 @@ import edu.ntnu.iir.bidata.fridser.ui.UserInterface;
  */
 public class Main {
 
-    static UserInterface ui;
+  static UserInterface ui;
 
-    public static void main(String[] args) {
-        ui = new UserInterface();
-        ui.start();
+  /**
+   * Main method to run the program.
+   *
+   * @param args Standard main method syntax.
+   */
+  public static void main(String[] args) {
+    ui = new UserInterface();
+    ui.start();
 
 
-
-    }
+  }
 }

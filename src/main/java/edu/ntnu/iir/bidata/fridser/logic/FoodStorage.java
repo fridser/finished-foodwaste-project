@@ -3,7 +3,10 @@ package edu.ntnu.iir.bidata.fridser.logic;
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 
 
 /**
@@ -195,8 +198,8 @@ public class FoodStorage {
    * @return amount The amount of the ingredient
    */
   public double getAmountOfIngredients(String ingredientName) {
-    if ((ingredientName.isBlank()) || (ingredientName == null) ||
-            (ingredientName.isEmpty())) {
+    if ((ingredientName.isBlank()) || (ingredientName == null)
+            || (ingredientName.isEmpty())) {
       throw new IllegalArgumentException("Name cannot be empty");
     }
     double amount = 0;
@@ -315,15 +318,14 @@ public class FoodStorage {
     return success;
   }
 
-
   /**
-   * Returns the cost of all the expired ingredients in the foodstorage.
+   * Calculates the cost of the given ingredients.
    *
-   * @param currentDate The date the ingredients are compared to.
-   * @return cost, the cost of all the expired ingredients.
+   * @param it The iterator containing the ingredients whose cost
+   *           is calculated
+   * @return double, the cost of the ingredients.
    */
-  public double calculateCostOfExpiredIngredients(LocalDate currentDate) {
-    Iterator<Ingredient> it = getExpiredIngredients(currentDate);
+  public double calculateCost(Iterator<Ingredient> it) {
     double cost = 0;
     while (it.hasNext()) {
       cost += it.next().getPrice() * it.next().getAmount();

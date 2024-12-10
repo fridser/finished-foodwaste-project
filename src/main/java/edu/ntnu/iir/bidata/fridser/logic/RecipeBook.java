@@ -36,8 +36,8 @@ public class RecipeBook {
    */
   public void addRecipe(Recipe recipe) {
     if (recipeList.containsKey(recipe.getRecipeName())) {
-      throw new IllegalArgumentException("Cannot put two recipes with same" +
-              "name in the list.");
+      throw new IllegalArgumentException("Cannot put two recipes with same"
+              + "name in the list.");
     }
     this.recipeList.put(recipe.getRecipeName().toLowerCase(), recipe);
   }
@@ -50,12 +50,12 @@ public class RecipeBook {
    */
   public Recipe getRecipe(String recipeName) {
     if ((recipeName.isBlank()) || (recipeName == null)) {
-      throw new IllegalArgumentException("The name of the recipe " +
-              "cannot be empty");
+      throw new IllegalArgumentException("The name of the recipe "
+              + "cannot be empty");
     }
     if (!containsKey(recipeName.toLowerCase())) {
-      throw new IllegalArgumentException("This recipe does not exist. Make sure" +
-              " you have entered the name of the recipe correctly");
+      throw new IllegalArgumentException("This recipe does not exist. Make sure"
+              + " you have entered the name of the recipe correctly");
     }
     return this.recipeList.get(recipeName.toLowerCase());
   }
@@ -110,19 +110,19 @@ public class RecipeBook {
   public Recipe recommendRecipe(LocalDate currentDate, FoodStorage fd) {
     Recipe bestRecipe = null;
     Iterator<Recipe> it = getPossibleRecipes(fd);
-    if(it.hasNext()) {
+    if (it.hasNext()) {
       while (it.hasNext()) {
         Recipe currentRecipe = it.next();
         if (bestRecipe == null) {
           bestRecipe = currentRecipe;
         }
-        if (currentRecipe.getDireValue(currentDate, fd) >
-                bestRecipe.getDireValue(currentDate, fd)) {
+        if (currentRecipe.getDireValue(currentDate, fd)
+                > bestRecipe.getDireValue(currentDate, fd)) {
           bestRecipe = currentRecipe;
-        } else if (currentRecipe.getDireValue(currentDate, fd) ==
-                bestRecipe.getDireValue(currentDate, fd)) {
-          if (currentRecipe.getUrgentValue(currentDate, fd) >
-                  bestRecipe.getUrgentValue(currentDate, fd)) {
+        } else if (currentRecipe.getDireValue(currentDate, fd)
+                == bestRecipe.getDireValue(currentDate, fd)) {
+          if (currentRecipe.getUrgentValue(currentDate, fd)
+                  > bestRecipe.getUrgentValue(currentDate, fd)) {
             bestRecipe = currentRecipe;
           }
         }
