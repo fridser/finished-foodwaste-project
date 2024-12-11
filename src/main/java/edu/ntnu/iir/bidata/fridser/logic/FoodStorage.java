@@ -317,21 +317,6 @@ public class FoodStorage {
     }
     return success;
   }
-
-  /**
-   * Calculates the cost of the given ingredients.
-   *
-   * @param it The iterator containing the ingredients whose cost
-   *           is calculated
-   * @return double, the cost of the ingredients.
-   */
-  public double calculateCost(Iterator<Ingredient> it) {
-    double cost = 0;
-    while (it.hasNext()) {
-      cost += it.next().getPrice() * it.next().getAmount();
-    }
-    return cost;
-  }
   
 }
 

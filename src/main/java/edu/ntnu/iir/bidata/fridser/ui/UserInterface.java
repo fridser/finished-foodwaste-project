@@ -1,6 +1,7 @@
 package edu.ntnu.iir.bidata.fridser.ui;
 
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
+import edu.ntnu.iir.bidata.fridser.logic.Calculator;
 import edu.ntnu.iir.bidata.fridser.logic.FoodStorage;
 import edu.ntnu.iir.bidata.fridser.logic.Recipe;
 import edu.ntnu.iir.bidata.fridser.logic.RecipeBook;
@@ -21,6 +22,7 @@ public class UserInterface {
   private FoodStorage fd;
   private RecipeBook rp;
   private InputParser ip;
+  private Calculator calc;
 
   private static final int INFO = 1;
   private static final int FOODSTORAGE = 2;
@@ -138,6 +140,7 @@ public class UserInterface {
     fd = new FoodStorage();
     rp = new RecipeBook();
     ip = new InputParser();
+    calc = new Calculator();
 
   }
 
@@ -641,7 +644,7 @@ public class UserInterface {
    */
   public void deleteExpiredIngredients() {
     System.out.println("Deleting expired ingredients ...");
-    double cost = fd.calculateCost(fd.getExpiredIngredients(currentDate));
+    double cost = calc.calculateCost(fd.getExpiredIngredients(currentDate));
     fd.removeExpiredIngredients(currentDate);
     System.out.println("Expired ingredients deleted! \n"
             + "Money wasted: " + cost + "NOK");
@@ -1167,6 +1170,7 @@ public class UserInterface {
     System.out.println("Name: " + ingredient.getName());
     System.out.println(" Amount: " + ingredient.getAmount() + " " + ingredient.getUnit());
     System.out.println(" Price: " + ingredient.getPrice() + " per " + ingredient.getUnit());
+    System.out.println("Total price: " + calc.calculateTotalPrice(ingredient));
     System.out.println(" Expiration date: " + ingredient.getExpiryDate().toString());
     System.out.println(" ");
   }
@@ -1192,7 +1196,7 @@ public class UserInterface {
       printIngredientDetails(it.next());
     }
     System.out.println("Total value of ingredients: "
-            + fd.calculateCost(fd.getIngredientList()) + "NOK");
+            + calc.calculateCost(fd.getIngredientList()) + "NOK");
     System.out.println(" ");
   }
 
