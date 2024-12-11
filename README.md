@@ -10,7 +10,9 @@ KANDIDATNUMMER = 10023
 ## Project description
 
 [//]: # (TODO: Write a short description of your project/product here.)
-A digital representation of a fridge.
+This app is a digital representation of a fridge, where you can add or remove
+food from the fridge. It also includes a digital representation of a recipe book,
+where you can add your favourite 
 ## Project structure
 
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
@@ -33,9 +35,6 @@ option. To choose one the user simply enters the
 [//]: # (TODO: Describe how to run the tests here.)
 
 ## References
-
-[//]: # (TODO: Include references here, if any. For example, if you have used code from the course book, include a reference to the chapter.
-Or if you have used code from a website or other source, include a link to the source.)
 Most code used is taken from the AdressBook project shown in class.
 
 Method removeAllIngredientsWithName() is from Objects First with Java

@@ -233,14 +233,8 @@ public class UserInterface {
       switch (userinput) {
 
         case PRINT:
-          if (fd.getNumberOfIngredients() > 0) {
-            fd.sortAlphabetically();
-            printAllIngredients(fd.getIngredientList());
-          } else {
-            System.out.println("You do not have any ingredients yet. \n"
-                    + "Get a job. \n"
-                    + " ");
-          }
+          fd.sortAlphabetically();
+          printAllIngredients(fd.getIngredientList());
           break;
 
         case ADD:
@@ -708,12 +702,7 @@ public class UserInterface {
       switch (userinput) {
 
         case PRINT:
-          if (rp.getAmountOfRecipes() > 0) {
-            printRecipes(rp.getRecipeIterator());
-          } else {
-            System.out.println("You do not have any recipes yet. \n"
-                    + " ");
-          }
+          printRecipes(rp.getRecipeIterator());
           break;
 
         case ADD:
@@ -738,11 +727,13 @@ public class UserInterface {
           break;
 
         case 6:
-          if (fd.getNumberOfIngredients() > 0) {
-            System.out.println("Based on the expiration date of the ingredients"
+          System.out.println("Based on the expiration date of the ingredients"
                     + "you have in storage we will recommend you make:");
-            printRecipeDetails(rp.recommendRecipe(currentDate, fd));
-          }
+            try {
+              printRecipeDetails(rp.recommendRecipe(currentDate, fd));
+            } catch (IllegalArgumentException e){
+              System.out.println(e.getMessage());
+            }
           break;
 
         case 7:
@@ -1213,12 +1204,18 @@ public class UserInterface {
    * @param it The iterator containing the ingredients getting their details printed
    */
   public void printAllIngredients(Iterator<Ingredient> it) {
+    boolean isEmpty = true;
     while (it.hasNext()) {
       printIngredientDetails(it.next());
+      isEmpty = false;
     }
-    System.out.println("Total value of ingredients: "
-            + calc.calculateCost(fd.getIngredientList()) + "NOK");
-    System.out.println(" ");
+    if (isEmpty) {
+      System.out.println("No ingredients found.");
+    } else {
+      System.out.println("Total value of ingredients: "
+              + calc.calculateCost(fd.getIngredientList()) + "NOK");
+      System.out.println(" ");
+    }
   }
 
   /**
@@ -1257,6 +1254,7 @@ public class UserInterface {
    * @param recipe The recipe whose details are being printed.
    */
   public void printRecipeDetails(Recipe recipe) {
+    System.out.println("You cannot make any recipes.");
     System.out.println(recipe.getRecipeName());
     System.out.println(recipe.getInstruction());
     printAllIngredientsInRecipe(recipe.getIngredientIterator());
@@ -1269,8 +1267,13 @@ public class UserInterface {
    * @param it The iterator containing all the recipes.
    */
   public void printRecipes(Iterator<Recipe> it) {
+    boolean isEmpty = true;
     while (it.hasNext()) {
       printRecipeDetails(it.next());
+      isEmpty = false;
+    }
+    if (isEmpty) {
+      System.out.println("No recipes found");
     }
     System.out.println(" ");
   }
