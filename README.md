@@ -38,5 +38,8 @@ option. To choose one the user simply enters the
 Or if you have used code from a website or other source, include a link to the source.)
 Most code used is taken from the AdressBook project shown in class.
 
+Method removeAllIngredientsWithName() is from Objects First with Java
+chapter 5.
+
 Method used to sort objects:
 https://stackoverflow.com/questions/19471005/sorting-an-arraylist-of-objects-alphabetically

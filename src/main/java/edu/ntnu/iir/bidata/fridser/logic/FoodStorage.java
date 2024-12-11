@@ -137,7 +137,6 @@ public class FoodStorage {
     while ((index < this.ingredients.size()) && ingredientNotFound) {
       Ingredient ingredient = this.ingredients.get(index);
 
-
       if (ingredient.getName().equalsIgnoreCase(name)) {
         ingredientNotFound = false;
         foundIngredient = ingredient;
@@ -253,7 +252,6 @@ public class FoodStorage {
       if (ingredient.isExpired(currentDate)) {
         expiredIngredients.add(ingredient);
       }
-
     }
     Iterator<Ingredient> ei = expiredIngredients.iterator();
     return ei;
@@ -316,6 +314,18 @@ public class FoodStorage {
       success = true;
     }
     return success;
+  }
+
+  /**
+   * Deletes all ingredients wth the stated name.
+   *
+   * @param name The name of the ingredients being deleted.
+   */
+  public void deleteAllIngredientsWithName(String name) {
+    if ((name.isBlank()) || (name == null) || (name.isEmpty())) {
+      throw new IllegalArgumentException("Name cannot be empty");
+    }
+    ingredients.removeIf(ingredient -> ingredient.getName().equalsIgnoreCase(name));
   }
   
 }

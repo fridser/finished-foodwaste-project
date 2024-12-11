@@ -558,6 +558,25 @@ public class FoodStorageTest {
     assertEquals(ingredient2, fd.getIngredient(2));
   }
 
+  @Test
+  public void deleteAllRecipesWithSameNameWithMultipleInstancesOfSameName() {
+    Ingredient ingredient1 = new Ingredient("Throwaway", 3, "Stk",
+            12.3, 2022, 12, 12);
+    Ingredient ingredient2 = new Ingredient("Orange", 5, "Stk",
+            15.2, 2025, 3, 12);
+    Ingredient ingredient3 = new Ingredient("Throwaway", 0.5, "Litres",
+            25.9, 2021, 1, 1);
+
+    fd.addIngredient(ingredient1);
+    fd.addIngredient(ingredient2);
+    fd.addIngredient(ingredient3);
+
+    fd.deleteAllIngredientsWithName("Throwaway");
+
+    assertEquals(ingredient2, fd.getIngredient(0));
+    assertEquals(1, fd.getNumberOfIngredients());
+  }
+
   //----------------------NEGATIVE TESTS------------------------------------
 
 
@@ -732,6 +751,20 @@ public class FoodStorageTest {
     assertFalse(success);
     assertEquals(8, fd.getAmountOfIngredients("Apple"));
     assertEquals(5, fd.getAmountOfIngredients("Orange"));
+  }
+
+  /**
+   * Tries to delete all ingredients in the foodstorage with an empty name.
+   * Checks to see if an exception is caught.
+   */
+  @Test
+  public void deleteAllIngredientsWithNameUsingInvalidName() {
+    try {
+      fd.deleteAllIngredientsWithName("");
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
   }
 
 }

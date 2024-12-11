@@ -508,9 +508,9 @@ public class UserInterface {
 
     while (!finished) {
       System.out.println("WARNING: You cannot exit the process of adding"
-              + "an ingredient before you have finished all the steps. Are you"
-              + "sure you want to proceed? \n"
-              + "1. Yes, 2. No \n");
+              + " an ingredient before you have finished all the steps. Are you"
+              + " sure you want to proceed? \n"
+              + " 1. Yes, 2. No \n");
       ;
       int userinput = ip.getIntInput();
 
@@ -534,62 +534,78 @@ public class UserInterface {
 
   /**
    * Creates a new Ingredient based on the input from the user and adds
-   * it to the foodstorage.
+   * it to the food storage.
    */
   public void addIngredient() {
-    String name;
-    double amount;
-    double price;
+    Ingredient throwaway = new Ingredient("Throwaway", 1, "Stk");
     while (true) {
       System.out.println("Please enter the name of ingredient: \n");
-      name = ip.getStringInput();
-      if ((name.isBlank()) || (name.isEmpty())) {
-        System.out.println("Please try again.");
-      } else {
+      try {
+        String name = ip.getStringInput();
+        throwaway.setName(name);
         break;
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+        System.out.println("Go suck a lemon.");
       }
     }
     while (true) {
       System.out.println("Please enter the amount of the ingredient: \n");
-      amount = ip.getDoubleInput();
-      if (amount <= 0) {
-        System.out.println("Amount cannot be less than or equal to zero.");
-      } else {
+      try {
+        double amount = ip.getDoubleInput();
+        throwaway.setAmount(amount);
         break;
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+        System.out.println("Go suck a lemon.");
       }
     }
-    String unit = chooseunit();
+    try {
+      String unit = chooseunit();
+      throwaway.setUnit(unit);
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
+    }
     while (true) {
       System.out.println("Please enter the price of the ingredient per unit "
               + "in NOK: \n");
-      price = ip.getDoubleInput();
-      if (price < 0) {
-        System.out.println("Please suck a lemon.");
-      } else {
+      try {
+        double price = ip.getDoubleInput();
+        throwaway.setPrice(price);
         break;
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+        System.out.println("Go suck a lemon.");
       }
     }
-    System.out.println("Please enter the year the ingredient expires: \n");
-    int year = ip.getIntInput();
-    if ((year < 99) && (year > 69)) {
-      year += 1900;
-    } else if ((year > 0) && (year < 70)) {
-      year += 2000;
+    while (true) {
+      System.out.println("Please enter the year the ingredient expires: \n");
+      int year = ip.getIntInput();
+      if ((year < 99) && (year > 69)) {
+        year += 1900;
+      } else if ((year > 0) && (year < 70)) {
+        year += 2000;
+      }
+      System.out.println("Please enter the month the ingredient expires as a whole "
+              + "number between 1 and 12: \n");
+      int month = ip.getIntInput();
+      System.out.println("Please enter the day of the month the ingredient expires"
+              + "as a whole number: \n");
+      int day = ip.getIntInput();
+      try {
+        throwaway.setExpiryDate(year, month, day);
+        break;
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+        System.out.println("Go suck a lemon.");
+      }
     }
-    System.out.println("Please enter the month the ingredient expires as a whole "
-            + "number between 1 and 12: \n");
-    int month = ip.getIntInput();
-    System.out.println("Please enter the day of the month the ingredient expires"
-            + "as a whole number: \n");
-    int day = ip.getIntInput();
-
     try {
-      Ingredient ingredient = new Ingredient(name, amount, unit, price,
-              year, month, day);
-      fd.addIngredient(ingredient);
+      fd.addIngredient(throwaway);
+      fd.deleteAllIngredientsWithName("Throwaway");
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
-      System.out.println("Go suck a lemon.");
+      System.out.println("Congratulations.");
     }
   }
 
@@ -887,7 +903,6 @@ public class UserInterface {
   public void editIngredientInRecipeName(Ingredient ingredient) {
     System.out.println("Please enter the new name of the ingredient: \n");
     String name = ip.getStringInput();
-
     try {
       ingredient.setName(name);
     } catch (IllegalArgumentException e) {
@@ -1129,32 +1144,38 @@ public class UserInterface {
    * @param recipe The recipe the ingredient is being added to.
    */
   public void addRecipeIngredient(Recipe recipe) {
-    String name;
-    double amount;
+    Ingredient throwaway = new Ingredient("Throwaway", 1, "Stk");
     while (true) {
       System.out.println("Please enter the name of ingredient: \n");
-      name = ip.getStringInput();
-      if (name.isBlank() || name.isEmpty()) {
-        System.out.println("Please try again");
-      } else {
+      try {
+        String name = ip.getStringInput();
+        throwaway.setName(name);
         break;
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+        System.out.println("Go suck a lemon.");
       }
     }
     while (true) {
       System.out.println("Please enter the amount of the ingredient: \n");
-      amount = ip.getDoubleInput();
-      if (amount <= 0) {
-        System.out.println("The amount cannot be less than or equal to zero.");
-      } else {
+      try {
+        double amount = ip.getDoubleInput();
+        throwaway.setAmount(amount);
         break;
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+        System.out.println("Go suck a lemon.");
       }
     }
-    String unit = chooseunit();
-
-
     try {
-      Ingredient ingredient = new Ingredient(name, amount, unit);
-      recipe.addIngredient(ingredient);
+      String unit = chooseunit();
+      throwaway.setUnit(unit);
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
+    }
+    try {
+      recipe.addIngredient(throwaway);
+      recipe.deleteIngredient("Throwaway");
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
     }
