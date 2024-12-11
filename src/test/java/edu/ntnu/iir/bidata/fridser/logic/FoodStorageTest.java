@@ -1,6 +1,7 @@
 package edu.ntnu.iir.bidata.fridser.logic;
 
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -39,6 +40,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FoodStorageTest {
 
+  FoodStorage fd;
+
+  /**
+   * Executes before each of the test methods.
+   *
+   * <p>Creates the instance of the food storage to be used for each test. This way
+   * we make sure that every single of the tests starts off with a newly created, empty
+   * instance of FoodStorage.</p>
+   */
+  @BeforeEach
+  void createInstanceOfFoodStorage() {
+    this.fd = new FoodStorage();
+  }
+
 
   //------------------------------POSITIVE TESTS----------------------------------
 
@@ -55,8 +70,6 @@ public class FoodStorageTest {
             15.2, 2025, 3, 12);
     Ingredient ingredient3 = new Ingredient("Milk", 0.5, "Litres",
             25.9, 2025, 1, 1);
-
-    FoodStorage fd = new FoodStorage();
 
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
@@ -81,8 +94,6 @@ public class FoodStorageTest {
     Ingredient ingredient2 = new Ingredient("Apple", 5, "Stk",
             15.2, 2025, 3, 12);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
 
@@ -103,8 +114,6 @@ public class FoodStorageTest {
     Ingredient ingredient2 = new Ingredient("Apple", 5, "Stk",
             15.2, 2024, 12, 12);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
 
@@ -124,8 +133,6 @@ public class FoodStorageTest {
             15.2, 2025, 3, 12);
     Ingredient ingredient3 = new Ingredient("Milk", 0.5, "Litres",
             25.9, 2025, 1, 1);
-
-    FoodStorage fd = new FoodStorage();
 
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
@@ -151,8 +158,6 @@ public class FoodStorageTest {
     Ingredient ingredient3 = new Ingredient("Milk", 0.5, "Litres",
             25.9, 2025, 1, 1);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
     fd.addIngredient(ingredient3);
@@ -176,8 +181,6 @@ public class FoodStorageTest {
             25.9, 2025, 1, 1);
     Ingredient ingredient4 = new Ingredient("Apple", 5, "Stk",
             15.2, 2025, 3, 12);
-
-    FoodStorage fd = new FoodStorage();
 
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
@@ -207,8 +210,6 @@ public class FoodStorageTest {
     Ingredient ingredient4 = new Ingredient("Apple", 5, "Stk",
             15.2, 2025, 3, 12);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
     fd.addIngredient(ingredient3);
@@ -236,8 +237,6 @@ public class FoodStorageTest {
     Ingredient ingredient3 = new Ingredient("Apple", 5, "Stk",
             15.2, 2025, 1, 1);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
     fd.addIngredient(ingredient3);
@@ -264,8 +263,6 @@ public class FoodStorageTest {
     Ingredient ingredient2 = new Ingredient("Apple", 5, "Stk",
             15.2, 2025, 3, 12);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
 
@@ -291,8 +288,6 @@ public class FoodStorageTest {
     Ingredient ingredient4 = new Ingredient("Apple", 5, "Stk",
             15.2, 2025, 3, 12);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
     fd.addIngredient(ingredient3);
@@ -313,8 +308,6 @@ public class FoodStorageTest {
             12.3, 2024, 12, 12);
     Ingredient ingredient2 = new Ingredient("Apple", 5, "Stk",
             15.2, 2025, 3, 12);
-
-    FoodStorage fd = new FoodStorage();
 
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
@@ -339,8 +332,6 @@ public class FoodStorageTest {
             25.9, 2025, 1, 1);
     Ingredient ingredient4 = new Ingredient("Apple", 5, "Stk",
             15.2, 2025, 3, 12);
-
-    FoodStorage fd = new FoodStorage();
 
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
@@ -377,8 +368,6 @@ public class FoodStorageTest {
     Ingredient ingredient4 = new Ingredient("Apple", 5, "Stk",
             15.2, 2025, 3, 12);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
     fd.addIngredient(ingredient3);
@@ -412,8 +401,6 @@ public class FoodStorageTest {
             25.9, 2025, 1, 1);
     Ingredient ingredient4 = new Ingredient("Apple", 5, "Stk",
             15.2, 2025, 3, 12);
-
-    FoodStorage fd = new FoodStorage();
 
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
@@ -453,8 +440,6 @@ public class FoodStorageTest {
     Ingredient ingredient4 = new Ingredient("Apple", 5, "Stk",
             15.2, 2025, 3, 12);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
     fd.addIngredient(ingredient3);
@@ -490,8 +475,6 @@ public class FoodStorageTest {
     Ingredient ingredient3 = new Ingredient("Milk", 0.5, "Litres",
             25.9, 2025, 1, 1);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
     fd.addIngredient(ingredient3);
@@ -511,7 +494,6 @@ public class FoodStorageTest {
    */
   @Test
   public void getIngredientListWithNoIngredients() {
-    FoodStorage fd = new FoodStorage();
     Iterator<Ingredient> it = fd.getIngredientList();
     assertFalse(it.hasNext());
   }
@@ -529,8 +511,6 @@ public class FoodStorageTest {
             15.2, 2025, 3, 12);
     Ingredient ingredient3 = new Ingredient("Milk", 0.5, "Litres",
             25.9, 2025, 1, 1);
-
-    FoodStorage fd = new FoodStorage();
 
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
@@ -557,8 +537,6 @@ public class FoodStorageTest {
     Ingredient ingredient3 = new Ingredient("Milk", 0.5, "Litres",
             25.9, 2021, 1, 1);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
     fd.addIngredient(ingredient3);
@@ -584,8 +562,6 @@ public class FoodStorageTest {
     Ingredient ingredient2 = new Ingredient("Orange", 5, "Stk",
             15.2, 2025, 3, 12);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
 
@@ -606,8 +582,6 @@ public class FoodStorageTest {
             15.2, 2025, 3, 12);
     Ingredient ingredient3 = new Ingredient("Milk", 0.5, "Litres",
             25.9, 2021, 1, 1);
-
-    FoodStorage fd = new FoodStorage();
 
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
@@ -633,8 +607,6 @@ public class FoodStorageTest {
     Ingredient ingredient3 = new Ingredient("Milk", 0.5, "Litres",
             25.9, 2022, 12, 12);
 
-    FoodStorage fd = new FoodStorage();
-
     fd.addIngredient(ingredient1);
     fd.addIngredient(ingredient2);
     fd.addIngredient(ingredient3);
@@ -644,6 +616,52 @@ public class FoodStorageTest {
     assertEquals(0, fd.getNumberOfIngredients());
   }
 
+  /**
+   * Deletes an ingredient from the food storage using its index.
+   * Checks that the ingredient was deleted.
+   */
+  @Test
+  public void deleteIngredientWithValidInt() {
+    Ingredient ingredient1 = new Ingredient("Apple", 3, "Stk",
+            12.3, 2022, 12, 12);
+    Ingredient ingredient2 = new Ingredient("Orange", 5, "Stk",
+            15.2, 2022, 12, 12);
+    Ingredient ingredient3 = new Ingredient("Milk", 0.5, "Litres",
+            25.9, 2022, 12, 12);
+
+    fd.addIngredient(ingredient1);
+    fd.addIngredient(ingredient2);
+    fd.addIngredient(ingredient3);
+
+    fd.deleteIngredientWithIndex(0);
+
+    assertEquals(ingredient2, fd.getIngredient(0));
+  }
+
+  /**
+   * Sorts the food storage by date.
+   * Checks that the ingredients in the food storage is in the correct
+   * index positions.
+   */
+  @Test
+  public void sortIngredientsChronologically() {
+    Ingredient ingredient1 = new Ingredient("Apple", 3, "Stk",
+            12.3, 2022, 12, 12);
+    Ingredient ingredient2 = new Ingredient("Orange", 5, "Stk",
+            15.2, 2025, 3, 12);
+    Ingredient ingredient3 = new Ingredient("Milk", 0.5, "Litres",
+            25.9, 2021, 1, 1);
+
+    fd.addIngredient(ingredient1);
+    fd.addIngredient(ingredient2);
+    fd.addIngredient(ingredient3);
+
+    fd.sortByDate();
+
+    assertEquals(ingredient3, fd.getIngredient(0));
+    assertEquals(ingredient1, fd.getIngredient(1));
+    assertEquals(ingredient2, fd.getIngredient(2));
+  }
 
   //----------------------NEGATIVE TESTS------------------------------------
 
@@ -659,8 +677,6 @@ public class FoodStorageTest {
               12.3, 2024, 12, 12);
       Ingredient ingredient2 = new Ingredient("Apple", 5, "Stk",
               15.2, 2025, 3, 12);
-
-      FoodStorage fd = new FoodStorage();
 
       fd.addIngredient(ingredient1);
       fd.addIngredient(ingredient2);
@@ -681,7 +697,6 @@ public class FoodStorageTest {
   @Test
   public void getIngredientWithIndexGreaterThanSize() {
     try {
-      FoodStorage fd = new FoodStorage();
       fd.getIngredient(1);
       fail();
     } catch (IllegalArgumentException e) {
@@ -689,5 +704,31 @@ public class FoodStorageTest {
     }
   }
 
+  /**
+   * Tries to delete an ingredient on an index that doesn't exist.
+   * Checks that an exception is caught.
+   */
+  @Test
+  public void deleteIngredientWithInvalidIndex() {
+    try {
+      Ingredient ingredient1 = new Ingredient("Apple", 3, "Stk",
+              12.3, 2024, 12, 12);
+      fd.addIngredient(ingredient1);
+      fd.deleteIngredientWithIndex(1);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+  }
+
+  @Test
+  public void getAmountOfIngredientsOfInvalidIngredientName() {
+    try {
+      fd.getAmountOfIngredients("");
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+  }
 
 }

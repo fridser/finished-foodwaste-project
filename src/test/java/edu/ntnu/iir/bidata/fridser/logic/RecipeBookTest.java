@@ -1,6 +1,7 @@
 package edu.ntnu.iir.bidata.fridser.logic;
 
 import edu.ntnu.iir.bidata.fridser.data.Ingredient;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -11,6 +12,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RecipeBookTest {
 
+  RecipeBook rp;
+
+  /**
+   * Executes before each of the test methods.
+   *
+   * <p>Creates the instance of the recipe book to be used for each test. This way
+   * we make sure that every single of the tests starts off with a newly created, empty
+   * instance of RecipeBook.</p>
+   */
+  @BeforeEach
+  void createInstanceOfRecipeBook() {
+    this.rp = new RecipeBook();
+  }
+
 //-------------------------------POSITIVE TESTS-----------------------------------
 
   /**
@@ -19,7 +34,6 @@ public class RecipeBookTest {
    */
   @Test
   public void createRecipeBookWithMultipleRecipes() {
-    RecipeBook rp = new RecipeBook();
 
     Recipe recipe1 = new Recipe("Fruit Salad",
             "Cut fruits and add it to a bowl");
@@ -38,7 +52,6 @@ public class RecipeBookTest {
    */
   @Test
   public void deleteRecipeFromRecipeBook() {
-    RecipeBook rp = new RecipeBook();
 
     Recipe recipe1 = new Recipe("Fruit Salad",
             "Cut fruits and add it to a bowl");
@@ -62,15 +75,14 @@ public class RecipeBookTest {
    */
   @Test
   public void getThePossibleRecipe() {
-    RecipeBook rb = new RecipeBook();
 
     Recipe recipe1 = new Recipe("Fruit Salad",
             "Cut fruits and add it to a bowl");
     Recipe recipe2 = new Recipe("Pasta with tomato sauce",
             "Boil water and cook pasta for 10 min. Drain and add tomato sauce");
 
-    rb.addRecipe(recipe1);
-    rb.addRecipe(recipe2);
+    rp.addRecipe(recipe1);
+    rp.addRecipe(recipe2);
 
     FoodStorage fd = new FoodStorage();
 
@@ -93,7 +105,7 @@ public class RecipeBookTest {
     fd.addIngredient(apple1);
     fd.addIngredient(orange1);
 
-    Iterator<Recipe> it = rb.getPossibleRecipes(fd);
+    Iterator<Recipe> it = rp.getPossibleRecipes(fd);
 
     assertTrue(it.hasNext());
     assertEquals(recipe1, it.next());
@@ -108,15 +120,14 @@ public class RecipeBookTest {
    */
   @Test
   public void recommendRecipeWithDifferentDireValues() {
-    RecipeBook rb = new RecipeBook();
 
     Recipe recipe1 = new Recipe("Fruit Salad",
             "Cut fruits and add it to a bowl");
     Recipe recipe2 = new Recipe("Pasta with tomato sauce",
             "Boil water and cook pasta for 10 min. Drain and add tomato sauce");
 
-    rb.addRecipe(recipe1);
-    rb.addRecipe(recipe2);
+    rp.addRecipe(recipe1);
+    rp.addRecipe(recipe2);
 
     FoodStorage fd = new FoodStorage();
 
@@ -147,7 +158,7 @@ public class RecipeBookTest {
 
     LocalDate currentDate = LocalDate.of(2024, 1, 1);
 
-    Recipe recommendedRecipe = rb.recommendRecipe(currentDate, fd);
+    Recipe recommendedRecipe = rp.recommendRecipe(currentDate, fd);
     assertEquals(recipe1, recommendedRecipe);
 
   }
@@ -161,15 +172,14 @@ public class RecipeBookTest {
    */
   @Test
   public void recommendRecipeWithSameDireValueAndDifferentUrgentValues() {
-    RecipeBook rb = new RecipeBook();
 
     Recipe recipe1 = new Recipe("Fruit Salad",
             "Cut fruits and add it to a bowl");
     Recipe recipe2 = new Recipe("Pasta with tomato sauce",
             "Boil water and cook pasta for 10 min. Drain and add tomato sauce");
 
-    rb.addRecipe(recipe1);
-    rb.addRecipe(recipe2);
+    rp.addRecipe(recipe1);
+    rp.addRecipe(recipe2);
 
     FoodStorage fd = new FoodStorage();
 
@@ -200,9 +210,11 @@ public class RecipeBookTest {
 
     LocalDate currentDate = LocalDate.of(2024, 1, 1);
 
-    Recipe recommendedRecipe = rb.recommendRecipe(currentDate, fd);
+    Recipe recommendedRecipe = rp.recommendRecipe(currentDate, fd);
     assertEquals(recipe2, recommendedRecipe);
   }
+
+
 
 
 //---------------------------------NEGATIVE TESTS-----------------------------
@@ -214,15 +226,14 @@ public class RecipeBookTest {
   @Test
   public void addRecipeWithNameThatAlreadyExists() {
     try {
-      RecipeBook rb = new RecipeBook();
 
       Recipe recipe1 = new Recipe("Fruit Salad",
               "Cut fruits and add it to a bowl");
       Recipe recipe2 = new Recipe("Fruit Salad",
               "Cut fruits, add fruit bits and cream to a bowl");
 
-      rb.addRecipe(recipe1);
-      rb.addRecipe(recipe2);
+      rp.addRecipe(recipe1);
+      rp.addRecipe(recipe2);
       fail();
     } catch (IllegalArgumentException e) {
       assertTrue(true);
