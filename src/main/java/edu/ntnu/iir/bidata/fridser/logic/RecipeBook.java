@@ -35,11 +35,11 @@ public class RecipeBook {
    * @param recipe The recipe being added.
    */
   public void addRecipe(Recipe recipe) {
-    if (recipeList.containsKey(recipe.getRecipeName())) {
+    if (recipeList.containsKey(recipe.getRecipeName().toUpperCase())) {
       throw new IllegalArgumentException("Cannot put two recipes with same"
               + "name in the list.");
     }
-    this.recipeList.put(recipe.getRecipeName().toLowerCase(), recipe);
+    this.recipeList.put(recipe.getRecipeName().toUpperCase(), recipe);
   }
 
   /**
@@ -49,15 +49,11 @@ public class RecipeBook {
    * @return recipe, the recipe corresponding to the name.
    */
   public Recipe getRecipe(String recipeName) {
-    if ((recipeName.isBlank()) || (recipeName == null)) {
-      throw new IllegalArgumentException("The name of the recipe "
-              + "cannot be empty");
-    }
-    if (!containsKey(recipeName.toLowerCase())) {
+    if (!containsKey(recipeName)) {
       throw new IllegalArgumentException("This recipe does not exist. Make sure"
               + " you have entered the name of the recipe correctly");
     }
-    return this.recipeList.get(recipeName.toLowerCase());
+    return this.recipeList.get(recipeName.toUpperCase());
   }
 
   /**
@@ -66,7 +62,11 @@ public class RecipeBook {
    * @param name The name of the recipe being removed.
    */
   public void deleteRecipe(String name) {
-    this.recipeList.remove(name.toLowerCase());
+    if (!containsKey(name)) {
+      throw new IllegalArgumentException("This recipe does not exist. Make sure"
+              + " you have entered the name of the recipe correctly");
+    }
+    this.recipeList.remove(name.toUpperCase());
   }
 
   /**
@@ -85,17 +85,7 @@ public class RecipeBook {
    * @return boolean, true if the key exists in the recipeList already.
    */
   public boolean containsKey(String key) {
-    return this.recipeList.containsKey(key.toLowerCase());
-  }
-
-  /**
-   * Returns true if the recipeList contains the stated recipe already.
-   *
-   * @param recipe The recipe that is being checked.
-   * @return boolean, true if the recipe exists in the recipeList already.
-   */
-  public boolean containsRecipe(Recipe recipe) {
-    return this.recipeList.containsValue(recipe);
+    return this.recipeList.containsKey(key.toUpperCase());
   }
 
 

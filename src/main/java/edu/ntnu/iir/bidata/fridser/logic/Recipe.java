@@ -47,7 +47,7 @@ public class Recipe {
    * @param ingredient The ingredient being added.
    */
   public void addIngredient(Ingredient ingredient) {
-    this.ingredientList.put(ingredient.getName().toLowerCase(), ingredient);
+    this.ingredientList.put(ingredient.getName().toUpperCase(), ingredient);
   }
 
   /**
@@ -64,10 +64,10 @@ public class Recipe {
       throw new IllegalArgumentException("Cannot search for an"
               + "empty name");
     }
-    if (!ingredientList.containsKey(ingredientName.toLowerCase())) {
+    if (!containsKey(ingredientName)) {
       throw new IllegalArgumentException("Ingredient name does not exist.");
     }
-    return this.ingredientList.get(ingredientName.toLowerCase());
+    return this.ingredientList.get(ingredientName.toUpperCase());
   }
 
   /**
@@ -139,18 +139,20 @@ public class Recipe {
    */
   public Iterator<Ingredient> getLackingIngredients(FoodStorage fd) {
     Iterator<Ingredient> it = getIngredientIterator();
-    ArrayList<Ingredient> ingredients = new ArrayList<>();
+    ArrayList<Ingredient> LackingIngredients = new ArrayList<>();
     while (it.hasNext()) {
-      Ingredient ingredient = new Ingredient(it.next().getName(), it.next().getAmount(),
-              it.next().getUnit());
+      Ingredient currentIngredient = it.next();
+      Ingredient ingredient = new Ingredient(currentIngredient.getName(),
+              currentIngredient.getAmount(),
+              currentIngredient.getUnit());
       if (ingredient.getAmount()
               > fd.getAmountOfIngredients(ingredient.getName())) {
-        ingredients.add(ingredient);
+        LackingIngredients.add(ingredient);
         ingredient.setAmount(ingredient.getAmount()
                 - fd.getAmountOfIngredients(ingredient.getName()));
       }
     }
-    return ingredients.iterator();
+    return LackingIngredients.iterator();
   }
 
   /**
@@ -227,7 +229,7 @@ public class Recipe {
    * @return boolean, true is the recipe contains the stated ingredient.
    */
   public boolean containsKey(String key) {
-    return this.ingredientList.containsKey(key.toLowerCase());
+    return this.ingredientList.containsKey(key.toUpperCase());
   }
 
   /**
@@ -240,7 +242,7 @@ public class Recipe {
       throw new IllegalArgumentException("Name entered doesn't correspond to"
               + "any ingredients in the recipe");
     }
-    this.ingredientList.remove(ingredientName.toLowerCase());
+    this.ingredientList.remove(ingredientName.toUpperCase());
   }
 
 

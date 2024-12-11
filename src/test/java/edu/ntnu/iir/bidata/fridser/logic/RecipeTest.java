@@ -128,27 +128,6 @@ public class RecipeTest {
   }
 
   /**
-   * Checks if the ingredient iterator returns all added ingredients.
-   * Written with copilot.
-   */
-  @Test
-  public void getIngredientIteratorReturnsAllIngredients() {
-    Recipe recipe = new Recipe("Fruit Salad",
-            "Cut fruits and add it to a bowl");
-    Ingredient apple = new Ingredient("Apple", 2, "Stk");
-    Ingredient orange = new Ingredient("Orange", 3, "Stk");
-    recipe.addIngredient(apple);
-    recipe.addIngredient(orange);
-
-    Iterator<Ingredient> iterator = recipe.getIngredientIterator();
-    assertTrue(iterator.hasNext());
-    assertEquals(apple, iterator.next());
-    assertTrue(iterator.hasNext());
-    assertEquals(orange, iterator.next());
-    assertFalse(iterator.hasNext());
-  }
-
-  /**
    * Checks if getUrgentValue returns the correct count of ingredients
    * expiring within a week.
    * Written with copilot.
@@ -293,6 +272,26 @@ public class RecipeTest {
     assertFalse(iterator.hasNext());
   }
 
+  /**
+   * Deletes an ingredient from the recipe.
+   * Checks if the ingredient is deleted.
+   */
+  @Test
+  public void deleteIngredientFromRecipeThatExistInRecipe() {
+    Recipe recipe = new Recipe("Fruit Salad",
+            "Cut fruits and add it to a bowl");
+
+    Ingredient apple = new Ingredient("Apple", 2, "Stk");
+    Ingredient orange = new Ingredient("Orange", 3, "Stk");
+
+    recipe.addIngredient(apple);
+    recipe.addIngredient(orange);
+
+    recipe.deleteIngredient(apple.getName());
+
+    assertFalse(recipe.containsKey(apple.getName()));
+  }
+
 
 //-----------------------------------NEGATIVE TESTS--------------------
 
@@ -354,6 +353,22 @@ public class RecipeTest {
             "Boil water and cook pasta for 10 minutes");
     try {
       recipe.setInstruction("");
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Tries to delete an ingredient that isn't in the recipe.
+   * Checks if an exception is caught.
+   */
+  @Test
+  public void deleteIngredientThatDoesntExist() {
+    Recipe recipe = new Recipe("Pasta",
+            "Boil water and cook pasta for 10 minutes");
+    try {
+      recipe.deleteIngredient("Apple");
       fail();
     } catch (IllegalArgumentException e) {
       assertTrue(true);

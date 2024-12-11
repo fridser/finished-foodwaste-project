@@ -63,7 +63,6 @@ public class RecipeBookTest {
 
     rp.deleteRecipe("Fruit Salad");
 
-    assertFalse(rp.containsRecipe(recipe1));
     assertFalse(rp.containsKey(recipe1.getRecipeName()));
   }
 
@@ -234,6 +233,34 @@ public class RecipeBookTest {
 
       rp.addRecipe(recipe1);
       rp.addRecipe(recipe2);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Tries to get a recipe that doesn't exist in the recipe book.
+   * Checks to see if an exception is caught.
+   */
+  @Test
+  public void getRecipeWhichDoesntExist() {
+    try {
+      rp.getRecipe("Pasta");
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Tries to remove a recipe that doesn't exist in the recipe book.
+   * Checks to see if an exception is caught.
+   */
+  @Test
+  public void removeRecipeThatDoesntExist() {
+    try {
+      rp.deleteRecipe("Pasta");
       fail();
     } catch (IllegalArgumentException e) {
       assertTrue(true);

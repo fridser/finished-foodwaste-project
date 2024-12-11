@@ -6,7 +6,7 @@
 
     <groupId>edu.ntnu.iir.bidata</groupId>
     <artifactId>MealPlanner-project</artifactId>
-    <version>3.2</version>
+    <version>3.3</version>
 
     <properties>
         <!-- Per Sept 2024 the LTS version is 21 -->
