@@ -266,4 +266,21 @@ public class RecipeBookTest {
       assertTrue(true);
     }
   }
+
+  /**
+   * Tries to recommend a recipe from an empty recipeBook.
+   * Checks to see if an exception is caught.
+   */
+  @Test
+  public void recommendRecipeWithNoViableRecipes() {
+    try {
+      FoodStorage fd = new FoodStorage();
+      LocalDate currentDate = LocalDate.of(2024, 1, 1);
+
+      Recipe recommendedRecipe = rp.recommendRecipe(currentDate, fd);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+  }
 }

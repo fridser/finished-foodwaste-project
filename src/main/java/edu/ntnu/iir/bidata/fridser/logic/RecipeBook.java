@@ -93,26 +93,26 @@ public class RecipeBook {
    * Recommends a recipe based on which ingredients are about to expire.
    *
    * @param currentDate The date the ingredients are compared to.
-   * @param fd          The foodstorage the ingredients reside in.
+   * @param foodStorage          The foodstorage the ingredients reside in.
    * @return recipe, the recipe who uses the most amount of Ingredients
    * that are about to expire.
    */
-  public Recipe recommendRecipe(LocalDate currentDate, FoodStorage fd) {
+  public Recipe recommendRecipe(LocalDate currentDate, FoodStorage foodStorage) {
     Recipe bestRecipe = null;
-    Iterator<Recipe> it = getPossibleRecipes(fd);
+    Iterator<Recipe> it = getPossibleRecipes(foodStorage);
     if (it.hasNext()) {
       while (it.hasNext()) {
         Recipe currentRecipe = it.next();
         if (bestRecipe == null) {
           bestRecipe = currentRecipe;
         }
-        if (currentRecipe.getDireValue(currentDate, fd)
-                > bestRecipe.getDireValue(currentDate, fd)) {
+        if (currentRecipe.getDireValue(currentDate, foodStorage)
+                > bestRecipe.getDireValue(currentDate, foodStorage)) {
           bestRecipe = currentRecipe;
-        } else if (currentRecipe.getDireValue(currentDate, fd)
-                == bestRecipe.getDireValue(currentDate, fd)) {
-          if (currentRecipe.getUrgentValue(currentDate, fd)
-                  > bestRecipe.getUrgentValue(currentDate, fd)) {
+        } else if (currentRecipe.getDireValue(currentDate, foodStorage)
+                == bestRecipe.getDireValue(currentDate, foodStorage)) {
+          if (currentRecipe.getUrgentValue(currentDate, foodStorage)
+                  > bestRecipe.getUrgentValue(currentDate, foodStorage)) {
             bestRecipe = currentRecipe;
           }
         }
@@ -127,15 +127,15 @@ public class RecipeBook {
    * Returns a list of recipes possible to make with the ingredients in the
    * given FoodStorage, in the for of an iterator.
    *
-   * @param fd The FoodStorage containing the ingredients used in the recipe.
+   * @param foodStorage The FoodStorage containing the ingredients used in the recipe.
    * @return pr, The iterator containing the possible recipes.
    */
-  public Iterator<Recipe> getPossibleRecipes(FoodStorage fd) {
+  public Iterator<Recipe> getPossibleRecipes(FoodStorage foodStorage) {
     Iterator<Recipe> it = this.recipeList.values().iterator();
     ArrayList<Recipe> possibleRecipes = new ArrayList<>();
     while (it.hasNext()) {
       Recipe recipe = it.next();
-      if (recipe.canUseRecipe(fd)) {
+      if (recipe.canUseRecipe(foodStorage)) {
         possibleRecipes.add(recipe);
       }
     }

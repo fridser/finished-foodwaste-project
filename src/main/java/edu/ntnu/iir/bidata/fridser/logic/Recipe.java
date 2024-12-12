@@ -134,10 +134,10 @@ public class Recipe {
    * Returns the ingredients and how much each of the ingredients are lacking
    * to be able to make the recipe.
    *
-   * @param fd The FoodStorage containing the ingredients
+   * @param foodStorage The FoodStorage containing the ingredients
    * @return it, the iterator containing the lacking ingredients.
    */
-  public Iterator<Ingredient> getLackingIngredients(FoodStorage fd) {
+  public Iterator<Ingredient> getLackingIngredients(FoodStorage foodStorage) {
     Iterator<Ingredient> it = getIngredientIterator();
     ArrayList<Ingredient> LackingIngredients = new ArrayList<>();
     while (it.hasNext()) {
@@ -146,10 +146,10 @@ public class Recipe {
               currentIngredient.getAmount(),
               currentIngredient.getUnit());
       if (ingredient.getAmount()
-              > fd.getAmountOfIngredients(ingredient.getName())) {
+              > foodStorage.getAmountOfIngredients(ingredient.getName())) {
         LackingIngredients.add(ingredient);
         ingredient.setAmount(ingredient.getAmount()
-                - fd.getAmountOfIngredients(ingredient.getName()));
+                - foodStorage.getAmountOfIngredients(ingredient.getName()));
       }
     }
     return LackingIngredients.iterator();
@@ -182,17 +182,17 @@ public class Recipe {
    * be counted once.
    *
    * @param currentDate The date the ingredient is compared to
-   * @param fd          The FoodStorage the ingredients reside in
+   * @param foodStorage          The FoodStorage the ingredients reside in
    * @return int, how many different ingredients in the recipe who will
    * expire within a week.
    */
-  public int getUrgentValue(LocalDate currentDate, FoodStorage fd) {
+  public int getUrgentValue(LocalDate currentDate, FoodStorage foodStorage) {
     int count = 0;
-    fd.sortByDate();
+    foodStorage.sortByDate();
     Iterator<String> it = getKeyIterator();
     while (it.hasNext()) {
       String name = it.next();
-      if (fd.findIngredientByName(name).isUrgent(currentDate)) {
+      if (foodStorage.findIngredientByName(name).isUrgent(currentDate)) {
         count++;
       }
     }
@@ -205,17 +205,17 @@ public class Recipe {
    * be counted once.
    *
    * @param currentDate The date the ingredient is compared to
-   * @param fd          The FoodStorage the ingredients reside in
+   * @param foodStorage          The FoodStorage the ingredients reside in
    * @return int, how many different ingredients in the recipe who will
    * expire within a day.
    */
-  public int getDireValue(LocalDate currentDate, FoodStorage fd) {
+  public int getDireValue(LocalDate currentDate, FoodStorage foodStorage) {
     int count = 0;
-    fd.sortByDate();
+    foodStorage.sortByDate();
     Iterator<String> it = getKeyIterator();
     while (it.hasNext()) {
       String name = it.next();
-      if (fd.findIngredientByName(name).isDire(currentDate)) {
+      if (foodStorage.findIngredientByName(name).isDire(currentDate)) {
         count++;
       }
     }
